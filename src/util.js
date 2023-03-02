@@ -32,11 +32,11 @@ export default {
         }
         let url = hash.replace("#","");
         if(url === "/"){
-            url = "/README.md";
+            url = "README.md";
         }else{
             url = url + ".md";
         }
-        url = "/docs" + url;
+        url = "docs" + url;
         return url;
     },
     render(url,config){
