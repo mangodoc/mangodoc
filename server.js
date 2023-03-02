@@ -8,9 +8,9 @@ const basePath = path.join(__dirname, '');
 const server = http.createServer((req, res) => {
   let url = req.url;
   console.info(url);
-  if(url.endsWith(".md")){
-    url = "/docs" + url;
-  }
+  // if(url.endsWith(".md")){
+  //   url = "/docs" + url;
+  // }
   if( url.endsWith(".js") 
     || url.endsWith(".md")
     || url.endsWith(".css")
@@ -33,13 +33,15 @@ const server = http.createServer((req, res) => {
         <head>
           <meta charset="UTF-8">
           <title>Mg Doc</title>
-          <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+          <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+          <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+          <!--[if lt IE 9]>
+              <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+              <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+          <![endif]-->
         </head>
         <body>
           <div id="app"></div>
-          <script>
-            window.currentPath = "${url}";
-          </script>
           <script src="./lib/mgdoc.min.js"></script>
         </body>
       </html>

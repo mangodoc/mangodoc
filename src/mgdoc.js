@@ -1,19 +1,31 @@
-const marked = require("marked")
+import util from "./util";
+import titlePlugin from './plugins/title'
+import demoPlugin from './plugins/demo'
 
-var url = window.currentPath;
-if(url === "/"){
-    url = "/README.md";
-}else{
-    url = url + ".md";
+let url = util.getUrl();
+console.info(url);
+// 定义基础配置
+let config = {
+    plugins : [titlePlugin,demoPlugin]
 }
-// 读取 Markdown 文件
-fetch(url)
-.then(response => response.text())
-.then(markdown => {
-    // 将 Markdown 转换为 HTML
-    const html = marked.parse(markdown);
-    // 将 HTML 显示在页面上
-    document.getElementById('app').innerHTML = html;
+// 合并config 和 $mgdoc
+config = Object.assign({}, config, window.$mgdoc);
+console.info(config);
+// 调用生命周期 beforeEach
+util.callHook(config,"init");
+// 开始渲染
+util.render(url,config);
+
+// 监听地址栏变化
+window.onpopstate = function(event) {
+    util.render(util.getUrl(),config);
+};
+
+// 监听文档ready
+document.addEventListener("DOMContentLoaded", function(event) { 
+    util.callHook(config,"ready");
 });
 
+// 绑定到window.$mgdoc
+window.$mgdoc = config;
 
