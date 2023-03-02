@@ -1,2 +1,1 @@
-* [主页](#/)
-* [主流前端](#/all)
+* [mgdoc](https://github.com/mg0324/mgdoc)
