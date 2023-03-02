@@ -1,6 +1,8 @@
 # mgdoc
 一个简单的doc文档生成器，类似docsify。
 
+[在线demo](https://mg0324.github.io/mgdoc/)
+
 ## 特性
 * 基于`javascript`实现的简单文档生成器。
 * 支持静态资源部署，如`gitee pages`、`github pages`等。
