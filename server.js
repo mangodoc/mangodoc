@@ -29,10 +29,14 @@ const server = http.createServer((req, res) => {
     res.setHeader('Content-Type', 'text/html');
     var template = `
       <!DOCTYPE html>
-      <html>
+      <html lang="en">
         <head>
           <meta charset="UTF-8">
-          <title>Mg Doc</title>
+          <title>My Docs</title>
+          <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+          <meta name="description" content="Description">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+          <meta name="renderer" content="webkit">
           <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
           <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
           <!--[if lt IE 9]>
@@ -41,8 +45,18 @@ const server = http.createServer((req, res) => {
           <![endif]-->
         </head>
         <body>
-          <div id="app"></div>
-          <script src="./lib/mgdoc.min.js"></script>
+          <div id="vue"></div>
+          <script>
+              window.$mgdoc = {
+                  title: 'mgdoc-test',
+                  loadSidebar: true,
+                  loadNavbar: true,
+                  footer: '<span>mango mei &copy; 2022</span> @ copyright'
+              };
+          </script>
+          <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+          <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+          <script src="./lib/mgdoc.min.js"></script>    
         </body>
       </html>
     `;

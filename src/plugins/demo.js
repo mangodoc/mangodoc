@@ -7,7 +7,6 @@ export default {
         return content;
     },
     afterEach(html,next){
-        html = html + "<div>demo</div>"
         console.info("demo afterEach:"+html);
         next(html);
     },

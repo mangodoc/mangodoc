@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <title>My Docs</title>
@@ -7,6 +7,7 @@
     <meta name="description" content="Description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="renderer" content="webkit">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
         <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -14,12 +15,17 @@
     <![endif]-->
   </head>
   <body>
-    <div id="app"></div>
+    <div id="vue"></div>
     <script>
         window.$mgdoc = {
-            title: 'mgdoc - test'
+            title: 'mgdoc-test',
+            loadSidebar: true,
+            loadNavbar: true,
+            footer: '<span>mango mei &copy; 2022</span> @ copyright'
         };
     </script>
-    <script src="./lib/mgdoc.min.js"></script>
+    <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./lib/mgdoc.min.js"></script>    
   </body>
 </html>

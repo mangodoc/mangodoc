@@ -1,12 +1,11 @@
 import util from "./util";
-import titlePlugin from './plugins/title'
-import demoPlugin from './plugins/demo'
+import plugin from "./plugins/index"
 
 let url = util.getUrl();
 console.info(url);
 // 定义基础配置
 let config = {
-    plugins : [titlePlugin,demoPlugin]
+    plugins : plugin.list()
 }
 // 合并config 和 $mgdoc
 config = Object.assign({}, config, window.$mgdoc);
