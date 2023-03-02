@@ -27,4 +27,3 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 // 绑定到window.$mgdoc
 window.$mgdoc = config;
-

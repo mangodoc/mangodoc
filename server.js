@@ -49,8 +49,6 @@ const server = http.createServer((req, res) => {
           <script>
               window.$mgdoc = {
                   title: 'mgdoc-test',
-                  loadSidebar: true,
-                  loadNavbar: true,
                   footer: '<span>mango mei &copy; 2022</span> @ copyright'
               };
           </script>
