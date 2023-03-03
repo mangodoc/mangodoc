@@ -14313,6 +14313,7 @@ function injectStyle() {
         border-radius: 3px;
         padding: 3px 8px;
         color: #fff;
+        margin: 0px 5px;
       }
       pre code{
         background: none;
