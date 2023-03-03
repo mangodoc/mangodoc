@@ -1,7 +1,7 @@
-# mgdoc
+# mangodoc
 一个简单的doc文档生成器，类似docsify。
 
-[在线demo](https://mg0324.github.io/mgdoc/)
+[在线demo](https://mg0324.github.io/mangodoc/)
 
 ## 特性
 * 基于`javascript`实现的简单文档生成器。

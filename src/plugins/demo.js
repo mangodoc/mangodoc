@@ -20,5 +20,3 @@ export default {
         console.info("demo ready");
     }
 }
-
-//$mgdoc.plugins = [].concat(install, $mgdoc.plugins);

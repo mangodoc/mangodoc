@@ -41,9 +41,9 @@ export default {
             let mainEl = document.getElementById("main");
             mainEl.insertBefore(el,mainEl.firstChild);
             // 处理repo
-            if(window.$mgdoc.repo){
+            if(window.$mangodoc.repo){
                 let html = `
-                    <a class="nav-a" href="${window.$mgdoc.repo}" target="_blank">仓库</a>         
+                    <a class="nav-a" href="${window.$mangodoc.repo}" target="_blank">仓库</a>         
                 `;
                 let span = document.createElement('span');
                 span.innerHTML = html;
@@ -85,4 +85,3 @@ window.operFn = function(){
     }
 
 }
-//$mgdoc.plugins = [].concat(install, $mgdoc.plugins);

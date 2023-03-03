@@ -1,13 +1,55 @@
+const path = require('path')
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
+
+const theName = 'mangodoc'
+
 module.exports = {
-    mode: "production",
-    entry: "./src/mgdoc.js",
-    output: {
-        path: __dirname,
-        filename: "lib/mgdoc.min.js"
-    },
-    module: {
-        // loaders: [
-        //     { test: /\.css$/, loader: "style-loader!css-loader" }
-        // ]
-    }
-};
+  mode: 'production',
+  entry: {
+    [theName]: [path.join(process.cwd(), 'src', 'index.js')],
+    [theName + '.min']: [path.join(process.cwd(), 'src', 'index.js')]
+  },
+  output: {
+    path: path.join(process.cwd(), 'dist'),
+    filename: '[name].js',
+    library: 'mangodoc',
+    libraryTarget: 'umd',
+    libraryExport: 'default',
+    sourceMapFilename: '[file].map',
+    globalObject: 'this'
+  },
+  optimization: {
+    minimizer: [
+      new TerserWebpackPlugin({
+        include: /\.min\.js$/,
+        parallel: true,
+        extractComments: false,
+        terserOptions: {
+          format: {
+            comments: false
+          },
+          compress: true,
+          ie8: false,
+          ecma: 5,
+          warnings: false
+        }
+      })
+    ]
+  },
+//   plugins: [
+//     new CopyPlugin({
+//       patterns: [
+//         // {
+//         //   from: path.join(process.cwd(), 'src', 'assets', 'light.css'),
+//         //   to: path.join(process.cwd(), 'dist', 'light.css')
+//         // }
+//         // {
+//         //   from: path.join(process.cwd(), 'src', 'assets', 'dark.css'),
+//         //   to: path.join(process.cwd(), 'dist', 'dark.css')
+//         // }
+//       ]
+//     })
+//   ],
+  module: {}
+}

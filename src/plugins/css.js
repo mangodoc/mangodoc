@@ -104,5 +104,3 @@ function injectStyle() {
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }
-
-//$mgdoc.plugins = [].concat(install, $mgdoc.plugins);

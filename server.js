@@ -32,7 +32,7 @@ const server = http.createServer((req, res) => {
       <html lang="en">
         <head>
           <meta charset="UTF-8">
-          <title>My Docs</title>
+          <title>mangodoc</title>
           <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
           <meta name="description" content="Description">
           <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
@@ -47,16 +47,17 @@ const server = http.createServer((req, res) => {
         <body>
           <div id="vue"></div>
           <script>
-              window.$mgdoc = {
-                  title: 'mgdoc-test',
-                  footer: '<span>mango mei &copy; 2022</span> @ copyright'
+              window.$mangodoc = {
+                  title: 'mangodoc',
+                  repo: 'https://github.com/mg0324/mangodoc',
+                  footer: '<span>mango mei &copy; 2023</span> @ copyright'
               };
           </script>
           <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
           <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-          <script src="./lib/mgdoc.min.js"></script>    
+          <script src="./dist/mangodoc.min.js"></script>    
         </body>
-      </html>
+      </html>    
     `;
     res.end(template);
   }

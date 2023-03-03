@@ -23,8 +23,8 @@ export default {
         template += `
             <el-main><div id="app"></div></el-main>
         `; 
-        if(window.$mgdoc.footer){
-            template += `<el-footer id="footer">${window.$mgdoc.footer}</el-footer>`;
+        if(window.$mangodoc.footer){
+            template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
         }
         template += `
             </el-container>
@@ -36,5 +36,3 @@ export default {
         vue.appendChild(pageEl);
     }
 }
-
-//$mgdoc.plugins = [].concat(install, $mgdoc.plugins);

@@ -7,8 +7,8 @@ console.info(url);
 let config = {
     plugins : plugin.list()
 }
-// 合并config 和 $mgdoc
-config = Object.assign({}, config, window.$mgdoc);
+// 合并config 和 $mangodoc
+config = Object.assign({}, config, window.$mangodoc);
 console.info(config);
 // 调用生命周期 beforeEach
 util.callHook(config,"init");
@@ -34,5 +34,5 @@ window.addEventListener('resize', function() {
     window.asideInitFn();
 });
 
-// 绑定到window.$mgdoc
-window.$mgdoc = config;
+// 绑定到window.$mangodoc
+window.$mangodoc = config;

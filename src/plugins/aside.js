@@ -48,11 +48,9 @@ export default {
             var el = document.createElement("h2");
             // title
             el.id = "title";
-            el.innerHTML = `${window.$mgdoc.title}`;
+            el.innerHTML = `${window.$mangodoc.title}`;
             elSide.insertBefore(el,elSide.firstChild);
         });
         
     }
 }
-
-//$mgdoc.plugins = [].concat(install, $mgdoc.plugins);
