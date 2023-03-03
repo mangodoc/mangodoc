@@ -21,6 +21,16 @@ export default {
         });
     }
 }
+window.asideInitFn = function(){
+    let screenWidth = window.innerWidth;
+    // console.log('当前屏幕宽度：' + screenWidth + 'px');
+    if(screenWidth < 500){
+        $("#aside").hide();
+    }else{
+        $("#aside").show();
+    }
+    
+}
 window.operFn = function(){
     let width = $("#aside").width();
     width = width == 0 ? 250 : 0;

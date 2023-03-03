@@ -39,7 +39,7 @@ export default {
         url = "docs" + url;
         return url;
     },
-    render(url,config){
+    render(url,config,callback){
         // 读取 Markdown 文件
         fetch(url)
         .then(response => response.text())
@@ -59,6 +59,9 @@ export default {
                 that.callHook(config,"doneEach");
                 // 调用生命周期 mounted
                 that.callHook(config,"mounted");
+                if(callback){
+                    callback();
+                }
             });
         });
     }

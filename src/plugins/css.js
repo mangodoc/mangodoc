@@ -91,7 +91,6 @@ function injectStyle() {
         margin-left: 0px;
         padding-left: 8px;
       }
-      
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

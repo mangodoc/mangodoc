@@ -13,7 +13,12 @@ console.info(config);
 // 调用生命周期 beforeEach
 util.callHook(config,"init");
 // 开始渲染
-util.render(url,config);
+util.render(url,config,function(){
+    setTimeout(function(){
+        // 检测屏幕宽度，并设置aside
+        window.asideInitFn();
+    },100); 
+});
 
 // 监听地址栏变化
 window.onpopstate = function(event) {
@@ -23,6 +28,10 @@ window.onpopstate = function(event) {
 // 监听文档ready
 document.addEventListener("DOMContentLoaded", function(event) { 
     util.callHook(config,"ready");
+});
+
+window.addEventListener('resize', function() {
+    window.asideInitFn();
 });
 
 // 绑定到window.$mgdoc
