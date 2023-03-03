@@ -27,7 +27,7 @@ function injectStyle() {
         border-right: 1px solid #eee;
       }
       #aside ul {
-        margin: 8px;
+        margin: 2px 10px;
         padding: 0px;
       }
       #aside ul li {
@@ -35,6 +35,7 @@ function injectStyle() {
       }
       #aside ul li a {
         text-decoration: none;
+        color: #409EFF;
       }
       #title{
         text-align: center;
@@ -52,8 +53,8 @@ function injectStyle() {
         padding-left:0px;
       }
       #header .oper{
-        font-size: 30px;
-        color: green;
+        font-size: 28px;
+        color: #409EFF;
         float: left;
         line-height: 51px;
         padding: 0px;
@@ -78,19 +79,28 @@ function injectStyle() {
         text-decoration: none;
       }
       code{
-        background: yellowgreen;
+        background: #409EFF;
         border-radius: 3px;
         padding: 3px;
+        color: white;
       }
       h1{
         font-size: 32px;
         margin: 0px;
       }
       blockquote{
-        border-left: 3px solid green;
+        border-left: 3px solid #409EFF;
         margin-left: 0px;
         padding-left: 8px;
       }
+      .el-menu{
+        border-right: 0px !important;
+      }
+      .nav-a{
+        font-size: 14px;
+        text-decoration: none;
+        color: #409EFF;
+      }      
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

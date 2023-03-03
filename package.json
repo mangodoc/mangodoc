@@ -8,9 +8,10 @@
         "build": "webpack"
     },
     "dependencies": {
-        "jquery": "^3.6.3"
+        
     },
     "devDependencies": {
+        "jquery": "^3.6.3",
         "marked": "^4.2.12",
         "webpack": "^5.72.1",
         "webpack-cli": "^4.9.2"

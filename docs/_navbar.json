@@ -1,0 +1,24 @@
+[
+  {
+    "title": "更新日志",
+    "href": "#/changelog",
+    "target": "",
+    "level": 1
+  },
+  {
+    "title": "其他链接",
+    "children": [{
+        "title": "mgdoc",
+        "href": "https://github.com/mg0324/mgdoc",
+        "target": "_blank",
+        "level": 2
+      },
+      {
+        "title": "mgdoc2",
+        "href": "https://github.com/mg0324/mgdoc",
+        "target": "_blank",
+        "level": 2
+      }
+    ]
+  }
+]

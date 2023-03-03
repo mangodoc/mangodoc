@@ -1,14 +1,18 @@
-import { marked } from "marked";
+import { marked } from 'marked';
+import util from '../util'
 
 export default {
     ready(){
         console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.id = "aside";;
+        elSide.style.width = 250;
+        elSide.id = "aside";
         fetch("docs/_sidebar.md")
         .then(response => response.text())
         .then(markdown => {
-            const html = marked.parse(markdown);
+            let html = marked.parse(markdown);
+            //const json = util.htmlToJson(html,"ul");
+            //console.info(json);
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);

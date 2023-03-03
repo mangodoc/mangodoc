@@ -64,5 +64,39 @@ export default {
                 }
             });
         });
+    },
+    htmlToJson(html,root) {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, "text/html");
+        const body = doc.querySelector(root);
+      
+        function parseNode(node) {
+          const obj = {};
+          obj.nodeName = node.nodeName.toLowerCase();
+      
+          const attrs = node.attributes;
+          if (attrs) {
+            obj.attrs = {};
+            for (let i = 0; i < attrs.length; i++) {
+              const attr = attrs[i];
+              obj.attrs[attr.nodeName] = attr.nodeValue;
+            }
+          }
+      
+          const children = node.childNodes;
+          if (children) {
+            obj.children = [];
+            for (let i = 0; i < children.length; i++) {
+              const child = children[i];
+              if (child.nodeType === Node.TEXT_NODE) {
+                obj.content = child.nodeValue;
+              } else if (child.nodeType === Node.ELEMENT_NODE) {
+                obj.children.push(parseNode(child));
+              }
+            }
+          }
+          return obj;
+        }
+        return parseNode(body);
     }
 }

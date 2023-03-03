@@ -1,14 +1,41 @@
-import { marked } from "marked";
 import $ from "jquery";
+function renderNavItem(list){
+    let html = "";
+    for(let item of list){
+        if(!item.children){
+            if(item.level == 2){
+                html += `<el-dropdown-item><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-dropdown-item>`;
+            }else if(item.level == 1){
+                html += `<a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a>`;
+            }
+        }else {
+            let itemHtml = renderNavItem(item.children);
+            html += `
+                <el-dropdown>
+                    <span class="el-dropdown-link">
+                    ${item.title}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                    ${itemHtml}
+                    </el-dropdown-menu>
+                </el-dropdown>
+            `;
+        }
+    }
+    return html;
+}
 export default {
     ready(){
         console.info("nav ready");
         var el = document.createElement("el-header");
         el.id = "header";
-        fetch("docs/_navbar.md")
+        fetch("docs/_navbar.json")
         .then(response => response.text())
-        .then(markdown => {
-            const html = marked.parse(markdown);
+        .then(json => {
+            let navList = JSON.parse(json);
+            console.info(navList);
+            let html = renderNavItem(navList);
+            console.info("nav:"+html);
             let oper = `<i id='oper' class='el-icon-s-operation oper' onclick='window.operFn()'></i>`
             el.innerHTML = oper + html;
             let mainEl = document.getElementById("main");
