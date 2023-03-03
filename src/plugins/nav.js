@@ -8,6 +8,9 @@ function renderNavItem(list){
             }else if(item.level == 1){
                 html += `<a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a>`;
             }
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
+            }
         }else {
             let itemHtml = renderNavItem(item.children);
             html += `

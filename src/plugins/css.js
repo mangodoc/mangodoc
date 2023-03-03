@@ -78,11 +78,20 @@ function injectStyle() {
       #header ul li a {
         text-decoration: none;
       }
-      code{
-        background: #409EFF;
+      pre {
+        background: #eee;
         border-radius: 3px;
-        padding: 3px;
-        color: white;
+        padding: 8px;
+      }
+      code{
+        background: green;
+        border-radius: 3px;
+        padding: 3px 8px;
+        color: #fff;
+      }
+      pre code{
+        background: none;
+        color: black;
       }
       h1{
         font-size: 32px;

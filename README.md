@@ -10,7 +10,7 @@
 * 提供插件API接口，可通过插件完善文档能力；目前已经支持简单的文档布局。
 
 ## 快速开始
-1. 创建index.html页
+1. 创建`index.html`页
 ``` html
 <!DOCTYPE html>
 <html lang="en">

@@ -1,6 +1,8 @@
 import util from "./util";
 import plugin from "./plugins/index"
-
+import $ from "jquery"
+// 定义全局对象navMap
+window.navMap = {};
 let url = util.getUrl();
 console.info(url);
 // 定义基础配置
@@ -23,6 +25,8 @@ util.render(url,config,function(){
 // 监听地址栏变化
 window.onpopstate = function(event) {
     util.render(util.getUrl(),config);
+    // 变化页面标题
+    $("title").text(window.navMap[window.location.hash]);
 };
 
 // 监听文档ready

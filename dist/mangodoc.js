@@ -14069,6 +14069,7 @@ const lexer = Lexer.lex;
 
 ;// CONCATENATED MODULE: ./src/plugins/aside.js
 let index = 1;
+
 function renderSidebarItem(list,init){
     let html = "";
     if(init){
@@ -14081,6 +14082,9 @@ function renderSidebarItem(list,init){
     for(let item of list){
         if(!item.children){
             html += `<el-menu-item index="${index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
+            }
         }else {
             let itemHtml = renderSidebarItem(item.children,false);
             html += `
@@ -14137,6 +14141,9 @@ function renderNavItem(list){
                 html += `<el-dropdown-item><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-dropdown-item>`;
             }else if(item.level == 1){
                 html += `<a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a>`;
+            }
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
             }
         }else {
             let itemHtml = renderNavItem(item.children);
@@ -14296,11 +14303,20 @@ function injectStyle() {
       #header ul li a {
         text-decoration: none;
       }
-      code{
-        background: #409EFF;
+      pre {
+        background: #eee;
         border-radius: 3px;
-        padding: 3px;
-        color: white;
+        padding: 8px;
+      }
+      code{
+        background: green;
+        border-radius: 3px;
+        padding: 3px 8px;
+        color: #fff;
+      }
+      pre code{
+        background: none;
+        color: black;
       }
       h1{
         font-size: 32px;
@@ -14339,6 +14355,8 @@ function injectStyle() {
 
 
 
+// 定义全局对象navMap
+window.navMap = {};
 let url = util.getUrl();
 console.info(url);
 // 定义基础配置
@@ -14361,6 +14379,8 @@ util.render(url,config,function(){
 // 监听地址栏变化
 window.onpopstate = function(event) {
     util.render(util.getUrl(),config);
+    // 变化页面标题
+    jquery_default()("title").text(window.navMap[window.location.hash]);
 };
 
 // 监听文档ready
@@ -14374,6 +14394,7 @@ window.addEventListener('resize', function() {
 
 // 绑定到window.$mangodoc
 window.$mangodoc = config;
+
 })();
 
 __webpack_exports__ = __webpack_exports__["default"];

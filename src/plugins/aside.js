@@ -1,4 +1,5 @@
 let index = 1;
+
 function renderSidebarItem(list,init){
     let html = "";
     if(init){
@@ -11,6 +12,9 @@ function renderSidebarItem(list,init){
     for(let item of list){
         if(!item.children){
             html += `<el-menu-item index="${index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
+            }
         }else {
             let itemHtml = renderSidebarItem(item.children,false);
             html += `
