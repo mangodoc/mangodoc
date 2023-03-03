@@ -40,12 +40,21 @@ export default {
             el.innerHTML = oper + html;
             let mainEl = document.getElementById("main");
             mainEl.insertBefore(el,mainEl.firstChild);
-            document.getle
+            // 处理repo
+            if(window.$mgdoc.repo){
+                let html = `
+                    <a class="nav-a" href="${window.$mgdoc.repo}" target="_blank">仓库</a>         
+                `;
+                let span = document.createElement('span');
+                span.innerHTML = html;
+                let header = document.getElementById("header");
+                header.appendChild(span);
+            }
             new Vue({
                 el: '#vue',
                 data(){
                     return {
-                        "sidebarCollapse": true
+                        
                     }
                 }
             })
