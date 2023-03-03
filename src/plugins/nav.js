@@ -42,7 +42,12 @@ export default {
             mainEl.insertBefore(el,mainEl.firstChild);
             document.getle
             new Vue({
-                el: '#vue'
+                el: '#vue',
+                data(){
+                    return {
+                        "sidebarCollapse": true
+                    }
+                }
             })
             $("#aside").width(250);
         });

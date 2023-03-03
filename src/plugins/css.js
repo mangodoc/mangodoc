@@ -27,7 +27,7 @@ function injectStyle() {
         border-right: 1px solid #eee;
       }
       #aside ul {
-        margin: 2px 10px;
+        margin: 0px;
         padding: 0px;
       }
       #aside ul li {

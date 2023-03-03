@@ -1,0 +1,30 @@
+[
+    {
+        "title": "主页",
+        "href": "#/",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-s-home"
+    },
+    {
+        "title": "示例",
+        "level": 1,
+        "icon": "el-icon-star-on",
+        "children": [
+            {
+                "title": "主流前端",
+                "href": "#/all",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-promotion"
+            },
+            {
+                "title": "网络模型",
+                "href": "#/network",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-tools"
+            }
+        ]
+    }
+]
