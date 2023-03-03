@@ -20,11 +20,29 @@
         window.$mangodoc = {
             title: 'mangodoc',
             repo: 'https://github.com/mg0324/mangodoc',
-            footer: '<span>mango mei &copy; 2023</span> @ copyright'
+            footer: '<span>mango mei &copy; 2023</span> @ copyright',
+            // giscus评论
+            giscus:{
+              repo: "mg0324/docsify-comments",
+              repoId: "R_kgDOI68LwA",
+              category: "Announcements",
+              categoryId: "DIC_kwDOI68LwM4CUDhM",
+              mapping: "url",
+              reactionsEnabled: "0",
+              strict: "1",
+              emitMetadata: "0",
+              inputPosition: "bottom",
+              theme: "light",
+              lang: "zh-CN",
+              loading: "lazy"
+            }
         };
     </script>
     <script src="https://unpkg.com/vue@2/dist/vue.js"></script>
     <script src="https://unpkg.com/element-ui/lib/index.js"></script>
-    <script src="./dist/mangodoc.min.js"></script>    
+    <script src="./dist/mangodoc.min.js"></script>
+    <!-- giscus评论  -->
+    <link rel="stylesheet" href="https://unpkg.com/mangodoc-giscus@1.0.0/dist/giscus.css">
+    <script src="https://unpkg.com/mangodoc-giscus@1.0.0/dist/mangodoc-giscus.min.js"></script>    
   </body>
 </html>
