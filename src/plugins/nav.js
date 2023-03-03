@@ -48,6 +48,7 @@ export default {
         });
     }
 }
+
 window.asideInitFn = function(){
     let screenWidth = window.innerWidth;
     // console.log('当前屏幕宽度：' + screenWidth + 'px');
@@ -59,8 +60,15 @@ window.asideInitFn = function(){
     
 }
 window.operFn = function(){
-    let width = $("#aside").width();
+    let v = $("#aside");
+    let width = v.width();
     width = width == 0 ? 250 : 0;
-    $("#aside").width(width);
+    v.width(width);
+    if(width == 0){
+        v.hide();
+    }else{
+        v.show();
+    }
+
 }
 //$mgdoc.plugins = [].concat(install, $mgdoc.plugins);
