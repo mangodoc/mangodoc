@@ -13944,6 +13944,7 @@ const lexer = Lexer.lex;
         return url;
     },
     render(url,config,callback){
+        $("#fullscreen-loading").show();
         console.info(url);
         // 读取 Markdown 文件
         fetch(url)
@@ -13964,6 +13965,8 @@ const lexer = Lexer.lex;
                 that.callHook(config,"doneEach");
                 // 调用生命周期 mounted
                 that.callHook(config,"mounted");
+                // 关闭加载提示
+                $("#fullscreen-loading").hide();
                 if(callback){
                     callback();
                 }
@@ -14020,7 +14023,7 @@ const lexer = Lexer.lex;
             <el-container id="main">
         `;
         template += `
-            <el-main><div id="app"></div></el-main>
+            <el-main><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
         `; 
         if(window.$mangodoc.footer){
             template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
@@ -14035,9 +14038,14 @@ const lexer = Lexer.lex;
         vue.appendChild(pageEl);
     },
     onpopstate(){
-        util.render(util.getUrl(),window.$mangodoc);
-        // 变化页面标题
-        $("title").text(window.navMap[window.location.hash]);
+        // 如果是锚点，则不加载资源，因为是同一个页面
+        if(window.location.hash.indexOf("?id=heading") > -1){
+            
+        }else{
+            util.render(util.getUrl(),window.$mangodoc);
+            // 变化页面标题
+            $("title").text(window.navMap[window.location.hash]);
+        }
     }
 });
 
@@ -14093,7 +14101,7 @@ function renderSidebarItem(list,init){
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);
-            var el = document.createElement("h2");
+            var el = document.createElement("span");
             // title
             el.id = "title";
             el.innerHTML = `${window.$mangodoc.title}`;
@@ -14176,7 +14184,7 @@ function renderNavItem(list){
         });
     },
     mounted(){
-
+        
     }
 });
 
@@ -14237,6 +14245,8 @@ function injectStyle() {
         line-height: 50px;
         margin: 0px;
         padding: 0px;
+        display: block;
+        font-size: 20px;
       }
       #header {
         height:51px !important;
@@ -14304,6 +14314,32 @@ function injectStyle() {
         text-decoration: none;
         color: #409EFF;
       }
+      .fullscreen-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .fullscreen-loading::before {
+        content: "";
+        width: 60px;
+        height: 60px;
+        border: 5px solid #ddd;
+        border-top-color: #777;
+        border-radius: 50%;
+        animation: rotate 1s linear infinite;
+      }
+      @keyframes rotate {
+        to {
+          transform: rotate(360deg);
+        }
+      }      
       @media only screen and (max-width: 500px) {
         #aside{
           display: none;

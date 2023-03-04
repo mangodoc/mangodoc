@@ -49,7 +49,7 @@ export default {
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);
-            var el = document.createElement("h2");
+            var el = document.createElement("span");
             // title
             el.id = "title";
             el.innerHTML = `${window.$mangodoc.title}`;

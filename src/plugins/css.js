@@ -44,6 +44,8 @@ function injectStyle() {
         line-height: 50px;
         margin: 0px;
         padding: 0px;
+        display: block;
+        font-size: 20px;
       }
       #header {
         height:51px !important;
@@ -111,6 +113,32 @@ function injectStyle() {
         text-decoration: none;
         color: #409EFF;
       }
+      .fullscreen-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .fullscreen-loading::before {
+        content: "";
+        width: 60px;
+        height: 60px;
+        border: 5px solid #ddd;
+        border-top-color: #777;
+        border-radius: 50%;
+        animation: rotate 1s linear infinite;
+      }
+      @keyframes rotate {
+        to {
+          transform: rotate(360deg);
+        }
+      }      
       @media only screen and (max-width: 500px) {
         #aside{
           display: none;

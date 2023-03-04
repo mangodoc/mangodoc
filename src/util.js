@@ -41,6 +41,7 @@ export default {
         return url;
     },
     render(url,config,callback){
+        $("#fullscreen-loading").show();
         console.info(url);
         // 读取 Markdown 文件
         fetch(url)
@@ -61,6 +62,8 @@ export default {
                 that.callHook(config,"doneEach");
                 // 调用生命周期 mounted
                 that.callHook(config,"mounted");
+                // 关闭加载提示
+                $("#fullscreen-loading").hide();
                 if(callback){
                     callback();
                 }
