@@ -30,6 +30,7 @@ export default {
             window.location.hash = "#/";
             hash = "#/";
         }
+        hash = hash.split("?")[0];
         let url = hash.replace("#","");
         if(url === "/"){
             url = "/README.md";
@@ -40,6 +41,7 @@ export default {
         return url;
     },
     render(url,config,callback){
+        console.info(url);
         // 读取 Markdown 文件
         fetch(url)
         .then(response => response.text())
@@ -47,13 +49,13 @@ export default {
             let that = this;
             // 调用生命周期 beforeEach
             markdown = this.callHook(config,"beforeEach",markdown);
-            console.info("final markdown:"+markdown);
+            // console.info("final markdown:"+markdown);
             // 将 Markdown 转换为 HTML
             const html = marked.parse(markdown);
             // 调用生命周期 afterEach
             this.callHook(config,"afterEach",html,function(resultHtml){
                 // 将 HTML 显示在页面上
-                console.info("final html:"+resultHtml);
+                // console.info("final html:"+resultHtml);
                 document.getElementById('app').innerHTML = resultHtml;
                 // 调用生命周期 doneEach
                 that.callHook(config,"doneEach");
@@ -64,39 +66,5 @@ export default {
                 }
             });
         });
-    },
-    htmlToJson(html,root) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const body = doc.querySelector(root);
-      
-        function parseNode(node) {
-          const obj = {};
-          obj.nodeName = node.nodeName.toLowerCase();
-      
-          const attrs = node.attributes;
-          if (attrs) {
-            obj.attrs = {};
-            for (let i = 0; i < attrs.length; i++) {
-              const attr = attrs[i];
-              obj.attrs[attr.nodeName] = attr.nodeValue;
-            }
-          }
-      
-          const children = node.childNodes;
-          if (children) {
-            obj.children = [];
-            for (let i = 0; i < children.length; i++) {
-              const child = children[i];
-              if (child.nodeType === Node.TEXT_NODE) {
-                obj.content = child.nodeValue;
-              } else if (child.nodeType === Node.ELEMENT_NODE) {
-                obj.children.push(parseNode(child));
-              }
-            }
-          }
-          return obj;
-        }
-        return parseNode(body);
     }
 }
