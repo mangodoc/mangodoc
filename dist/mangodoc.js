@@ -14214,6 +14214,7 @@ function injectStyle() {
       }
       html, body {
         height: 100%;
+        overflow: hidden;
       }
       #page,#vue {
         height: 100%;
@@ -14285,6 +14286,7 @@ function injectStyle() {
         background: #eee;
         border-radius: 3px;
         padding: 8px;
+        overflow: auto;
       }
       code{
         background: green;
