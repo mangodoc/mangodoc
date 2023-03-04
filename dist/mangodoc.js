@@ -13933,6 +13933,7 @@ const lexer = Lexer.lex;
             window.location.hash = "#/";
             hash = "#/";
         }
+        hash = hash.split("?")[0];
         let url = hash.replace("#","");
         if(url === "/"){
             url = "/README.md";
@@ -13943,6 +13944,7 @@ const lexer = Lexer.lex;
         return url;
     },
     render(url,config,callback){
+        console.info(url);
         // 读取 Markdown 文件
         fetch(url)
         .then(response => response.text())
@@ -13950,13 +13952,13 @@ const lexer = Lexer.lex;
             let that = this;
             // 调用生命周期 beforeEach
             markdown = this.callHook(config,"beforeEach",markdown);
-            console.info("final markdown:"+markdown);
+            // console.info("final markdown:"+markdown);
             // 将 Markdown 转换为 HTML
             const html = marked.parse(markdown);
             // 调用生命周期 afterEach
             this.callHook(config,"afterEach",html,function(resultHtml){
                 // 将 HTML 显示在页面上
-                console.info("final html:"+resultHtml);
+                // console.info("final html:"+resultHtml);
                 document.getElementById('app').innerHTML = resultHtml;
                 // 调用生命周期 doneEach
                 that.callHook(config,"doneEach");
@@ -13967,40 +13969,6 @@ const lexer = Lexer.lex;
                 }
             });
         });
-    },
-    htmlToJson(html,root) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, "text/html");
-        const body = doc.querySelector(root);
-      
-        function parseNode(node) {
-          const obj = {};
-          obj.nodeName = node.nodeName.toLowerCase();
-      
-          const attrs = node.attributes;
-          if (attrs) {
-            obj.attrs = {};
-            for (let i = 0; i < attrs.length; i++) {
-              const attr = attrs[i];
-              obj.attrs[attr.nodeName] = attr.nodeValue;
-            }
-          }
-      
-          const children = node.childNodes;
-          if (children) {
-            obj.children = [];
-            for (let i = 0; i < children.length; i++) {
-              const child = children[i];
-              if (child.nodeType === Node.TEXT_NODE) {
-                obj.content = child.nodeValue;
-              } else if (child.nodeType === Node.ELEMENT_NODE) {
-                obj.children.push(parseNode(child));
-              }
-            }
-          }
-          return obj;
-        }
-        return parseNode(body);
     }
 });
 ;// CONCATENATED MODULE: ./src/plugins/demo.js
@@ -14013,7 +13981,7 @@ const lexer = Lexer.lex;
         return content;
     },
     afterEach(html,next){
-        console.info("demo afterEach:"+html);
+        // console.info("demo afterEach:"+html);
         next(html);
     },
     doneEach(){
@@ -14028,6 +13996,7 @@ const lexer = Lexer.lex;
 });
 
 ;// CONCATENATED MODULE: ./src/plugins/core.js
+
 /* harmony default export */ const core = ({
     // init(){
     //     console.info("core init");
@@ -14046,7 +14015,7 @@ const lexer = Lexer.lex;
     //     console.info("core mounted");
     // },
     ready(){
-        console.info("core ready");
+        // console.info("core ready");
         let template = `
             <el-container id="main">
         `;
@@ -14064,6 +14033,11 @@ const lexer = Lexer.lex;
         pageEl.innerHTML = template;
         let vue = document.getElementById("vue");
         vue.appendChild(pageEl);
+    },
+    onpopstate(){
+        util.render(util.getUrl(),window.$mangodoc);
+        // 变化页面标题
+        $("title").text(window.navMap[window.location.hash]);
     }
 });
 
@@ -14106,7 +14080,7 @@ function renderSidebarItem(list,init){
 }
 /* harmony default export */ const aside = ({
     ready(){
-        console.info("aside ready");
+        // console.info("aside ready");
         var elSide = document.createElement("el-aside");
         elSide.style.width = 250;
         elSide.id = "aside";
@@ -14115,7 +14089,7 @@ function renderSidebarItem(list,init){
         .then(json => {
             let sidebarList = JSON.parse(json);
             let html = renderSidebarItem(sidebarList,true);
-            console.info("sidebar html:"+html);
+            // console.info("sidebar html:"+html);
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);
@@ -14163,17 +14137,17 @@ function renderNavItem(list){
 }
 /* harmony default export */ const nav = ({
     ready(){
-        console.info("nav ready");
+        // console.info("nav ready");
         var el = document.createElement("el-header");
         el.id = "header";
         fetch("docs/_navbar.json")
         .then(response => response.text())
         .then(json => {
             let navList = JSON.parse(json);
-            console.info(navList);
+            // console.info(navList);
             let html = renderNavItem(navList);
-            console.info("nav:"+html);
-            let oper = `<i id='oper' class='el-icon-s-operation oper' onclick='window.operFn()'></i>`
+            // console.info("nav:"+html);
+            let oper = `<i id='oper' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
             el.innerHTML = oper + html;
             let mainEl = document.getElementById("main");
             mainEl.insertBefore(el,mainEl.firstChild);
@@ -14187,6 +14161,10 @@ function renderNavItem(list){
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
+            jquery_default()("#aside").width(250);
+            if(screen.width < 500){
+                jquery_default()("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
+            }
             new Vue({
                 el: '#vue',
                 data(){
@@ -14195,32 +14173,22 @@ function renderNavItem(list){
                     }
                 }
             })
-            jquery_default()("#aside").width(250);
         });
+    },
+    mounted(){
+
     }
 });
 
-window.asideInitFn = function(){
-    let screenWidth = window.innerWidth;
-    // console.log('当前屏幕宽度：' + screenWidth + 'px');
-    if(screenWidth < 500){
-        jquery_default()("#aside").hide();
-    }else{
-        jquery_default()("#aside").show();
-    }
-    
-}
 window.operFn = function(){
     let v = jquery_default()("#aside");
-    let width = v.width();
-    width = width == 0 ? 250 : 0;
-    v.width(width);
-    if(width == 0){
-        v.hide();
-    }else{
+    if (v.is(':visible')) {
+        jquery_default()("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
+        v.hide(); 
+    } else {
+        jquery_default()("#oper").removeClass("el-icon-d-arrow-right").addClass("el-icon-d-arrow-left");
         v.show();
     }
-
 }
 ;// CONCATENATED MODULE: ./src/plugins/css.js
 /* harmony default export */ const css = ({
@@ -14278,7 +14246,7 @@ function injectStyle() {
         padding-left:0px;
       }
       #header .oper{
-        font-size: 28px;
+        font-size: 25px;
         color: #409EFF;
         float: left;
         line-height: 51px;
@@ -14335,7 +14303,12 @@ function injectStyle() {
         font-size: 14px;
         text-decoration: none;
         color: #409EFF;
-      }      
+      }
+      @media only screen and (max-width: 500px) {
+        #aside{
+          display: none;
+        }
+      }  
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }
@@ -14349,7 +14322,11 @@ function injectStyle() {
 
 /* harmony default export */ const plugins = ({
     list(){
-        return [css,core,aside,nav,demo];
+        let list = [css,core,aside,nav,demo];
+        if(window.$mangodoc.plugins){
+            list = list.concat(window.$mangodoc.plugins);
+        }
+        return list;
     }
 });
 ;// CONCATENATED MODULE: ./src/index.js
@@ -14359,29 +14336,23 @@ function injectStyle() {
 // 定义全局对象navMap
 window.navMap = {};
 let url = util.getUrl();
-console.info(url);
-// 定义基础配置
-let config = {
-    plugins : plugins.list()
-}
+// 合并插件列表
+window.$mangodoc.plugins = plugins.list();
 // 合并config 和 $mangodoc
-config = Object.assign({}, config, window.$mangodoc);
+// config = Object.assign({}, window.$mangodoc, config );
+let config = window.$mangodoc;
 console.info(config);
 // 调用生命周期 beforeEach
 util.callHook(config,"init");
 // 开始渲染
 util.render(url,config,function(){
-    setTimeout(function(){
-        // 检测屏幕宽度，并设置aside
-        window.asideInitFn();
-    },100); 
+    
 });
 
 // 监听地址栏变化
 window.onpopstate = function(event) {
-    util.render(util.getUrl(),config);
-    // 变化页面标题
-    jquery_default()("title").text(window.navMap[window.location.hash]);
+    // 调用事件
+    util.callHook(config,"onpopstate",event);
 };
 
 // 监听文档ready
@@ -14389,12 +14360,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     util.callHook(config,"ready");
 });
 
+// 监听resize
 window.addEventListener('resize', function() {
-    window.asideInitFn();
+    util.callHook(config,"resize");
 });
-
-// 绑定到window.$mangodoc
-window.$mangodoc = config;
 
 })();
 

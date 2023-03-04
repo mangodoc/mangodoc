@@ -6,6 +6,10 @@ import css from './css';
 
 export default{
     list(){
-        return [css,core,aside,nav,demo];
+        let list = [css,core,aside,nav,demo];
+        if(window.$mangodoc.plugins){
+            list = list.concat(window.$mangodoc.plugins);
+        }
+        return list;
     }
 }

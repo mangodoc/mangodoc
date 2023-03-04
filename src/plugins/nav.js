@@ -29,17 +29,17 @@ function renderNavItem(list){
 }
 export default {
     ready(){
-        console.info("nav ready");
+        // console.info("nav ready");
         var el = document.createElement("el-header");
         el.id = "header";
         fetch("docs/_navbar.json")
         .then(response => response.text())
         .then(json => {
             let navList = JSON.parse(json);
-            console.info(navList);
+            // console.info(navList);
             let html = renderNavItem(navList);
-            console.info("nav:"+html);
-            let oper = `<i id='oper' class='el-icon-s-operation oper' onclick='window.operFn()'></i>`
+            // console.info("nav:"+html);
+            let oper = `<i id='oper' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
             el.innerHTML = oper + html;
             let mainEl = document.getElementById("main");
             mainEl.insertBefore(el,mainEl.firstChild);
@@ -53,6 +53,10 @@ export default {
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
+            $("#aside").width(250);
+            if(screen.width < 500){
+                $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
+            }
             new Vue({
                 el: '#vue',
                 data(){
@@ -61,30 +65,20 @@ export default {
                     }
                 }
             })
-            $("#aside").width(250);
         });
+    },
+    mounted(){
+
     }
 }
 
-window.asideInitFn = function(){
-    let screenWidth = window.innerWidth;
-    // console.log('当前屏幕宽度：' + screenWidth + 'px');
-    if(screenWidth < 500){
-        $("#aside").hide();
-    }else{
-        $("#aside").show();
-    }
-    
-}
 window.operFn = function(){
     let v = $("#aside");
-    let width = v.width();
-    width = width == 0 ? 250 : 0;
-    v.width(width);
-    if(width == 0){
-        v.hide();
-    }else{
+    if (v.is(':visible')) {
+        $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
+        v.hide(); 
+    } else {
+        $("#oper").removeClass("el-icon-d-arrow-right").addClass("el-icon-d-arrow-left");
         v.show();
     }
-
 }

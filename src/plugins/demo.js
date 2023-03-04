@@ -7,7 +7,7 @@ export default {
         return content;
     },
     afterEach(html,next){
-        console.info("demo afterEach:"+html);
+        // console.info("demo afterEach:"+html);
         next(html);
     },
     doneEach(){

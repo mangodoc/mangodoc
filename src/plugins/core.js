@@ -1,3 +1,4 @@
+import util from "../util";
 export default {
     // init(){
     //     console.info("core init");
@@ -16,7 +17,7 @@ export default {
     //     console.info("core mounted");
     // },
     ready(){
-        console.info("core ready");
+        // console.info("core ready");
         let template = `
             <el-container id="main">
         `;
@@ -34,5 +35,10 @@ export default {
         pageEl.innerHTML = template;
         let vue = document.getElementById("vue");
         vue.appendChild(pageEl);
+    },
+    onpopstate(){
+        util.render(util.getUrl(),window.$mangodoc);
+        // 变化页面标题
+        $("title").text(window.navMap[window.location.hash]);
     }
 }

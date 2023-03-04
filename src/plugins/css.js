@@ -53,7 +53,7 @@ function injectStyle() {
         padding-left:0px;
       }
       #header .oper{
-        font-size: 28px;
+        font-size: 25px;
         color: #409EFF;
         float: left;
         line-height: 51px;
@@ -110,7 +110,12 @@ function injectStyle() {
         font-size: 14px;
         text-decoration: none;
         color: #409EFF;
-      }      
+      }
+      @media only screen and (max-width: 500px) {
+        #aside{
+          display: none;
+        }
+      }  
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

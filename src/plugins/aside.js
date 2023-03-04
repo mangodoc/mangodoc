@@ -36,7 +36,7 @@ function renderSidebarItem(list,init){
 }
 export default {
     ready(){
-        console.info("aside ready");
+        // console.info("aside ready");
         var elSide = document.createElement("el-aside");
         elSide.style.width = 250;
         elSide.id = "aside";
@@ -45,7 +45,7 @@ export default {
         .then(json => {
             let sidebarList = JSON.parse(json);
             let html = renderSidebarItem(sidebarList,true);
-            console.info("sidebar html:"+html);
+            // console.info("sidebar html:"+html);
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);
