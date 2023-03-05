@@ -16,9 +16,6 @@
   </head>
   <body>
     <div id="vue"></div>
-    <div class="overlay" style="display: none;">
-      <img src="" alt="overlay image">
-    </div>
     <script>
         window.$mangodoc = {
             title: 'mangodoc',
@@ -41,14 +38,7 @@
             },
             toc:{
               select: "h1, h2, h3, h4, h5, h6"
-            },
-            plugins:[
-              {
-                mounted(){
-                  
-                }
-              }
-            ]
+            }
         };
     </script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -62,20 +52,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-toc@1.0.1/dist/toc.css">
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-toc@1.0.1/dist/mangodoc-toc.min.js"></script>  
     <!-- to top  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.0/dist/top.css">
-    <script src="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.0/dist/mangodoc-top.min.js"></script> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.1/dist/top.css">
+    <script src="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.1/dist/mangodoc-top.min.js"></script> 
     <!-- imgview插件  -->
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/mangodoc-imgview@1.0.1/dist/imgview.css">
-    <script src="https://unpkg.com/mangodoc-imgview@1.0.1/dist/mangodoc-imgview.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/mangodoc-imgview@1.0.3/dist/imgview.css">
+    <script src="https://unpkg.com/mangodoc-imgview@1.0.3/dist/mangodoc-imgview.min.js"></script>
 
     <!-- java语法高亮 -->
     <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
-    <style>
-
-    </style>
-    <script>
-      
-    </script>
   </body>
 </html>

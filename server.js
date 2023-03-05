@@ -69,14 +69,7 @@ const server = http.createServer((req, res) => {
                 },
                 toc:{
                   select: "h1, h2, h3, h4, h5, h6"
-                },
-                // plugins:[
-                //   {
-                //     beforeRequest(){
-                      
-                //     }
-                //   }
-                // ]
+                }
             };
         </script>
         <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -88,12 +81,19 @@ const server = http.createServer((req, res) => {
         <script src="https://cdn.jsdelivr.net/npm/mangodoc-giscus@1.0.1/dist/mangodoc-giscus.min.js"></script>
         <!-- toc文章目录  -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-toc@1.0.1/dist/toc.css">
-        <script src="https://cdn.jsdelivr.net/npm/mangodoc-toc@1.0.1/dist/mangodoc-toc.min.js"></script>    
-        <style>
-            
-        </style>
+        <script src="https://cdn.jsdelivr.net/npm/mangodoc-toc@1.0.1/dist/mangodoc-toc.min.js"></script>  
+        <!-- to top  -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.1/dist/top.css">
+        <script src="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.1/dist/mangodoc-top.min.js"></script> 
+        <!-- imgview插件  -->
+        <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/mangodoc-imgview@1.0.3/dist/imgview.css">
+        <script src="https://unpkg.com/mangodoc-imgview@1.0.3/dist/mangodoc-imgview.min.js"></script>
+
+        <!-- java语法高亮 -->
+        <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>
       </body>
-    </html>        
+    </html>
     `;
     res.end(template);
   }
