@@ -1,28 +1,33 @@
 {
     "name": "mangodoc",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "description": "mangodoc tool",
     "main": "src",
     "unpkg": "dist/mangodoc.min.js",
     "homepage": "https://github.com/mg0324/mangodoc",
     "repository": "git@github.com:mg0324/mangodoc.git",
     "files": [
-      "dist/"
+        "dist/"
     ],
     "scripts": {
         "dev": "node server.js",
         "build": "webpack"
     },
     "keywords": [
-      "mangodoc"
+        "mangodoc"
     ],
     "author": "mgang",
     "license": "MIT",
     "devDependencies": {
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.7.3",
         "jquery": "^3.6.3",
         "marked": "^4.2.12",
+        "postcss-loader": "^7.0.2",
+        "prismjs": "^1.29.0",
+        "sass-loader": "^13.2.0",
+        "style-loader": "^3.3.1",
         "webpack": "^5.72.1",
-        "webpack-cli": "^4.9.2",
-        "copy-webpack-plugin": "^11.0.0"
+        "webpack-cli": "^4.9.2"
     }
-  }
+}
