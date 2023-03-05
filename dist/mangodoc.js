@@ -14040,7 +14040,7 @@ const lexer = Lexer.lex;
             <el-container id="main">
         `;
         template += `
-            <el-main><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
+            <el-main id='content'><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
         `; 
         if(window.$mangodoc.footer){
             template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
