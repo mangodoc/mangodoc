@@ -1,11 +1,11 @@
 # mangodoc
-一个简单的doc文档生成器，类似docsify。
+一个简单的doc文档构建器，参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)
 
 [在线demo](https://mg0324.github.io/mangodoc/)
 
 ## 特性
 * 基于`javascript`实现的简单文档生成器。
-* 基于`marked`实现`markdown`到`html`的转哈。
+* 基于`marked`实现`markdown`到`html`的转换。
 * 基于[elementui](https://element.eleme.cn/#/zh-CN/component/installation)的vue组件版本构建。
 * 基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
 * 支持静态资源部署，如`gitee pages`、`github pages`等。
