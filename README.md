@@ -5,9 +5,22 @@
 
 ## 特性
 * 基于`javascript`实现的简单文档生成器。
+* 基于`marked`实现`markdown`到`html`的转哈。
 * 基于[elementui](https://element.eleme.cn/#/zh-CN/component/installation)的vue组件版本构建。
+* 基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
 * 支持静态资源部署，如`gitee pages`、`github pages`等。
-* 提供插件API接口，可通过插件完善文档能力；目前已经支持简单的文档布局。
+* 提供插件API接口，包括生命周期和部分事件监听函数。
+
+## 插件列表
+* 内置插件core - 支持文档布局、文档核心、hash路由、加载提示及插件机制
+* 内置插件css - 支持内置样式嵌入
+* 内置插件aside - 支持左侧目录栏配置和生成
+* 内置插件nav - 支持顶部导航条配置和生成
+* 内置插件prism - 基于`prismjs`支持代码高亮
+* 外部插件[mangodoc-giscus](https://github.com/mg0324/mangodoc-giscus) - 支持giscus评论
+* 外部插件[mangodoc-toc](https://github.com/mg0324/mangodoc-toc) - 支持文章目录书签生成
+* 外部插件[mangodoc-imgview](https://github.com/mg0324/mangodoc-imgview) - 集成`hammerjs`支持图片点击查看和放大移动
+* 外部插件[mangodoc-top](https://github.com/mg0324/mangodoc-top) - 支持文章阅读时返回顶部
 
 ## 快速开始
 1. 创建index.html页
