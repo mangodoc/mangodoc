@@ -8,14 +8,8 @@
   {
     "title": "其他链接",
     "children": [{
-        "title": "mgdoc",
-        "href": "https://github.com/mg0324/mgdoc",
-        "target": "_blank",
-        "level": 2
-      },
-      {
-        "title": "mgdoc2",
-        "href": "https://github.com/mg0324/mgdoc",
+        "title": "mangodoc",
+        "href": "https://github.com/mg0324/mangodoc",
         "target": "_blank",
         "level": 2
       }
