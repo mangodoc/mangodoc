@@ -16403,12 +16403,18 @@ const lexer = Lexer.lex;
     },
     ready(){
         console.info("demo ready");
+    },
+    onpopstate(event){
+
+    },
+    resize(){
+
     }
 });
 
-;// CONCATENATED MODULE: ./src/plugins/core.js
+;// CONCATENATED MODULE: ./src/plugins/layout.js
 
-/* harmony default export */ const core = ({
+/* harmony default export */ const layout = ({
     // init(){
     //     console.info("core init");
     // },
@@ -16849,7 +16855,7 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, pri
 
 /* harmony default export */ const plugins = ({
     list(){
-        let list = [css,core,aside,nav,demo,plugins_prism];
+        let list = [css,layout,aside,nav,demo,plugins_prism];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }

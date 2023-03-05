@@ -1,7 +1,9 @@
 # mangodoc
-一个简单的doc文档构建器，参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)
+一个简单的doc文档构建器，参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
 
 [在线demo](https://mg0324.github.io/mangodoc/)
+
+![](static/images/demo.drawio.png)
 
 ## 特性
 * 基于`javascript`实现的简单文档生成器。

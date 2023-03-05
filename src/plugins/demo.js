@@ -18,5 +18,11 @@ export default {
     },
     ready(){
         console.info("demo ready");
+    },
+    onpopstate(event){
+
+    },
+    resize(){
+
     }
 }
