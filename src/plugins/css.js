@@ -146,6 +146,9 @@ function injectStyle() {
         #aside{
           display: none;
         }
+        img {
+          width:100%;
+        }
       }
       /* 滚动条的样式 */
       ::-webkit-scrollbar {
