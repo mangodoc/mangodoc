@@ -5,6 +5,10 @@ export default {
 }
 
 function injectStyle() {
+    let themeColor = window.$mangodoc.themeColor;
+    if(!themeColor){
+      themeColor = "#409EFF";
+    }
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       body {
@@ -36,7 +40,7 @@ function injectStyle() {
       }
       #aside ul li a {
         text-decoration: none;
-        color: #409EFF;
+        color: ${themeColor};
       }
       #title{
         text-align: center;
@@ -57,7 +61,7 @@ function injectStyle() {
       }
       #header .oper{
         font-size: 25px;
-        color: #409EFF;
+        color: ${themeColor};
         float: left;
         line-height: 51px;
         padding: 0px;
@@ -104,7 +108,7 @@ function injectStyle() {
         margin: 0px;
       }
       blockquote{
-        border-left: 3px solid #409EFF;
+        border-left: 3px solid ${themeColor};
         margin-left: 0px;
         padding-left: 8px;
       }
@@ -114,7 +118,7 @@ function injectStyle() {
       .nav-a{
         font-size: 14px;
         text-decoration: none;
-        color: #409EFF;
+        color: ${themeColor};
       }
       .fullscreen-loading {
         position: fixed;
