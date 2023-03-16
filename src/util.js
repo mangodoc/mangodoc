@@ -1,5 +1,6 @@
 import { marked } from "marked";
 
+
 export default {
     callHook(config,hookName,data,callback){
         if(config.plugins){
@@ -13,14 +14,14 @@ export default {
                             final = data;
                         });
                     }else{
-                        data = plugin[hookName](data);
+                        final = plugin[hookName](data);
                     }
                 }
             }
             if(callback){
                 callback(final);
             }else{
-                return data;
+                return final;
             }
         }
     },
@@ -31,6 +32,7 @@ export default {
             console.info("in same page not request");
             return true;
         }
+        return false;
     },
     getHash(){
         let hash = window.location.hash;
@@ -71,20 +73,41 @@ export default {
             // 调用生命周期 afterEach
             this.callHook(config,"afterEach",html,function(resultHtml){
                 // 将 HTML 显示在页面上
-                // console.info("final html:"+resultHtml);
-                document.getElementById('app').innerHTML = resultHtml;
-                // 调用生命周期 doneEach
-                that.callHook(config,"doneEach");
-                // 调用生命周期 mounted
-                that.callHook(config,"mounted");
-                // 关闭加载提示
-                $("#fullscreen-loading").hide();
-                // 记录old hash
-                window.oldHash = that.getHash();
-                if(callback){
-                    callback();
-                }
+                handleAppEl(function(appEl){
+                    appEl.innerHTML = resultHtml;
+                    // 调用后置处理
+                    // 调用生命周期 doneEach
+                    that.callHook(config,"doneEach");
+                    // 调用生命周期 mounted
+                    that.callHook(config,"mounted");
+                    // 关闭加载提示
+                    $("#fullscreen-loading").hide();
+                    // 记录old hash
+                    window.oldHash = that.getHash();
+                    if(callback){
+                        callback();
+                    }
+                });
             });
         });
+    },
+    
+}
+// 最大重试次数
+const MAX_RETRY_TIMES = 20;
+let retryCount = 0;
+
+function handleAppEl(callback){
+    let appEl = document.getElementById('app');
+    if (appEl) {
+        // div元素存在，执行你的代码逻辑
+        callback(appEl);
+    } else if (retryCount < MAX_RETRY_TIMES) {
+        // div元素不存在，等待一秒后重试
+        retryCount++;
+        setTimeout(handleAppEl, 200,callback);
+    } else {
+        // div元素不存在且超过最大重试次数，执行你的备选代码逻辑
+        console.error("获取app的div元素失败，请重试！");
     }
 }

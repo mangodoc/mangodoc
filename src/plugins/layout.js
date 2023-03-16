@@ -38,12 +38,9 @@ export default {
     },
     onpopstate(){
         // 如果是锚点，则不加载资源，因为是同一个页面
-        if(window.location.hash.indexOf("?id=heading") > -1){
-            
-        }else{
-            util.render(util.getUrl(),window.$mangodoc);
-            // 变化页面标题
-            $("title").text(window.navMap[window.location.hash]);
-        }
+        util.render(util.getUrl(),window.$mangodoc);
+        // 变化页面标题
+        $("title").text(window.navMap[window.location.hash]);
+        
     }
 }

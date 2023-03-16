@@ -119,6 +119,7 @@ function injectStyle() {
         font-size: 14px;
         text-decoration: none;
         color: ${themeColor};
+        margin-left: 5px;
       }
       .fullscreen-loading {
         position: fixed;
