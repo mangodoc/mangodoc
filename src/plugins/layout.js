@@ -35,12 +35,13 @@ export default {
         pageEl.innerHTML = template;
         let vue = document.getElementById("vue");
         vue.appendChild(pageEl);
+        util.setFlag("layout");
+        console.info("layout finish!");
     },
     onpopstate(){
         // 如果是锚点，则不加载资源，因为是同一个页面
         util.render(util.getUrl(),window.$mangodoc);
         // 变化页面标题
         $("title").text(window.navMap[window.location.hash]);
-        
     }
 }

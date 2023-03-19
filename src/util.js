@@ -97,15 +97,18 @@ export default {
         });
     },
     createVueApp(){
-        new Vue({
-            el: '#vue',
-            data(){
-                return {
-                    
+        if(!flag["vue"]){
+            new Vue({
+                el: '#vue',
+                data(){
+                    return {
+                        
+                    }
                 }
-            }
-        });
-        console.info("create vue app")
+            });
+            this.setFlag("vue");
+            console.info("create vue app")
+        }
     },
     getSideWidth(){
         return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : Config.sideWidth;
@@ -136,7 +139,7 @@ function handleAppEl(callback){
 
 let retryCountVue = 0;
 function handleVue(callback){
-    let v = flag["aside"] && flag["nav"];
+    let v = flag["aside"] && flag["nav"] && flag["layout"];
     if(v){
         callback();
     }else if (retryCountVue < MAX_RETRY_TIMES) {

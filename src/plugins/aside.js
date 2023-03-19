@@ -50,9 +50,11 @@ export default {
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);
-            var el = document.createElement("span");
+            var el = document.createElement("a");
             // title
             el.id = "title";
+            el.href = "#/";
+            el.target = "_self";
             el.innerHTML = `${window.$mangodoc.title}`;
             elSide.insertBefore(el,elSide.firstChild);
             util.setFlag("aside");

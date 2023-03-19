@@ -51,6 +51,7 @@ function injectStyle() {
         padding: 0px;
         display: block;
         font-size: 20px;
+        text-decoration: none;
       }
       #header {
         height:51px !important;

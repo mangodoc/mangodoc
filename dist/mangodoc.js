@@ -16396,15 +16396,18 @@ let flag = {};
         });
     },
     createVueApp(){
-        new Vue({
-            el: '#vue',
-            data(){
-                return {
-                    
+        if(!flag["vue"]){
+            new Vue({
+                el: '#vue',
+                data(){
+                    return {
+                        
+                    }
                 }
-            }
-        });
-        console.info("create vue app")
+            });
+            this.setFlag("vue");
+            console.info("create vue app")
+        }
     },
     getSideWidth(){
         return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : config.sideWidth;
@@ -16435,7 +16438,7 @@ function handleAppEl(callback){
 
 let retryCountVue = 0;
 function handleVue(callback){
-    let v = flag["aside"] && flag["nav"];
+    let v = flag["aside"] && flag["nav"] && flag["layout"];
     if(v){
         callback();
     }else if (retryCountVue < MAX_RETRY_TIMES) {
@@ -16514,13 +16517,14 @@ function handleVue(callback){
         pageEl.innerHTML = template;
         let vue = document.getElementById("vue");
         vue.appendChild(pageEl);
+        util.setFlag("layout");
+        console.info("layout finish!");
     },
     onpopstate(){
         // 如果是锚点，则不加载资源，因为是同一个页面
         util.render(util.getUrl(),window.$mangodoc);
         // 变化页面标题
         $("title").text(window.navMap[window.location.hash]);
-        
     }
 });
 
@@ -16577,9 +16581,11 @@ function renderSidebarItem(list,init){
             elSide.innerHTML = html;
             let pageEl = document.getElementById("page");
             pageEl.insertBefore(elSide,pageEl.firstChild);
-            var el = document.createElement("span");
+            var el = document.createElement("a");
             // title
             el.id = "title";
+            el.href = "#/";
+            el.target = "_self";
             el.innerHTML = `${window.$mangodoc.title}`;
             elSide.insertBefore(el,elSide.firstChild);
             util.setFlag("aside");
@@ -16726,6 +16732,7 @@ function injectStyle() {
         padding: 0px;
         display: block;
         font-size: 20px;
+        text-decoration: none;
       }
       #header {
         height:51px !important;
@@ -16947,14 +16954,7 @@ console.info(src_config);
 util.callHook(src_config,"init");
 // 开始渲染
 util.render(url,src_config,function(){
-    new Vue({
-        el: '#vue',
-        data(){
-            return {
-                
-            }
-        }
-    })
+    
 });
 
 // 监听地址栏变化
