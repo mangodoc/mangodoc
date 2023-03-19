@@ -1,6 +1,7 @@
 import { marked } from "marked";
-
-
+import Config from "./config";
+// 标志位
+let flag = {};
 export default {
     callHook(config,hookName,data,callback){
         if(config.plugins){
@@ -84,6 +85,10 @@ export default {
                     $("#fullscreen-loading").hide();
                     // 记录old hash
                     window.oldHash = that.getHash();
+                    // 渲染为vue
+                    handleVue(function(){
+                        that.createVueApp();
+                    });
                     if(callback){
                         callback();
                     }
@@ -91,7 +96,24 @@ export default {
             });
         });
     },
-    
+    createVueApp(){
+        new Vue({
+            el: '#vue',
+            data(){
+                return {
+                    
+                }
+            }
+        });
+        console.info("create vue app")
+    },
+    getSideWidth(){
+        return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : Config.sideWidth;
+    },
+    setFlag(key){
+        flag[key] = true;
+    }
+
 }
 // 最大重试次数
 const MAX_RETRY_TIMES = 20;
@@ -108,6 +130,19 @@ function handleAppEl(callback){
         setTimeout(handleAppEl, 200,callback);
     } else {
         // div元素不存在且超过最大重试次数，执行你的备选代码逻辑
+        console.error("获取app的div元素失败，请重试！");
+    }
+}
+
+let retryCountVue = 0;
+function handleVue(callback){
+    let v = flag["aside"] && flag["nav"];
+    if(v){
+        callback();
+    }else if (retryCountVue < MAX_RETRY_TIMES) {
+        retryCountVue++;
+        setTimeout(handleVue, 200,callback);
+    } else {
         console.error("获取app的div元素失败，请重试！");
     }
 }

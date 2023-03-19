@@ -16291,10 +16291,16 @@ const lexer = Lexer.lex;
 
 
 
+;// CONCATENATED MODULE: ./src/config.js
+/* harmony default export */ const config = ({
+    sideWidth: 200, // 左侧栏宽度默认200px
+    smallWidth: 500 // 宽度超过500px为大屏
+});
 ;// CONCATENATED MODULE: ./src/util.js
 
 
-
+// 标志位
+let flag = {};
 /* harmony default export */ const util = ({
     callHook(config,hookName,data,callback){
         if(config.plugins){
@@ -16378,6 +16384,10 @@ const lexer = Lexer.lex;
                     $("#fullscreen-loading").hide();
                     // 记录old hash
                     window.oldHash = that.getHash();
+                    // 渲染为vue
+                    handleVue(function(){
+                        that.createVueApp();
+                    });
                     if(callback){
                         callback();
                     }
@@ -16385,7 +16395,24 @@ const lexer = Lexer.lex;
             });
         });
     },
-    
+    createVueApp(){
+        new Vue({
+            el: '#vue',
+            data(){
+                return {
+                    
+                }
+            }
+        });
+        console.info("create vue app")
+    },
+    getSideWidth(){
+        return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : config.sideWidth;
+    },
+    setFlag(key){
+        flag[key] = true;
+    }
+
 });
 // 最大重试次数
 const MAX_RETRY_TIMES = 20;
@@ -16405,6 +16432,20 @@ function handleAppEl(callback){
         console.error("获取app的div元素失败，请重试！");
     }
 }
+
+let retryCountVue = 0;
+function handleVue(callback){
+    let v = flag["aside"] && flag["nav"];
+    if(v){
+        callback();
+    }else if (retryCountVue < MAX_RETRY_TIMES) {
+        retryCountVue++;
+        setTimeout(handleVue, 200,callback);
+    } else {
+        console.error("获取app的div元素失败，请重试！");
+    }
+}
+
 ;// CONCATENATED MODULE: ./src/plugins/demo.js
 /* harmony default export */ const demo = ({
     init(){
@@ -16486,6 +16527,7 @@ function handleAppEl(callback){
 ;// CONCATENATED MODULE: ./src/plugins/aside.js
 let index = 1;
 
+
 function renderSidebarItem(list,init){
     let html = "";
     if(init){
@@ -16524,7 +16566,7 @@ function renderSidebarItem(list,init){
     ready(){
         // console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.style.width = 250;
+        elSide.style.width = util.getSideWidth();
         elSide.id = "aside";
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
@@ -16540,14 +16582,18 @@ function renderSidebarItem(list,init){
             el.id = "title";
             el.innerHTML = `${window.$mangodoc.title}`;
             elSide.insertBefore(el,elSide.firstChild);
+            util.setFlag("aside");
+            console.info("aside finish!");
         });
-        
     }
 });
 // EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
 var jquery = __webpack_require__(755);
 var jquery_default = /*#__PURE__*/__webpack_require__.n(jquery);
 ;// CONCATENATED MODULE: ./src/plugins/nav.js
+
+
+
 
 function renderNavItem(list){
     let html = "";
@@ -16603,18 +16649,12 @@ function renderNavItem(list){
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
-            jquery_default()("#aside").width(250);
-            if(screen.width < 500){
+            jquery_default()("#aside").width(util.getSideWidth());
+            if(screen.width < config.smallWidth){
                 jquery_default()("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
             }
-            new Vue({
-                el: '#vue',
-                data(){
-                    return {
-                        
-                    }
-                }
-            })
+            util.setFlag("nav");
+            console.info("nav finish");
         });
     },
     mounted(){
@@ -16901,29 +16941,36 @@ let url = util.getUrl();
 window.$mangodoc.plugins = plugins.list();
 // 合并config 和 $mangodoc
 // config = Object.assign({}, window.$mangodoc, config );
-let config = window.$mangodoc;
-console.info(config);
+let src_config = window.$mangodoc;
+console.info(src_config);
 // 调用生命周期 beforeEach
-util.callHook(config,"init");
+util.callHook(src_config,"init");
 // 开始渲染
-util.render(url,config,function(){
-    
+util.render(url,src_config,function(){
+    new Vue({
+        el: '#vue',
+        data(){
+            return {
+                
+            }
+        }
+    })
 });
 
 // 监听地址栏变化
 window.onpopstate = function(event) {
     // 调用事件
-    util.callHook(config,"onpopstate",event);
+    util.callHook(src_config,"onpopstate",event);
 };
 
 // 监听文档ready
 document.addEventListener("DOMContentLoaded", function(event) { 
-    util.callHook(config,"ready");
+    util.callHook(src_config,"ready");
 });
 
 // 监听resize
 window.addEventListener('resize', function() {
-    util.callHook(config,"resize");
+    util.callHook(src_config,"resize");
 });
 
 })();

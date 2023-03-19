@@ -1,4 +1,7 @@
 import $ from "jquery";
+import util from "../util";
+import Config from "../config";
+
 function renderNavItem(list){
     let html = "";
     for(let item of list){
@@ -53,18 +56,12 @@ export default {
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
-            $("#aside").width(250);
-            if(screen.width < 500){
+            $("#aside").width(util.getSideWidth());
+            if(screen.width < Config.smallWidth){
                 $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
             }
-            new Vue({
-                el: '#vue',
-                data(){
-                    return {
-                        
-                    }
-                }
-            })
+            util.setFlag("nav");
+            console.info("nav finish");
         });
     },
     mounted(){

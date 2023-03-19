@@ -7,6 +7,9 @@
     <meta name="description" content="Description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
     <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/element-ui/lib/theme-chalk/index.css">
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
@@ -25,6 +28,7 @@
             title: 'mangodoc',
             repo: 'https://github.com/mg0324/mangodoc',
             footer: '<span>mango mei &copy; 2023</span> @ copyright',
+            sideWidth: 200,
             themeColor: "#F08",
             // giscus评论
             giscus:{
@@ -43,7 +47,9 @@
             },
             toc:{
               select: "h1, h2, h3, h4, h5, h6"
-            }
+            },
+            // 百度统计id
+            baiduTjId: "xxxx"
         };
     </script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
@@ -63,6 +69,8 @@
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-imgview@1.0.4/dist/imgview.css">
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-imgview@1.0.4/dist/mangodoc-imgview.min.js"></script>
+    <!-- 百度统计 -->
+    <script src="https://cdn.jsdelivr.net/npm/mangodoc-baidu-tj@1.0.0/dist/mangodoc-baidu-tj.min.js"></script>
 
     <!-- java语法高亮 -->
     <script src="//cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-java.min.js"></script>

@@ -1,4 +1,5 @@
 let index = 1;
+import util from "../util";
 
 function renderSidebarItem(list,init){
     let html = "";
@@ -38,7 +39,7 @@ export default {
     ready(){
         // console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.style.width = 250;
+        elSide.style.width = util.getSideWidth();
         elSide.id = "aside";
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
@@ -54,7 +55,8 @@ export default {
             el.id = "title";
             el.innerHTML = `${window.$mangodoc.title}`;
             elSide.insertBefore(el,elSide.firstChild);
+            util.setFlag("aside");
+            console.info("aside finish!");
         });
-        
     }
 }
