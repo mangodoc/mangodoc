@@ -32,7 +32,7 @@ export default {
         // console.info("nav ready");
         var el = document.createElement("el-header");
         el.id = "header";
-        fetch("docs/_navbar.json")
+        fetch("docs/_navbar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
             let navList = JSON.parse(json);

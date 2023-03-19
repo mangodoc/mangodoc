@@ -40,7 +40,7 @@ export default {
         var elSide = document.createElement("el-aside");
         elSide.style.width = 250;
         elSide.id = "aside";
-        fetch("docs/_sidebar.json")
+        fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
             let sidebarList = JSON.parse(json);

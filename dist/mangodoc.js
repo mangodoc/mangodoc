@@ -16526,7 +16526,7 @@ function renderSidebarItem(list,init){
         var elSide = document.createElement("el-aside");
         elSide.style.width = 250;
         elSide.id = "aside";
-        fetch("docs/_sidebar.json")
+        fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
             let sidebarList = JSON.parse(json);
@@ -16582,7 +16582,7 @@ function renderNavItem(list){
         // console.info("nav ready");
         var el = document.createElement("el-header");
         el.id = "header";
-        fetch("docs/_navbar.json")
+        fetch("docs/_navbar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
             let navList = JSON.parse(json);
