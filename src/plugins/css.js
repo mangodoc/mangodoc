@@ -30,6 +30,7 @@ function injectStyle() {
       }
       #aside {
         border-right: 1px solid #eee;
+        overflow-x: hidden;
       }
       #aside ul {
         margin: 0px;

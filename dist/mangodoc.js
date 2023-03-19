@@ -16360,6 +16360,10 @@ let flag = {};
         }
         $("#fullscreen-loading").show();
         console.info(url);
+        // 是否开启总是刷新，默认为false
+        if(window.$mangodoc.alwaysRefresh){
+            url += "?t="+Math.random();
+        }
         // 读取 Markdown 文件
         fetch(url)
         .then(response => response.text())
@@ -16711,6 +16715,7 @@ function injectStyle() {
       }
       #aside {
         border-right: 1px solid #eee;
+        overflow-x: hidden;
       }
       #aside ul {
         margin: 0px;
