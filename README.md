@@ -12,6 +12,7 @@
 * 基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
 * 支持静态资源部署，如`gitee pages`、`github pages`等。
 * 提供插件API接口，包括生命周期和部分事件监听函数。
+* md内支持局部使用，详情参考[例子](#/aaa)。
 
 ## 插件列表
 * 内置插件core - 支持文档布局、文档核心、hash路由、加载提示及插件机制
