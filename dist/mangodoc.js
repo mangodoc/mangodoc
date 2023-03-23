@@ -13531,7 +13531,7 @@ let flag = {};
         }
     },
     getSideWidth(){
-        return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"].sideWidth */ .Z.sideWidth;
+        return window.$mangodoc.sideWidth ? window.$mangodoc.sideWidth : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"].sideWidth */ .Z.sideWidth;
     },
     setFlag(key){
         flag[key] = true;

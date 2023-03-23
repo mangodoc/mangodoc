@@ -118,7 +118,7 @@ export default {
         }
     },
     getSideWidth(){
-        return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : Config.sideWidth;
+        return window.$mangodoc.sideWidth ? window.$mangodoc.sideWidth : Config.sideWidth;
     },
     setFlag(key){
         flag[key] = true;
