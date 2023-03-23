@@ -1,5 +1,6 @@
 import { marked } from "marked";
 import Config from "./config";
+import $ from "jquery";
 // 标志位
 let flag = {};
 export default {
@@ -74,9 +75,11 @@ export default {
             markdown = this.callHook(config,"beforeEach",markdown);
             // console.info("final markdown:"+markdown);
             // 将 Markdown 转换为 HTML
-            const html = marked.parse(markdown);
+            let html = marked.parse(markdown);
+            html = handleLocalStyle(html,url);
+            let result = handleLocalScript(html);
             // 调用生命周期 afterEach
-            this.callHook(config,"afterEach",html,function(resultHtml){
+            this.callHook(config,"afterEach",result[0],function(resultHtml){
                 // 将 HTML 显示在页面上
                 handleAppEl(function(appEl){
                     appEl.innerHTML = resultHtml;
@@ -91,7 +94,7 @@ export default {
                     window.oldHash = that.getHash();
                     // 渲染为vue
                     handleVue(function(){
-                        that.createVueApp();
+                        that.createVueApp(result[1]);
                     });
                     if(callback){
                         callback();
@@ -100,15 +103,15 @@ export default {
             });
         });
     },
-    createVueApp(){
-        if(!flag["vue"]){
+    createVueApp(localVue){
+        // 未渲染vue 或者 是localVue
+        if(!flag["vue"] || localVue){
             new Vue({
                 el: '#vue',
                 data(){
-                    return {
-                        
-                    }
-                }
+                    return localVue ? localVue.data() : {};
+                },
+                methods: localVue ? localVue.methods : {} 
             });
             this.setFlag("vue");
             console.info("create vue app")
@@ -121,6 +124,45 @@ export default {
         flag[key] = true;
     }
 
+}
+// 处理md转为html后里的style，只支持最后一个style
+function handleLocalStyle(html,id){
+    if(html.indexOf("<style>") == 1){
+        return html;
+    }
+    let $html = $(`<div>${html}</div>`);
+    let styles = $html.find("style");
+    let style = null;
+    // 取最后一个style
+    styles.each(function(){
+        style = $(this);
+    });
+    $html.find("style").remove();
+    html = $html.html();
+    if(style){
+        style[0].id = id;
+        if(!document.getElementById(id)){
+            document.head.insertBefore(style[0], document.querySelector("head style, head link[rel*='stylesheet']"));
+        }
+    }
+    return html;
+}
+// 处理md转为html后里的script，只支持最后一个script
+function handleLocalScript(html){
+    let $html = $(`<div>${html}</div>`);
+    let scripts = $html.find("script");
+    let script = null;
+    // 取最后一个script
+    scripts.each(function(){
+        script = $(this);
+    });
+    if(!script){
+        return [html,null];
+    }
+    let localVue = eval(script.text());
+    $html.find("script").remove();
+    html = $html.html();
+    return [html,localVue];
 }
 // 最大重试次数
 const MAX_RETRY_TIMES = 20;

@@ -24,6 +24,13 @@
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools"
+            },
+            {
+                "title": "vue测试",
+                "href": "#/test",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-tools"
             }
         ]
     }

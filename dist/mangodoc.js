@@ -13384,88 +13384,242 @@ function styleTagTransform(css, styleElement) {
 
 module.exports = styleTagTransform;
 
-/***/ })
+/***/ }),
 
-/******/ 	});
-/************************************************************************/
-/******/ 	// The module cache
-/******/ 	var __webpack_module_cache__ = {};
-/******/ 	
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			// no module.loaded needed
-/******/ 			exports: {}
-/******/ 		};
-/******/ 	
-/******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/compat get default export */
-/******/ 	(() => {
-/******/ 		// getDefaultExport function for compatibility with non-harmony modules
-/******/ 		__webpack_require__.n = (module) => {
-/******/ 			var getter = module && module.__esModule ?
-/******/ 				() => (module['default']) :
-/******/ 				() => (module);
-/******/ 			__webpack_require__.d(getter, { a: getter });
-/******/ 			return getter;
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/nonce */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nc = undefined;
-/******/ 	})();
-/******/ 	
-/************************************************************************/
-var __webpack_exports__ = {};
-// This entry need to be wrapped in an IIFE because it need to be in strict mode.
-(() => {
+/***/ 182:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
 "use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    sideWidth: 200, // 左侧栏宽度默认200px
+    smallWidth: 500 // 宽度超过500px为大屏
+});
 
-;// CONCATENATED MODULE: ./node_modules/marked/lib/marked.esm.js
+/***/ }),
+
+/***/ 891:
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var marked__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(441);
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(182);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(755);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+// 标志位
+let flag = {};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    callHook(config,hookName,data,callback){
+        if(config.plugins){
+            let final = data;
+            // 调用hook
+            for(let plugin of config.plugins){
+                if(plugin[hookName]){
+                    if(callback){
+                        plugin[hookName](data,function(res){
+                            data = res;
+                            final = data;
+                        });
+                    }else{
+                        final = plugin[hookName](data);
+                    }
+                }
+            }
+            if(callback){
+                callback(final);
+            }else{
+                return final;
+            }
+        }
+    },
+    checkUrl(){
+        // 如果新的hash和旧的相同，则不重复请求页面
+        let hash = this.getHash();
+        if(hash == window.oldHash){
+            console.info("in same page not request");
+            return true;
+        }
+        return false;
+    },
+    getHash(){
+        let hash = window.location.hash;
+        if(!hash){
+            window.location.hash = "#/";
+            hash = "#/";
+        }
+        hash = hash.split("?")[0];
+        return hash;
+    },
+    getUrl(){
+        let hash = this.getHash();
+        let url = hash.replace("#","");
+        if(url === "/"){
+            url = "/README.md";
+        }else{
+            url = url + ".md";
+        }
+        url = "docs" + url;
+        return url;
+    },
+    render(url,config,callback){
+        if(this.checkUrl()){
+            return ;
+        }
+        jquery__WEBPACK_IMPORTED_MODULE_2___default()("#fullscreen-loading").show();
+        console.info(url);
+        // 是否开启总是刷新，默认为false
+        if(window.$mangodoc.alwaysRefresh){
+            url += "?t="+Math.random();
+        }
+        // 读取 Markdown 文件
+        fetch(url)
+        .then(response => response.text())
+        .then(markdown => {
+            let that = this;
+            // 调用生命周期 beforeEach
+            markdown = this.callHook(config,"beforeEach",markdown);
+            // console.info("final markdown:"+markdown);
+            // 将 Markdown 转换为 HTML
+            let html = marked__WEBPACK_IMPORTED_MODULE_0__/* .marked.parse */ .TU.parse(markdown);
+            html = handleLocalStyle(html,url);
+            let result = handleLocalScript(html);
+            // 调用生命周期 afterEach
+            this.callHook(config,"afterEach",result[0],function(resultHtml){
+                // 将 HTML 显示在页面上
+                handleAppEl(function(appEl){
+                    appEl.innerHTML = resultHtml;
+                    // 调用后置处理
+                    // 调用生命周期 doneEach
+                    that.callHook(config,"doneEach");
+                    // 调用生命周期 mounted
+                    that.callHook(config,"mounted");
+                    // 关闭加载提示
+                    jquery__WEBPACK_IMPORTED_MODULE_2___default()("#fullscreen-loading").hide();
+                    // 记录old hash
+                    window.oldHash = that.getHash();
+                    // 渲染为vue
+                    handleVue(function(){
+                        that.createVueApp(result[1]);
+                    });
+                    if(callback){
+                        callback();
+                    }
+                });
+            });
+        });
+    },
+    createVueApp(localVue){
+        // 未渲染vue 或者 是localVue
+        if(!flag["vue"] || localVue){
+            new Vue({
+                el: '#vue',
+                data(){
+                    return localVue ? localVue.data() : {};
+                },
+                methods: localVue ? localVue.methods : {} 
+            });
+            this.setFlag("vue");
+            console.info("create vue app")
+        }
+    },
+    getSideWidth(){
+        return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"].sideWidth */ .Z.sideWidth;
+    },
+    setFlag(key){
+        flag[key] = true;
+    }
+
+});
+// 处理md转为html后里的style，只支持最后一个style
+function handleLocalStyle(html,id){
+    if(html.indexOf("<style>") == 1){
+        return html;
+    }
+    let $html = jquery__WEBPACK_IMPORTED_MODULE_2___default()(`<div>${html}</div>`);
+    let styles = $html.find("style");
+    let style = null;
+    // 取最后一个style
+    styles.each(function(){
+        style = jquery__WEBPACK_IMPORTED_MODULE_2___default()(this);
+    });
+    $html.find("style").remove();
+    html = $html.html();
+    if(style){
+        style[0].id = id;
+        if(!document.getElementById(id)){
+            document.head.insertBefore(style[0], document.querySelector("head style, head link[rel*='stylesheet']"));
+        }
+    }
+    return html;
+}
+// 处理md转为html后里的script，只支持最后一个script
+function handleLocalScript(html){
+    let $html = jquery__WEBPACK_IMPORTED_MODULE_2___default()(`<div>${html}</div>`);
+    let scripts = $html.find("script");
+    let script = null;
+    // 取最后一个script
+    scripts.each(function(){
+        script = jquery__WEBPACK_IMPORTED_MODULE_2___default()(this);
+    });
+    if(!script){
+        return [html,null];
+    }
+    let localVue = eval(script.text());
+    $html.find("script").remove();
+    html = $html.html();
+    return [html,localVue];
+}
+// 最大重试次数
+const MAX_RETRY_TIMES = 20;
+let retryCount = 0;
+
+function handleAppEl(callback){
+    let appEl = document.getElementById('app');
+    if (appEl) {
+        // div元素存在，执行你的代码逻辑
+        callback(appEl);
+    } else if (retryCount < MAX_RETRY_TIMES) {
+        // div元素不存在，等待一秒后重试
+        retryCount++;
+        setTimeout(handleAppEl, 200,callback);
+    } else {
+        // div元素不存在且超过最大重试次数，执行你的备选代码逻辑
+        console.error("获取app的div元素失败，请重试！");
+    }
+}
+
+let retryCountVue = 0;
+function handleVue(callback){
+    let v = flag["aside"] && flag["nav"] && flag["layout"];
+    if(v){
+        callback();
+    }else if (retryCountVue < MAX_RETRY_TIMES) {
+        retryCountVue++;
+        setTimeout(handleVue, 200,callback);
+    } else {
+        console.error("获取app的div元素失败，请重试！");
+    }
+}
+
+
+/***/ }),
+
+/***/ 441:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TU": () => (/* binding */ marked)
+/* harmony export */ });
+/* unused harmony exports Lexer, Parser, Renderer, Slugger, TextRenderer, Tokenizer, defaults, getDefaults, lexer, options, parse, parseInline, parser, setOptions, use, walkTokens */
 /**
  * marked v4.2.12 - a markdown parser
  * Copyright (c) 2011-2023, Christopher Jeffrey. (MIT Licensed)
@@ -13522,7 +13676,7 @@ const escapeReplacements = {
   "'": '&#39;'
 };
 const getEscapeReplacement = (ch) => escapeReplacements[ch];
-function marked_esm_escape(html, encode) {
+function escape(html, encode) {
   if (encode) {
     if (escapeTest.test(html)) {
       return html.replace(escapeReplace, getEscapeReplacement);
@@ -13541,7 +13695,7 @@ const unescapeTest = /&(#(?:\d+)|(?:#x[0-9A-Fa-f]+)|(?:\w+));?/ig;
 /**
  * @param {string} html
  */
-function marked_esm_unescape(html) {
+function unescape(html) {
   // explicitly match decimal, hex, and named HTML entities
   return html.replace(unescapeTest, (_, n) => {
     n = n.toLowerCase();
@@ -13590,7 +13744,7 @@ function cleanUrl(sanitize, base, href) {
   if (sanitize) {
     let prot;
     try {
-      prot = decodeURIComponent(marked_esm_unescape(href))
+      prot = decodeURIComponent(unescape(href))
         .replace(nonWordAndColonTest, '')
         .toLowerCase();
     } catch (e) {
@@ -13786,7 +13940,7 @@ function repeatString(pattern, count) {
 
 function outputLink(cap, link, raw, lexer) {
   const href = link.href;
-  const title = link.title ? marked_esm_escape(link.title) : null;
+  const title = link.title ? escape(link.title) : null;
   const text = cap[1].replace(/\\([\[\]])/g, '$1');
 
   if (cap[0].charAt(0) !== '!') {
@@ -13807,7 +13961,7 @@ function outputLink(cap, link, raw, lexer) {
     raw,
     href,
     title,
-    text: marked_esm_escape(text)
+    text: escape(text)
   };
 }
 
@@ -14146,7 +14300,7 @@ class Tokenizer {
         text: cap[0]
       };
       if (this.options.sanitize) {
-        const text = this.options.sanitizer ? this.options.sanitizer(cap[0]) : marked_esm_escape(cap[0]);
+        const text = this.options.sanitizer ? this.options.sanitizer(cap[0]) : escape(cap[0]);
         token.type = 'paragraph';
         token.text = text;
         token.tokens = this.lexer.inline(text);
@@ -14271,7 +14425,7 @@ class Tokenizer {
       return {
         type: 'escape',
         raw: cap[0],
-        text: marked_esm_escape(cap[1])
+        text: escape(cap[1])
       };
     }
   }
@@ -14300,7 +14454,7 @@ class Tokenizer {
         text: this.options.sanitize
           ? (this.options.sanitizer
             ? this.options.sanitizer(cap[0])
-            : marked_esm_escape(cap[0]))
+            : escape(cap[0]))
           : cap[0]
       };
     }
@@ -14457,7 +14611,7 @@ class Tokenizer {
       if (hasNonSpaceChars && hasSpaceCharsOnBothEnds) {
         text = text.substring(1, text.length - 1);
       }
-      text = marked_esm_escape(text, true);
+      text = escape(text, true);
       return {
         type: 'codespan',
         raw: cap[0],
@@ -14493,10 +14647,10 @@ class Tokenizer {
     if (cap) {
       let text, href;
       if (cap[2] === '@') {
-        text = marked_esm_escape(this.options.mangle ? mangle(cap[1]) : cap[1]);
+        text = escape(this.options.mangle ? mangle(cap[1]) : cap[1]);
         href = 'mailto:' + text;
       } else {
-        text = marked_esm_escape(cap[1]);
+        text = escape(cap[1]);
         href = text;
       }
 
@@ -14521,7 +14675,7 @@ class Tokenizer {
     if (cap = this.rules.inline.url.exec(src)) {
       let text, href;
       if (cap[2] === '@') {
-        text = marked_esm_escape(this.options.mangle ? mangle(cap[0]) : cap[0]);
+        text = escape(this.options.mangle ? mangle(cap[0]) : cap[0]);
         href = 'mailto:' + text;
       } else {
         // do extended autolink path validation
@@ -14530,7 +14684,7 @@ class Tokenizer {
           prevCapZero = cap[0];
           cap[0] = this.rules.inline._backpedal.exec(cap[0])[0];
         } while (prevCapZero !== cap[0]);
-        text = marked_esm_escape(cap[0]);
+        text = escape(cap[0]);
         if (cap[1] === 'www.') {
           href = 'http://' + cap[0];
         } else {
@@ -14558,9 +14712,9 @@ class Tokenizer {
     if (cap) {
       let text;
       if (this.lexer.state.inRawBlock) {
-        text = this.options.sanitize ? (this.options.sanitizer ? this.options.sanitizer(cap[0]) : marked_esm_escape(cap[0])) : cap[0];
+        text = this.options.sanitize ? (this.options.sanitizer ? this.options.sanitizer(cap[0]) : escape(cap[0])) : cap[0];
       } else {
-        text = marked_esm_escape(this.options.smartypants ? smartypants(cap[0]) : cap[0]);
+        text = escape(this.options.smartypants ? smartypants(cap[0]) : cap[0]);
       }
       return {
         type: 'text',
@@ -15392,15 +15546,15 @@ class Renderer {
 
     if (!lang) {
       return '<pre><code>'
-        + (escaped ? code : marked_esm_escape(code, true))
+        + (escaped ? code : escape(code, true))
         + '</code></pre>\n';
     }
 
     return '<pre><code class="'
       + this.options.langPrefix
-      + marked_esm_escape(lang)
+      + escape(lang)
       + '">'
-      + (escaped ? code : marked_esm_escape(code, true))
+      + (escaped ? code : escape(code, true))
       + '</code></pre>\n';
   }
 
@@ -15746,7 +15900,7 @@ class Parser {
           out += this.renderer.heading(
             this.parseInline(token.tokens),
             token.depth,
-            marked_esm_unescape(this.parseInline(token.tokens, this.textRenderer)),
+            unescape(this.parseInline(token.tokens, this.textRenderer)),
             this.slugger);
           continue;
         }
@@ -16040,7 +16194,7 @@ function marked(src, opt, callback) {
     e.message += '\nPlease report this to https://github.com/markedjs/marked.';
     if (opt.silent) {
       return '<p>An error occurred:</p><pre>'
-        + marked_esm_escape(e.message + '', true)
+        + escape(e.message + '', true)
         + '</pre>';
     }
     throw e;
@@ -16260,7 +16414,7 @@ marked.parseInline = function(src, opt) {
     e.message += '\nPlease report this to https://github.com/markedjs/marked.';
     if (opt.silent) {
       return '<p>An error occurred:</p><pre>'
-        + marked_esm_escape(e.message + '', true)
+        + escape(e.message + '', true)
         + '</pre>';
     }
     throw e;
@@ -16291,168 +16445,90 @@ const lexer = Lexer.lex;
 
 
 
-;// CONCATENATED MODULE: ./src/config.js
-/* harmony default export */ const config = ({
-    sideWidth: 200, // 左侧栏宽度默认200px
-    smallWidth: 500 // 宽度超过500px为大屏
-});
-;// CONCATENATED MODULE: ./src/util.js
 
+/***/ })
 
-// 标志位
-let flag = {};
-/* harmony default export */ const util = ({
-    callHook(config,hookName,data,callback){
-        if(config.plugins){
-            let final = data;
-            // 调用hook
-            for(let plugin of config.plugins){
-                if(plugin[hookName]){
-                    if(callback){
-                        plugin[hookName](data,function(res){
-                            data = res;
-                            final = data;
-                        });
-                    }else{
-                        final = plugin[hookName](data);
-                    }
-                }
-            }
-            if(callback){
-                callback(final);
-            }else{
-                return final;
-            }
-        }
-    },
-    checkUrl(){
-        // 如果新的hash和旧的相同，则不重复请求页面
-        let hash = this.getHash();
-        if(hash == window.oldHash){
-            console.info("in same page not request");
-            return true;
-        }
-        return false;
-    },
-    getHash(){
-        let hash = window.location.hash;
-        if(!hash){
-            window.location.hash = "#/";
-            hash = "#/";
-        }
-        hash = hash.split("?")[0];
-        return hash;
-    },
-    getUrl(){
-        let hash = this.getHash();
-        let url = hash.replace("#","");
-        if(url === "/"){
-            url = "/README.md";
-        }else{
-            url = url + ".md";
-        }
-        url = "docs" + url;
-        return url;
-    },
-    render(url,config,callback){
-        if(this.checkUrl()){
-            return ;
-        }
-        $("#fullscreen-loading").show();
-        console.info(url);
-        // 是否开启总是刷新，默认为false
-        if(window.$mangodoc.alwaysRefresh){
-            url += "?t="+Math.random();
-        }
-        // 读取 Markdown 文件
-        fetch(url)
-        .then(response => response.text())
-        .then(markdown => {
-            let that = this;
-            // 调用生命周期 beforeEach
-            markdown = this.callHook(config,"beforeEach",markdown);
-            // console.info("final markdown:"+markdown);
-            // 将 Markdown 转换为 HTML
-            const html = marked.parse(markdown);
-            // 调用生命周期 afterEach
-            this.callHook(config,"afterEach",html,function(resultHtml){
-                // 将 HTML 显示在页面上
-                handleAppEl(function(appEl){
-                    appEl.innerHTML = resultHtml;
-                    // 调用后置处理
-                    // 调用生命周期 doneEach
-                    that.callHook(config,"doneEach");
-                    // 调用生命周期 mounted
-                    that.callHook(config,"mounted");
-                    // 关闭加载提示
-                    $("#fullscreen-loading").hide();
-                    // 记录old hash
-                    window.oldHash = that.getHash();
-                    // 渲染为vue
-                    handleVue(function(){
-                        that.createVueApp();
-                    });
-                    if(callback){
-                        callback();
-                    }
-                });
-            });
-        });
-    },
-    createVueApp(){
-        if(!flag["vue"]){
-            new Vue({
-                el: '#vue',
-                data(){
-                    return {
-                        
-                    }
-                }
-            });
-            this.setFlag("vue");
-            console.info("create vue app")
-        }
-    },
-    getSideWidth(){
-        return window.$mangodoc.sideWdith ? window.$mangodoc.sideWdith : config.sideWidth;
-    },
-    setFlag(key){
-        flag[key] = true;
-    }
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/nonce */
+/******/ 	(() => {
+/******/ 		__webpack_require__.nc = undefined;
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it need to be in strict mode.
+(() => {
+"use strict";
 
-});
-// 最大重试次数
-const MAX_RETRY_TIMES = 20;
-let retryCount = 0;
-
-function handleAppEl(callback){
-    let appEl = document.getElementById('app');
-    if (appEl) {
-        // div元素存在，执行你的代码逻辑
-        callback(appEl);
-    } else if (retryCount < MAX_RETRY_TIMES) {
-        // div元素不存在，等待一秒后重试
-        retryCount++;
-        setTimeout(handleAppEl, 200,callback);
-    } else {
-        // div元素不存在且超过最大重试次数，执行你的备选代码逻辑
-        console.error("获取app的div元素失败，请重试！");
-    }
-}
-
-let retryCountVue = 0;
-function handleVue(callback){
-    let v = flag["aside"] && flag["nav"] && flag["layout"];
-    if(v){
-        callback();
-    }else if (retryCountVue < MAX_RETRY_TIMES) {
-        retryCountVue++;
-        setTimeout(handleVue, 200,callback);
-    } else {
-        console.error("获取app的div元素失败，请重试！");
-    }
-}
-
+// EXTERNAL MODULE: ./src/util.js
+var util = __webpack_require__(891);
 ;// CONCATENATED MODULE: ./src/plugins/demo.js
 /* harmony default export */ const demo = ({
     init(){
@@ -16521,12 +16597,12 @@ function handleVue(callback){
         pageEl.innerHTML = template;
         let vue = document.getElementById("vue");
         vue.appendChild(pageEl);
-        util.setFlag("layout");
+        util/* default.setFlag */.Z.setFlag("layout");
         console.info("layout finish!");
     },
     onpopstate(){
         // 如果是锚点，则不加载资源，因为是同一个页面
-        util.render(util.getUrl(),window.$mangodoc);
+        util/* default.render */.Z.render(util/* default.getUrl */.Z.getUrl(),window.$mangodoc);
         // 变化页面标题
         $("title").text(window.navMap[window.location.hash]);
     }
@@ -16574,7 +16650,7 @@ function renderSidebarItem(list,init){
     ready(){
         // console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.style.width = util.getSideWidth();
+        elSide.style.width = util/* default.getSideWidth */.Z.getSideWidth();
         elSide.id = "aside";
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
@@ -16592,7 +16668,7 @@ function renderSidebarItem(list,init){
             el.target = "_self";
             el.innerHTML = `${window.$mangodoc.title}`;
             elSide.insertBefore(el,elSide.firstChild);
-            util.setFlag("aside");
+            util/* default.setFlag */.Z.setFlag("aside");
             console.info("aside finish!");
         });
     }
@@ -16600,6 +16676,8 @@ function renderSidebarItem(list,init){
 // EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
 var jquery = __webpack_require__(755);
 var jquery_default = /*#__PURE__*/__webpack_require__.n(jquery);
+// EXTERNAL MODULE: ./src/config.js
+var config = __webpack_require__(182);
 ;// CONCATENATED MODULE: ./src/plugins/nav.js
 
 
@@ -16659,11 +16737,11 @@ function renderNavItem(list){
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
-            jquery_default()("#aside").width(util.getSideWidth());
-            if(screen.width < config.smallWidth){
+            jquery_default()("#aside").width(util/* default.getSideWidth */.Z.getSideWidth());
+            if(screen.width < config/* default.smallWidth */.Z.smallWidth){
                 jquery_default()("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
             }
-            util.setFlag("nav");
+            util/* default.setFlag */.Z.setFlag("nav");
             console.info("nav finish");
         });
     },
@@ -16895,17 +16973,17 @@ var themes_prism = __webpack_require__(183);
       
       
 
-var prism_options = {};
+var options = {};
 
-prism_options.styleTagTransform = (styleTagTransform_default());
-prism_options.setAttributes = (setAttributesWithoutAttributes_default());
+options.styleTagTransform = (styleTagTransform_default());
+options.setAttributes = (setAttributesWithoutAttributes_default());
 
-      prism_options.insert = insertBySelector_default().bind(null, "head");
+      options.insert = insertBySelector_default().bind(null, "head");
     
-prism_options.domAPI = (styleDomAPI_default());
-prism_options.insertStyleElement = (insertStyleElement_default());
+options.domAPI = (styleDomAPI_default());
+options.insertStyleElement = (insertStyleElement_default());
 
-var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, prism_options);
+var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, options);
 
 
 
@@ -16948,7 +17026,7 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, pri
 
 // 定义全局对象navMap
 window.navMap = {};
-let url = util.getUrl();
+let url = util/* default.getUrl */.Z.getUrl();
 // 合并插件列表
 window.$mangodoc.plugins = plugins.list();
 // 合并config 和 $mangodoc
@@ -16956,26 +17034,26 @@ window.$mangodoc.plugins = plugins.list();
 let src_config = window.$mangodoc;
 console.info(src_config);
 // 调用生命周期 beforeEach
-util.callHook(src_config,"init");
+util/* default.callHook */.Z.callHook(src_config,"init");
 // 开始渲染
-util.render(url,src_config,function(){
+util/* default.render */.Z.render(url,src_config,function(){
     
 });
 
 // 监听地址栏变化
 window.onpopstate = function(event) {
     // 调用事件
-    util.callHook(src_config,"onpopstate",event);
+    util/* default.callHook */.Z.callHook(src_config,"onpopstate",event);
 };
 
 // 监听文档ready
 document.addEventListener("DOMContentLoaded", function(event) { 
-    util.callHook(src_config,"ready");
+    util/* default.callHook */.Z.callHook(src_config,"ready");
 });
 
 // 监听resize
 window.addEventListener('resize', function() {
-    util.callHook(src_config,"resize");
+    util/* default.callHook */.Z.callHook(src_config,"resize");
 });
 
 })();
