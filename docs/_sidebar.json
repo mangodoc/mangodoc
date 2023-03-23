@@ -26,7 +26,7 @@
                 "icon": "el-icon-s-tools"
             },
             {
-                "title": "vue测试",
+                "title": "elementui的vue示例",
                 "href": "#/test",
                 "target": "_self",
                 "level": 2,
