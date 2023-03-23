@@ -7,27 +7,48 @@
         "icon": "el-icon-s-home"
     },
     {
+        "title": "快速开始",
+        "href": "#/quickstart",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-s-home"
+    },
+    {
+        "title": "配置参数",
+        "href": "#/configitem",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-s-home"
+    },
+    {
         "title": "示例",
         "level": 1,
         "icon": "el-icon-star-on",
         "children": [
             {
                 "title": "主流前端",
-                "href": "#/all",
+                "href": "#/demo/all",
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-promotion"
             },
             {
                 "title": "网络模型",
-                "href": "#/network",
+                "href": "#/demo/network",
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools"
             },
             {
-                "title": "elementui的vue示例",
-                "href": "#/test",
+                "title": "示例",
+                "href": "#/demo/demo",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-tools"
+            },
+            {
+                "title": "elementui示例",
+                "href": "#/demo/elementui",
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools"
