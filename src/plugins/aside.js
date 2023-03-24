@@ -56,11 +56,17 @@ export default {
             el.href = "#/";
             el.target = "_self";
             let version = window.$mangodoc.version;
-            if(version){
-                el.innerHTML = `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
-            }else{
-                el.innerHTML = `${window.$mangodoc.title}`;
+            let logo = util.getConfig("logo");
+            if(window.$mangodoc.logo){
+                logo = window.$mangodoc.logo;
             }
+            let titleHtml = `<img style="vertical-align: middle;margin-right:8px;" src="${logo}"/>`;
+            if(version){
+                titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
+            }else{
+                titleHtml += `${window.$mangodoc.title}`;
+            }
+            el.innerHTML = titleHtml;
             elSide.insertBefore(el,elSide.firstChild);
             util.setFlag("aside");
             console.info("aside finish!");

@@ -122,6 +122,9 @@ export default {
     },
     setFlag(key){
         flag[key] = true;
+    },
+    getConfig(key){
+        return Config[key];
     }
 
 }

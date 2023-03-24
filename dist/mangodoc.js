@@ -13395,7 +13395,8 @@ module.exports = styleTagTransform;
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
     sideWidth: 200, // 左侧栏宽度默认200px
-    smallWidth: 500 // 宽度超过500px为大屏
+    smallWidth: 500, // 宽度超过500px为大屏
+    logo: "static/icon/favicon-32x32.png", // 默认的logo
 });
 
 /***/ }),
@@ -13535,6 +13536,9 @@ let flag = {};
     },
     setFlag(key){
         flag[key] = true;
+    },
+    getConfig(key){
+        return _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
     }
 
 });
@@ -16667,11 +16671,17 @@ function renderSidebarItem(list,init){
             el.href = "#/";
             el.target = "_self";
             let version = window.$mangodoc.version;
-            if(version){
-                el.innerHTML = `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
-            }else{
-                el.innerHTML = `${window.$mangodoc.title}`;
+            let logo = util/* default.getConfig */.Z.getConfig("logo");
+            if(window.$mangodoc.logo){
+                logo = window.$mangodoc.logo;
             }
+            let titleHtml = `<img style="vertical-align: middle;margin-right:8px;" src="${logo}"/>`;
+            if(version){
+                titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
+            }else{
+                titleHtml += `${window.$mangodoc.title}`;
+            }
+            el.innerHTML = titleHtml;
             elSide.insertBefore(el,elSide.firstChild);
             util/* default.setFlag */.Z.setFlag("aside");
             console.info("aside finish!");
