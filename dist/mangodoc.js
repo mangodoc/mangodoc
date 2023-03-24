@@ -16666,7 +16666,12 @@ function renderSidebarItem(list,init){
             el.id = "title";
             el.href = "#/";
             el.target = "_self";
-            el.innerHTML = `${window.$mangodoc.title}`;
+            let version = window.$mangodoc.version;
+            if(version){
+                el.innerHTML = `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
+            }else{
+                el.innerHTML = `${window.$mangodoc.title}`;
+            }
             elSide.insertBefore(el,elSide.firstChild);
             util/* default.setFlag */.Z.setFlag("aside");
             console.info("aside finish!");
@@ -16933,6 +16938,11 @@ function injectStyle() {
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
+      }
+      .version-item sup{
+        right: 0px !important;
+        top: 15px !important;
+        background: ${themeColor};
       }
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));

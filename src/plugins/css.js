@@ -171,6 +171,11 @@ function injectStyle() {
       ::-webkit-scrollbar-thumb:hover {
         background: #555;
       }
+      .version-item sup{
+        right: 0px !important;
+        top: 15px !important;
+        background: ${themeColor};
+      }
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

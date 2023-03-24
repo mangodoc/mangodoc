@@ -82,6 +82,10 @@
   <el-button size="small">评论</el-button>
 </el-badge>
 
+<el-badge value="v1.0" class="item">
+  测试
+</el-badge>
+
 ## alert
 <el-alert
     title="成功提示的文案"
