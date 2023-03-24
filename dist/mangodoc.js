@@ -16675,7 +16675,7 @@ function renderSidebarItem(list,init){
             if(window.$mangodoc.logo){
                 logo = window.$mangodoc.logo;
             }
-            let titleHtml = `<img style="vertical-align: middle;margin-right:8px;" src="${logo}"/>`;
+            let titleHtml = `<img id="logo" src="${logo}"/>`;
             if(version){
                 titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
             }else{
@@ -16926,6 +16926,10 @@ function injectStyle() {
         to {
           transform: rotate(360deg);
         }
+      }
+      #logo {
+        vertical-align: middle;
+        margin-right:8px;
       }      
       @media only screen and (max-width: 500px) {
         #aside{
@@ -16933,6 +16937,9 @@ function injectStyle() {
         }
         img {
           width:100%;
+        }
+        #logo {
+          width: 10%;
         }
       }
       /* 滚动条的样式 */

@@ -60,7 +60,7 @@ export default {
             if(window.$mangodoc.logo){
                 logo = window.$mangodoc.logo;
             }
-            let titleHtml = `<img style="vertical-align: middle;margin-right:8px;" src="${logo}"/>`;
+            let titleHtml = `<img id="logo" src="${logo}"/>`;
             if(version){
                 titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
             }else{
