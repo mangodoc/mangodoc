@@ -1,21 +1,22 @@
 # mangodoc
-一个简单的doc文档构建器，参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
+一个简单的doc文档构建器，采用微内核架构风格实现。参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
 
 [在线demo](https://mg0324.github.io/mangodoc/)
 
 ![](static/images/demo.drawio.png)
 
 ## 特性
-* 基于`javascript`实现的简单文档生成器。
-* 基于`marked`实现`markdown`到`html`的转换。
-* 基于[elementui](https://element.eleme.cn/#/zh-CN/component/installation)的vue组件版本构建。
-* 基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
-* 支持静态资源部署，如`gitee pages`、`github pages`等。
-* 提供插件API接口，包括生命周期和部分事件监听函数。
-* md内支持局部使用，详情参考[例子](#/test)。
+* 简单文档：基于`javascript`实现的简单文档生成器。
+* `marked`转换:基于`marked`实现`markdown`到`html`的转换。
+* `elementui`风格：基于[elementui](https://element.eleme.cn/#/zh-CN/component/installation)的vue组件版本构建。
+* 简单路由：基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
+* 静态部署：支持静态资源部署，如`gitee pages`、`github pages`等。
+* 插件扩展：提供插件API接口，包括生命周期和部分事件监听函数。
+* 支持vue：md内支持局部使用，详情参考[例子](#/demo/elementui)。
+* 接口api: 将内部配置暴露为`window.$mangodocApi`提供给外部插件调用。
 
 ## 插件列表
-* 内置插件core - 支持文档布局、文档核心、hash路由、加载提示及插件机制
+* 内置插件core - 支持文档布局、文档核心、hash路由、加载提示、接口api及插件机制
 * 内置插件css - 支持内置样式嵌入
 * 内置插件aside - 支持左侧目录栏配置和生成
 * 内置插件nav - 支持顶部导航条配置和生成
