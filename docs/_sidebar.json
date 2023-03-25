@@ -26,20 +26,6 @@
         "icon": "el-icon-star-on",
         "children": [
             {
-                "title": "主流前端",
-                "href": "#/demo/all",
-                "target": "_self",
-                "level": 2,
-                "icon": "el-icon-s-promotion"
-            },
-            {
-                "title": "网络模型",
-                "href": "#/demo/network",
-                "target": "_self",
-                "level": 2,
-                "icon": "el-icon-s-tools"
-            },
-            {
                 "title": "示例",
                 "href": "#/demo/demo",
                 "target": "_self",
@@ -49,6 +35,34 @@
             {
                 "title": "elementui示例",
                 "href": "#/demo/elementui",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-tools"
+            }
+        ]
+    },
+    {
+        "title": "内容",
+        "level": 1,
+        "icon": "el-icon-star-on",
+        "children": [
+            {
+                "title": "主流前端",
+                "href": "#/doc/all",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-promotion"
+            },
+            {
+                "title": "网络模型",
+                "href": "#/doc/network",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-tools"
+            },
+            {
+                "title": "知识总结",
+                "href": "#/doc/summary",
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools"

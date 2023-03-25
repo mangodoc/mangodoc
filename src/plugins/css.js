@@ -113,6 +113,12 @@ function injectStyle() {
         border-left: 3px solid ${themeColor};
         margin-left: 0px;
         padding-left: 8px;
+        background: #eee;
+        color: gray;
+        border-radius: 3px;
+      }
+      blockquote p{
+        padding: 3px;
       }
       .el-menu{
         border-right: 0px !important;
