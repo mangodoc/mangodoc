@@ -123,10 +123,12 @@ export default {
     setFlag(key){
         flag[key] = true;
     },
+    getFlag(key){
+        return flag[key];
+    },
     getConfig(key){
         return Config[key];
     }
-
 }
 // 处理md转为html后里的style，只支持最后一个style
 function handleLocalStyle(html,id){

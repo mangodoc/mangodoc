@@ -1,6 +1,9 @@
 import util from "./util";
 import plugin from "./plugins/index";
+import api from "./api";
 
+// 暴露接口
+window.$mangodocApi = api;
 // 定义全局对象navMap
 window.navMap = {};
 let url = util.getUrl();

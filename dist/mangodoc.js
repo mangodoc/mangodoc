@@ -13537,10 +13537,12 @@ let flag = {};
     setFlag(key){
         flag[key] = true;
     },
+    getFlag(key){
+        return flag[key];
+    },
     getConfig(key){
         return _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
     }
-
 });
 // 处理md转为html后里的style，只支持最后一个style
 function handleLocalStyle(html,id){
@@ -17047,10 +17049,21 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, opt
         return list;
     }
 });
+;// CONCATENATED MODULE: ./src/api.js
+
+// 暴露函数接口给外部插件使用
+/* harmony default export */ const api = ({
+    getConfig: util/* default.getConfig */.Z.getConfig,
+    setFlag: util/* default.setFlag */.Z.setFlag,
+    getFlag: util/* default.getFlag */.Z.getFlag
+});
 ;// CONCATENATED MODULE: ./src/index.js
 
 
 
+
+// 暴露接口
+window.$mangodocApi = api;
 // 定义全局对象navMap
 window.navMap = {};
 let url = util/* default.getUrl */.Z.getUrl();
