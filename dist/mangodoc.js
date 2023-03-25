@@ -16969,6 +16969,10 @@ function injectStyle() {
         top: 15px !important;
         background: ${themeColor};
       }
+      p,li{
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

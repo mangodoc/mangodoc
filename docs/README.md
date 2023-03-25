@@ -3,6 +3,8 @@
 
 [在线demo](https://mg0324.github.io/mangodoc/)
 
+## 架构图
+
 ![](static/images/demo.drawio.png)
 
 ## 特性
