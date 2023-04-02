@@ -30,7 +30,7 @@
             footer: '<span>mango mei &copy; 2023</span> @ copyright',
             sideWidth: 230,
             alwaysRefresh: true,
-            version: "1.4.0",
+            version: "1.4.1",
             // themeColor: "#F08",
             // giscus评论
             // giscus:{
@@ -60,18 +60,26 @@
               type: "svg"
             },
             // 开启busuanzi
-            busuanzi: true
+            busuanzi: true,
+            // 最后修改时间
+            updateTime: {
+              align: "right",// 默认
+              prefix: "最后修改时间为",//默认
+              format: "YYYY-MM-DD HH:mm:ss"// 默认
+            }
         };
     </script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/element-ui/lib/index.js"></script>
     <script src="./dist/mangodoc.js"></script>
+    <!-- mangodoc-update-time -->
+    <script src="https://unpkg.com/mangodoc-update-time@1.0.3/dist/mangodoc-update-time.min.js"></script>
     <!-- giscus评论  -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-giscus@1.0.1/dist/giscus.css">
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-giscus@1.0.1/dist/mangodoc-giscus.min.js"></script> -->
     <!-- mangodoc-busuanzi -->
-    <script src="https://cdn.jsdelivr.net/npm/mangodoc-busuanzi@1.1.0/dist/mangodoc-busuanzi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mangodoc-busuanzi@1.1.1/dist/mangodoc-busuanzi.min.js"></script>
     <!-- valine -->
     <script src='//cdn.jsdelivr.net/npm/valine/dist/Valine.min.js'></script>
     <script src="https://unpkg.com/mangodoc-valine@1.0.1/dist/mangodoc-valine.min.js"></script>
