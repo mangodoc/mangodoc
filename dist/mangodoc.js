@@ -16985,10 +16985,13 @@ function injectStyle() {
         font-family: Arial, sans-serif;
         color: #333;
       }
-      #app ul{
+      #app ul, #app ol{
         line-height: 1.6rem;
         word-spacing: 0.05rem;
         padding-left: 20px;
+      }
+      #app strong{
+        color: black;
       }
       body{
         -webkit-font-smoothing: antialiased;
