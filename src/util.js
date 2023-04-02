@@ -3,6 +3,8 @@ import Config from "./config";
 import $ from "jquery";
 // 标志位
 let flag = {};
+// 内存块，存储数据
+let store = {};
 export default {
     callHook(config,hookName,data,callback){
         if(config.plugins){
@@ -68,7 +70,11 @@ export default {
         }
         // 读取 Markdown 文件
         fetch(url)
-        .then(response => response.text())
+        .then(response => {
+            const lastModified = response.headers.get('last-modified');
+            this.setStore("updateTime",lastModified);
+            return response.text();
+        })
         .then(markdown => {
             let that = this;
             // 调用生命周期 beforeEach
@@ -125,6 +131,12 @@ export default {
     },
     getFlag(key){
         return flag[key];
+    },
+    setStore(key,value){
+        store[key] = value;
+    },
+    getStore(key){
+        return store[key];
     },
     getConfig(key){
         return Config[key];

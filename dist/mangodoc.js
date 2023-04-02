@@ -13417,6 +13417,8 @@ module.exports = styleTagTransform;
 
 // 标志位
 let flag = {};
+// 内存块，存储数据
+let store = {};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
     callHook(config,hookName,data,callback){
         if(config.plugins){
@@ -13482,7 +13484,11 @@ let flag = {};
         }
         // 读取 Markdown 文件
         fetch(url)
-        .then(response => response.text())
+        .then(response => {
+            const lastModified = response.headers.get('last-modified');
+            this.setStore("updateTime",lastModified);
+            return response.text();
+        })
         .then(markdown => {
             let that = this;
             // 调用生命周期 beforeEach
@@ -13539,6 +13545,12 @@ let flag = {};
     },
     getFlag(key){
         return flag[key];
+    },
+    setStore(key,value){
+        store[key] = value;
+    },
+    getStore(key){
+        return store[key];
     },
     getConfig(key){
         return _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
@@ -17063,9 +17075,14 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, opt
 
 // 暴露函数接口给外部插件使用
 /* harmony default export */ const api = ({
+    // 配置层
     getConfig: util/* default.getConfig */.Z.getConfig,
+    // 状态层
     setFlag: util/* default.setFlag */.Z.setFlag,
-    getFlag: util/* default.getFlag */.Z.getFlag
+    getFlag: util/* default.getFlag */.Z.getFlag,
+    // 存储层
+    setStore: util/* default.setStore */.Z.setStore,
+    getStore: util/* default.getStore */.Z.getStore
 });
 ;// CONCATENATED MODULE: ./src/index.js
 

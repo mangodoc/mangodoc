@@ -11,14 +11,21 @@
         "href": "#/quickstart",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-s-home"
+        "icon": "el-icon-tickets"
     },
     {
         "title": "配置参数",
         "href": "#/configitem",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-s-home"
+        "icon": "el-icon-tickets"
+    },
+    {
+        "title": "API接口",
+        "href": "#/api",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-tickets"
     },
     {
         "title": "示例",
