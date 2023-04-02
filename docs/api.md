@@ -11,8 +11,8 @@ export default {
 ```
 
 ## 状态
-`window.$mangodocApi.setFlag()` - 用于设置状态
-`window.$mangodocApi.getFlag(key)` - 用于获取状态，如`aside`、`layout`、`nav`、`vue`等，用来加强插件逻辑执行顺序。
+* `window.$mangodocApi.setFlag()` - 用于设置状态
+* `window.$mangodocApi.getFlag(key)` - 用于获取状态，如`aside`、`layout`、`nav`、`vue`等，用来加强插件逻辑执行顺序。
 
 当然也可以用来在不同插件间传递状态数据。
 
