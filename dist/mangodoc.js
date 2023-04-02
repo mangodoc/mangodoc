@@ -16903,7 +16903,7 @@ function injectStyle() {
       }
       blockquote{
         border-left: 3px solid ${themeColor};
-        margin-left: 0px;
+        margin: 0px;
         padding-left: 8px;
         background: #eee;
         color: gray;
@@ -16984,6 +16984,20 @@ function injectStyle() {
       p,li{
         font-family: Arial, sans-serif;
         color: #333;
+      }
+      #app ul{
+        line-height: 1.6rem;
+        word-spacing: 0.05rem;
+        padding-left: 20px;
+      }
+      body{
+        -webkit-font-smoothing: antialiased;
+        color: #34495e;
+        font-family: Source Sans Pro,Helvetica Neue,Arial,sans-serif;
+        font-size: 15px;
+        letter-spacing: 0;
+        margin: 0;
+        overflow-x: hidden;
       }
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
