@@ -13524,8 +13524,8 @@ let store = {};
         });
     },
     createVueApp(localVue){
-        // 未渲染vue 或者 是localVue
-        if(!flag["vue"] || localVue){
+        // 未渲染vue 
+        if(!flag["vue"]){
             new Vue({
                 el: '#vue',
                 data(){
@@ -13535,6 +13535,18 @@ let store = {};
             });
             this.setFlag("vue");
             console.info("create vue app")
+        }else{
+            // 是localVue
+            if(localVue){
+                new Vue({
+                    el: '#app',
+                    data(){
+                        return localVue ? localVue.data() : {};
+                    },
+                    methods: localVue ? localVue.methods : {} 
+                });
+                console.info("create app")
+            }
         }
     },
     getSideWidth(){
