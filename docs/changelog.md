@@ -1,6 +1,8 @@
 # 更新日志
 ## 2023-04-08
 1. index.html里的mangodoc版本更换为gcore上的1.4.3版本。
+2. 新增百度统计。
+3. 将文档拆分到doc分支，并部署到railway的cname到[mangodoc.meiflower.top](mangodoc.meiflower.top)。
 
 ## 2023-04-03
 1. 修复cdn被墙超时的问题，替换为gcore。
