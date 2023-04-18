@@ -1,4 +1,7 @@
 # 更新日志
+## 2023-04-18
+1. index.html里修改cdn为`https://mg.meiflower.top/oss/cdn/`。
+
 ## 2023-04-08
 1. index.html里的mangodoc版本更换为gcore上的1.4.3版本。
 2. 新增百度统计。
