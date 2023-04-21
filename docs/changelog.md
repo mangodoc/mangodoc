@@ -1,6 +1,7 @@
 # 更新日志
-## 2023-04-18
+## 2023-04-xx
 1. index.html里修改cdn为`https://mg.meiflower.top/oss/cdn/`。
+2. 升级mangodoc到`1.5.0`，支持`menuOpens`参数，默认打开左侧菜单。
 
 ## 2023-04-08
 1. index.html里的mangodoc版本更换为gcore上的1.4.3版本。
