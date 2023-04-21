@@ -4,47 +4,54 @@
         "href": "#/",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-s-home"
+        "icon": "el-icon-s-home",
+        "index": "1"
     },
     {
         "title": "快速开始",
         "href": "#/quickstart",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-tickets"
+        "icon": "el-icon-tickets",
+        "index": "2"
     },
     {
         "title": "配置参数",
         "href": "#/configitem",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-tickets"
+        "icon": "el-icon-tickets",
+        "index": "3"
     },
     {
         "title": "API接口",
         "href": "#/api",
         "target": "_self",
         "level": 1,
-        "icon": "el-icon-tickets"
+        "icon": "el-icon-tickets",
+        "index": "4"
     },
     {
         "title": "示例",
         "level": 1,
         "icon": "el-icon-star-on",
+        "index": "5",
         "children": [
             {
                 "title": "示例",
                 "href": "#/demo/demo",
                 "target": "_self",
                 "level": 2,
-                "icon": "el-icon-s-tools"
+                "icon": "el-icon-s-tools",
+                "index": "5-1"
             },
             {
                 "title": "elementui示例",
                 "href": "#/demo/elementui",
                 "target": "_self",
                 "level": 2,
-                "icon": "el-icon-s-tools"
+                "icon": "el-icon-s-tools",
+                "index": "5-2"
             }
         ]
     },
@@ -52,27 +59,31 @@
         "title": "内容",
         "level": 1,
         "icon": "el-icon-star-on",
+        "index": "6",
         "children": [
             {
                 "title": "主流前端",
                 "href": "#/doc/all",
                 "target": "_self",
                 "level": 2,
-                "icon": "el-icon-s-promotion"
+                "icon": "el-icon-s-promotion",
+                "index": "6-1"
             },
             {
                 "title": "网络模型",
                 "href": "#/doc/network",
                 "target": "_self",
                 "level": 2,
-                "icon": "el-icon-s-tools"
+                "icon": "el-icon-s-tools",
+                "index": "6-2"
             },
             {
                 "title": "知识总结",
                 "href": "#/doc/summary",
                 "target": "_self",
                 "level": 2,
-                "icon": "el-icon-s-tools"
+                "icon": "el-icon-s-tools",
+                "index": "6-3"
             }
         ]
     }

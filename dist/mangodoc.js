@@ -13397,6 +13397,7 @@ module.exports = styleTagTransform;
     sideWidth: 200, // 左侧栏宽度默认200px
     smallWidth: 500, // 宽度超过500px为大屏
     logo: "static/icon/favicon-32x32.png", // 默认的logo
+    menuOpens: [""] // 左侧菜单，默认为空
 });
 
 /***/ }),
@@ -13529,9 +13530,12 @@ let store = {};
             new Vue({
                 el: '#vue',
                 data(){
-                    return localVue ? localVue.data() : {};
+                    return getVueData(localVue);
                 },
-                methods: localVue ? localVue.methods : {} 
+                methods: localVue ? localVue.methods : {},
+                mounted(){
+                    //callMounted();
+                }
             });
             this.setFlag("vue");
             console.info("create vue app")
@@ -13541,11 +13545,14 @@ let store = {};
                 new Vue({
                     el: '#app',
                     data(){
-                        return localVue ? localVue.data() : {};
+                        return getVueData(localVue);
                     },
-                    methods: localVue ? localVue.methods : {} 
+                    methods: localVue ? localVue.methods : {},
+                    mounted(){
+                        //callMounted();
+                    }
                 });
-                console.info("create app")
+                console.info("create local app")
             }
         }
     },
@@ -13568,6 +13575,29 @@ let store = {};
         return _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
     }
 });
+
+function getVueData(localVue){
+    let data = {};
+    if(localVue){
+        data = Object.assign({}, localVue.data(), {
+            menuOpens: menuOpens()
+        });
+    }else{
+        data = {
+            menuOpens: menuOpens()
+        }
+    }
+    return data;
+}
+
+function menuOpens(){
+    let menuOpens = _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"].menuOpens */ .Z.menuOpens;
+    if(window.$mangodoc.menuOpens){
+        menuOpens = window.$mangodoc.menuOpens;
+    }
+    return menuOpens;
+}
+
 // 处理md转为html后里的style，只支持最后一个style
 function handleLocalStyle(html,id){
     if(html.indexOf("<style>") == 1){
@@ -16639,7 +16669,6 @@ var util = __webpack_require__(891);
 });
 
 ;// CONCATENATED MODULE: ./src/plugins/aside.js
-let index = 1;
 
 
 function renderSidebarItem(list,init){
@@ -16648,19 +16677,20 @@ function renderSidebarItem(list,init){
         html = `
             <el-menu
                 default-active="1"
-                class="el-menu-vertical-demo">
+                class="el-menu-vertical-demo"
+                :default-openeds="menuOpens">
         `;
     }
     for(let item of list){
         if(!item.children){
-            html += `<el-menu-item index="${index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            html += `<el-menu-item index="${item.index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
             if(item.href.startsWith("#")){
                 window.navMap[item.href] = item.title;
             }
         }else {
             let itemHtml = renderSidebarItem(item.children,false);
             html += `
-                <el-submenu index="${index}">
+                <el-submenu index="${item.index}">
                     <template slot="title">
                         <i class="${item.icon}"></i>
                         <span>${item.title}</span>
@@ -16669,7 +16699,6 @@ function renderSidebarItem(list,init){
                 </el-submenu>
             `;
         }
-        index = index+1;
     }
     if(init){
         html += `</el-menu>`;

@@ -115,9 +115,12 @@ export default {
             new Vue({
                 el: '#vue',
                 data(){
-                    return localVue ? localVue.data() : {};
+                    return getVueData(localVue);
                 },
-                methods: localVue ? localVue.methods : {} 
+                methods: localVue ? localVue.methods : {},
+                mounted(){
+                    //callMounted();
+                }
             });
             this.setFlag("vue");
             console.info("create vue app")
@@ -127,11 +130,14 @@ export default {
                 new Vue({
                     el: '#app',
                     data(){
-                        return localVue ? localVue.data() : {};
+                        return getVueData(localVue);
                     },
-                    methods: localVue ? localVue.methods : {} 
+                    methods: localVue ? localVue.methods : {},
+                    mounted(){
+                        //callMounted();
+                    }
                 });
-                console.info("create app")
+                console.info("create local app")
             }
         }
     },
@@ -154,6 +160,29 @@ export default {
         return Config[key];
     }
 }
+
+function getVueData(localVue){
+    let data = {};
+    if(localVue){
+        data = Object.assign({}, localVue.data(), {
+            menuOpens: menuOpens()
+        });
+    }else{
+        data = {
+            menuOpens: menuOpens()
+        }
+    }
+    return data;
+}
+
+function menuOpens(){
+    let menuOpens = Config.menuOpens;
+    if(window.$mangodoc.menuOpens){
+        menuOpens = window.$mangodoc.menuOpens;
+    }
+    return menuOpens;
+}
+
 // 处理md转为html后里的style，只支持最后一个style
 function handleLocalStyle(html,id){
     if(html.indexOf("<style>") == 1){

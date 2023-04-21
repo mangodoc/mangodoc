@@ -1,4 +1,3 @@
-let index = 1;
 import util from "../util";
 
 function renderSidebarItem(list,init){
@@ -7,19 +6,20 @@ function renderSidebarItem(list,init){
         html = `
             <el-menu
                 default-active="1"
-                class="el-menu-vertical-demo">
+                class="el-menu-vertical-demo"
+                :default-openeds="menuOpens">
         `;
     }
     for(let item of list){
         if(!item.children){
-            html += `<el-menu-item index="${index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            html += `<el-menu-item index="${item.index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
             if(item.href.startsWith("#")){
                 window.navMap[item.href] = item.title;
             }
         }else {
             let itemHtml = renderSidebarItem(item.children,false);
             html += `
-                <el-submenu index="${index}">
+                <el-submenu index="${item.index}">
                     <template slot="title">
                         <i class="${item.icon}"></i>
                         <span>${item.title}</span>
@@ -28,7 +28,6 @@ function renderSidebarItem(list,init){
                 </el-submenu>
             `;
         }
-        index = index+1;
     }
     if(init){
         html += `</el-menu>`;
