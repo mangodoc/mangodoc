@@ -8,6 +8,11 @@
 @enduml
 ```
 
+## iconfont示例
+
+<span class="iconfont icon-code" style="color:red;"></span>
+<span class="iconfont icon-log" style="color:green;font-size:20px;"></span>
+
 ## java代码高亮
 ``` java
 import java.sql.*;
