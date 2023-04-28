@@ -13515,7 +13515,7 @@ let store = {};
                     window.oldHash = that.getHash();
                     // 渲染为vue
                     handleVue(function(){
-                        that.createVueApp(result[1]);
+                        that.createVueApp(result[1],callback);
                     });
                     if(callback){
                         callback();
@@ -13524,7 +13524,7 @@ let store = {};
             });
         });
     },
-    createVueApp(localVue){
+    createVueApp(localVue,callback){
         // 未渲染vue 
         if(!flag["vue"]){
             new Vue({
@@ -13534,7 +13534,9 @@ let store = {};
                 },
                 methods: localVue ? localVue.methods : {},
                 mounted(){
-                    //callMounted();
+                    if(callback){
+                        callback();
+                    }
                 }
             });
             this.setFlag("vue");
@@ -13549,7 +13551,9 @@ let store = {};
                     },
                     methods: localVue ? localVue.methods : {},
                     mounted(){
-                        //callMounted();
+                        if(callback){
+                            callback();
+                        }
                     }
                 });
                 console.info("create local app")
@@ -17178,7 +17182,8 @@ console.info(src_config);
 util/* default.callHook */.Z.callHook(src_config,"init");
 // 开始渲染
 util/* default.render */.Z.render(url,src_config,function(){
-    
+    // 渲染完成后调用onpopstate，触发修改title的逻辑
+    util/* default.callHook */.Z.callHook(src_config,"onpopstate",null);
 });
 
 // 监听地址栏变化

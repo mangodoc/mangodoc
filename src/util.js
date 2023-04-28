@@ -100,7 +100,7 @@ export default {
                     window.oldHash = that.getHash();
                     // 渲染为vue
                     handleVue(function(){
-                        that.createVueApp(result[1]);
+                        that.createVueApp(result[1],callback);
                     });
                     if(callback){
                         callback();
@@ -109,7 +109,7 @@ export default {
             });
         });
     },
-    createVueApp(localVue){
+    createVueApp(localVue,callback){
         // 未渲染vue 
         if(!flag["vue"]){
             new Vue({
@@ -119,7 +119,9 @@ export default {
                 },
                 methods: localVue ? localVue.methods : {},
                 mounted(){
-                    //callMounted();
+                    if(callback){
+                        callback();
+                    }
                 }
             });
             this.setFlag("vue");
@@ -134,7 +136,9 @@ export default {
                     },
                     methods: localVue ? localVue.methods : {},
                     mounted(){
-                        //callMounted();
+                        if(callback){
+                            callback();
+                        }
                     }
                 });
                 console.info("create local app")

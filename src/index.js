@@ -17,7 +17,8 @@ console.info(config);
 util.callHook(config,"init");
 // 开始渲染
 util.render(url,config,function(){
-    
+    // 渲染完成后调用onpopstate，触发修改title的逻辑
+    util.callHook(config,"onpopstate",null);
 });
 
 // 监听地址栏变化
