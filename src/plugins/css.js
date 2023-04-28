@@ -14,6 +14,13 @@ function injectStyle() {
       body {
         margin: 0px;
         padding: 0px;
+        -webkit-font-smoothing: antialiased;
+        color: #34495e;
+        font-family: Source Sans Pro,Helvetica Neue,Arial,sans-serif;
+        font-size: 15px;
+        letter-spacing: 0;
+        margin: 0;
+        overflow-x: hidden;
       }
       html, body {
         height: 100%;
@@ -38,6 +45,9 @@ function injectStyle() {
       }
       #aside ul li {
         list-style: none;
+      }
+      .theme-color {
+        color: ${themeColor};
       }
       #aside ul li a {
         text-decoration: none;
@@ -158,6 +168,7 @@ function injectStyle() {
       #logo {
         vertical-align: middle;
         margin-right:8px;
+        width:30px;
       }      
       @media only screen and (max-width: 500px) {
         #aside{
@@ -201,14 +212,11 @@ function injectStyle() {
       #app strong{
         color: black;
       }
-      body{
-        -webkit-font-smoothing: antialiased;
-        color: #34495e;
-        font-family: Source Sans Pro,Helvetica Neue,Arial,sans-serif;
-        font-size: 15px;
-        letter-spacing: 0;
-        margin: 0;
-        overflow-x: hidden;
+      .el-menu-item.is-active {
+        color: ${themeColor} !important;
+      }
+      ul {
+        padding-left: 25px;
       }
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
