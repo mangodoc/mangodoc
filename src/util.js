@@ -102,9 +102,6 @@ export default {
                     handleVue(function(){
                         that.createVueApp(result[1],callback);
                     });
-                    if(callback){
-                        callback();
-                    }
                 });
             });
         });
@@ -145,8 +142,9 @@ export default {
             }
         }
     },
-    getSideWidth(){
-        return window.$mangodoc.sideWidth ? window.$mangodoc.sideWidth : Config.sideWidth;
+    // common config get by key
+    getConfigOrDefault(key){
+        return window.$mangodoc[key] ? window.$mangodoc[key] : Config[key];
     },
     setFlag(key){
         flag[key] = true;

@@ -64,7 +64,6 @@ export default {
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
-            $("#aside").width(util.getSideWidth());
             if(screen.width < Config.smallWidth){
                 $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
             }

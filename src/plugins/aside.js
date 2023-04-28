@@ -38,7 +38,7 @@ export default {
     ready(){
         // console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.style.width = util.getSideWidth();
+        elSide.setAttribute("width",util.getConfigOrDefault("sideWidth") + "px");
         elSide.id = "aside";
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
@@ -55,10 +55,7 @@ export default {
             el.href = "#/";
             el.target = "_self";
             let version = window.$mangodoc.version;
-            let logo = util.getConfig("logo");
-            if(window.$mangodoc.logo){
-                logo = window.$mangodoc.logo;
-            }
+            let logo = util.getConfigOrDefault("logo");
             let titleHtml = `<img id="logo" src="${logo}"/>`;
             if(version){
                 titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;

@@ -13394,6 +13394,7 @@ module.exports = styleTagTransform;
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    themeColor: "#409EFF", // 默认主题颜色
     sideWidth: 200, // 左侧栏宽度默认200px
     smallWidth: 500, // 宽度超过500px为大屏
     logo: "static/icon/favicon-32x32.png", // 默认的logo
@@ -13517,9 +13518,6 @@ let store = {};
                     handleVue(function(){
                         that.createVueApp(result[1],callback);
                     });
-                    if(callback){
-                        callback();
-                    }
                 });
             });
         });
@@ -13560,8 +13558,9 @@ let store = {};
             }
         }
     },
-    getSideWidth(){
-        return window.$mangodoc.sideWidth ? window.$mangodoc.sideWidth : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"].sideWidth */ .Z.sideWidth;
+    // common config get by key
+    getConfigOrDefault(key){
+        return window.$mangodoc[key] ? window.$mangodoc[key] : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
     },
     setFlag(key){
         flag[key] = true;
@@ -16713,7 +16712,7 @@ function renderSidebarItem(list,init){
     ready(){
         // console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.style.width = util/* default.getSideWidth */.Z.getSideWidth();
+        elSide.setAttribute("width",util/* default.getConfigOrDefault */.Z.getConfigOrDefault("sideWidth") + "px");
         elSide.id = "aside";
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
@@ -16730,10 +16729,7 @@ function renderSidebarItem(list,init){
             el.href = "#/";
             el.target = "_self";
             let version = window.$mangodoc.version;
-            let logo = util/* default.getConfig */.Z.getConfig("logo");
-            if(window.$mangodoc.logo){
-                logo = window.$mangodoc.logo;
-            }
+            let logo = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("logo");
             let titleHtml = `<img id="logo" src="${logo}"/>`;
             if(version){
                 titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
@@ -16819,7 +16815,6 @@ function renderNavItem(list){
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
-            jquery_default()("#aside").width(util/* default.getSideWidth */.Z.getSideWidth());
             if(screen.width < config/* default.smallWidth */.Z.smallWidth){
                 jquery_default()("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
             }
@@ -16843,6 +16838,8 @@ window.operFn = function(){
     }
 }
 ;// CONCATENATED MODULE: ./src/plugins/css.js
+
+
 /* harmony default export */ const css = ({
     ready(){
       injectStyle();
@@ -16850,10 +16847,7 @@ window.operFn = function(){
 });
 
 function injectStyle() {
-    let themeColor = window.$mangodoc.themeColor;
-    if(!themeColor){
-      themeColor = "#409EFF";
-    }
+    let themeColor = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("themeColor");
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       body {

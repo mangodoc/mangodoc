@@ -1,3 +1,5 @@
+import util from "../util";
+
 export default {
     ready(){
       injectStyle();
@@ -5,10 +7,7 @@ export default {
 }
 
 function injectStyle() {
-    let themeColor = window.$mangodoc.themeColor;
-    if(!themeColor){
-      themeColor = "#409EFF";
-    }
+    let themeColor = util.getConfigOrDefault("themeColor");
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       body {
