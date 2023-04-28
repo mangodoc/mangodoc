@@ -16758,9 +16758,17 @@ function renderNavItem(list){
     for(let item of list){
         if(!item.children){
             if(item.level == 2){
-                html += `<el-dropdown-item><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-dropdown-item>`;
+                html += `<el-dropdown-item><a class="nav-a" href="${item.href}" target="${item.target}">`;
+                if(item.icon){
+                    html += `<i class="${item.icon} theme-color"></i>`;
+                }
+                html += `${item.title}</a></el-dropdown-item>`;
             }else if(item.level == 1){
-                html += `<a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a>`;
+                html += `<a class="nav-a" href="${item.href}" target="${item.target}">`;
+                if(item.icon){
+                    html += `<i class="${item.icon} theme-color"></i>`;
+                }
+                html += `${item.title}</a>`;
             }
             if(item.href.startsWith("#")){
                 window.navMap[item.href] = item.title;
