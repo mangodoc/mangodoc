@@ -1,6 +1,7 @@
 import { marked } from "marked";
 import Config from "./config";
 import $ from "jquery";
+import { util } from "prismjs";
 // 标志位
 let flag = {};
 // 内存块，存储数据
@@ -71,7 +72,12 @@ export default {
         // 读取 Markdown 文件
         fetch(url)
         .then(response => {
+            // 处理头信息
             const lastModified = response.headers.get('last-modified');
+            if(!lastModified){
+                // 如果为空，则获取date属性
+                lastModified = response.headers.get('date');
+            }
             this.setStore("updateTime",lastModified);
             return response.text();
         })
@@ -144,7 +150,7 @@ export default {
     },
     // common config get by key
     getConfigOrDefault(key){
-        return window.$mangodoc[key] ? window.$mangodoc[key] : Config[key];
+        return getConfigOrDefault(key);
     },
     setFlag(key){
         flag[key] = true;
@@ -163,26 +169,22 @@ export default {
     }
 }
 
+function getConfigOrDefault(key){
+    return window.$mangodoc[key] ? window.$mangodoc[key] : Config[key];
+}
+
 function getVueData(localVue){
     let data = {};
     if(localVue){
         data = Object.assign({}, localVue.data(), {
-            menuOpens: menuOpens()
+            menuOpens: getConfigOrDefault("menuOpens")
         });
     }else{
         data = {
-            menuOpens: menuOpens()
+            menuOpens: getConfigOrDefault("menuOpens")
         }
     }
     return data;
-}
-
-function menuOpens(){
-    let menuOpens = Config.menuOpens;
-    if(window.$mangodoc.menuOpens){
-        menuOpens = window.$mangodoc.menuOpens;
-    }
-    return menuOpens;
 }
 
 // 处理md转为html后里的style，只支持最后一个style

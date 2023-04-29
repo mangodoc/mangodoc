@@ -13414,6 +13414,9 @@ module.exports = styleTagTransform;
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(182);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(755);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var prismjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(660);
+/* harmony import */ var prismjs__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(prismjs__WEBPACK_IMPORTED_MODULE_3__);
+
 
 
 
@@ -13487,7 +13490,12 @@ let store = {};
         // 读取 Markdown 文件
         fetch(url)
         .then(response => {
+            // 处理头信息
             const lastModified = response.headers.get('last-modified');
+            if(!lastModified){
+                // 如果为空，则获取date属性
+                lastModified = response.headers.get('date');
+            }
             this.setStore("updateTime",lastModified);
             return response.text();
         })
@@ -13560,7 +13568,7 @@ let store = {};
     },
     // common config get by key
     getConfigOrDefault(key){
-        return window.$mangodoc[key] ? window.$mangodoc[key] : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
+        return getConfigOrDefault(key);
     },
     setFlag(key){
         flag[key] = true;
@@ -13579,26 +13587,22 @@ let store = {};
     }
 });
 
+function getConfigOrDefault(key){
+    return window.$mangodoc[key] ? window.$mangodoc[key] : _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"] */ .Z[key];
+}
+
 function getVueData(localVue){
     let data = {};
     if(localVue){
         data = Object.assign({}, localVue.data(), {
-            menuOpens: menuOpens()
+            menuOpens: getConfigOrDefault("menuOpens")
         });
     }else{
         data = {
-            menuOpens: menuOpens()
+            menuOpens: getConfigOrDefault("menuOpens")
         }
     }
     return data;
-}
-
-function menuOpens(){
-    let menuOpens = _config__WEBPACK_IMPORTED_MODULE_1__/* ["default"].menuOpens */ .Z.menuOpens;
-    if(window.$mangodoc.menuOpens){
-        menuOpens = window.$mangodoc.menuOpens;
-    }
-    return menuOpens;
 }
 
 // 处理md转为html后里的style，只支持最后一个style
