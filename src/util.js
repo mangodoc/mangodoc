@@ -73,7 +73,7 @@ export default {
         fetch(url)
         .then(response => {
             // 处理头信息
-            const lastModified = response.headers.get('last-modified');
+            let lastModified = response.headers.get('last-modified');
             if(!lastModified){
                 // 如果为空，则获取date属性
                 lastModified = response.headers.get('date');
