@@ -34,6 +34,9 @@ function injectStyle() {
         text-align:center;
         border-top: 1px solid #eee;
       }
+      #footer a{
+        font-size: 12px;
+      }
       #aside {
         border-right: 1px solid #eee;
         overflow-x: hidden;
