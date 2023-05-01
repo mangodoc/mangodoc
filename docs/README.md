@@ -1,7 +1,5 @@
 # mangodoc-template
-> mangodoc template 模板仓库，可通过`mangodoc init`初始化
-
-
+mangodoc template 模板仓库，能让您基于mangodoc快速搭建自己的在线笔记!
 
 ## 快速开始
 > 本工具基于node平台，且发布到npm公共仓库。
