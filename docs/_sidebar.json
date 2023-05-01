@@ -6,5 +6,23 @@
         "level": 1,
         "icon": "el-icon-s-home",
         "index": "1"
+    },
+    {
+        "title": "mangodoc",
+        "href": "https://mangodoc.meiflower.top",
+        "target": "_blank",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "2"
+    },
+    {
+        "title": "mangodoc-cli",
+        "href": "https://github.com/mg0324/mangodoc-cli",
+        "target": "_blank",
+        "level": 1,
+        "icon": "el-icon-s-promotion",
+        "index": "3"
     }
+
+    
 ]
