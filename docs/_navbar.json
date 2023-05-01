@@ -5,15 +5,5 @@
     "target": "",
     "icon": "el-icon-notebook-1",
     "level": 1
-  },
-  {
-    "title": "其他链接",
-    "children": [{
-        "title": "mangodoc",
-        "href": "https://github.com/mg0324/mangodoc",
-        "target": "_blank",
-        "level": 2
-      }
-    ]
   }
 ]
