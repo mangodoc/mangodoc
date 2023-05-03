@@ -1,7 +1,7 @@
 import { marked } from "marked";
 import Config from "./config";
 import $ from "jquery";
-import { util } from "prismjs";
+
 // 标志位
 let flag = {};
 // 内存块，存储数据
@@ -53,6 +53,10 @@ export default {
         let url = hash.replace("#","");
         if(url === "/"){
             url = "/README.md";
+            // 开启了封面
+            if(getConfigOrDefault("coverpage")){
+                url = "/coverpage.md";
+            }
         }else{
             url = url + ".md";
         }

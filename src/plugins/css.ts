@@ -1,4 +1,4 @@
-import util from "../util";
+import Util from "../util/util"
 
 export default {
     ready(){
@@ -7,7 +7,7 @@ export default {
 }
 
 function injectStyle() {
-    let themeColor = util.getConfigOrDefault("themeColor");
+    let themeColor = Util.getConfigOrDefault("themeColor");
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       body {
@@ -25,7 +25,7 @@ function injectStyle() {
         height: 100%;
         overflow: hidden;
       }
-      #page,#vue {
+      #page,#app {
         height: 100%;
       }
       #footer{
@@ -206,12 +206,12 @@ function injectStyle() {
         font-family: Arial, sans-serif;
         color: #333;
       }
-      #app ul, #app ol{
+      #container ul, #container ol{
         line-height: 1.6rem;
         word-spacing: 0.05rem;
         padding-left: 20px;
       }
-      #app strong{
+      #container strong{
         color: black;
       }
       .el-menu-item.is-active {

@@ -5,7 +5,7 @@ import nav from './nav';
 import css from './css';
 import prism from './prism';
 
-export default{
+export default {
     list(){
         let list = [css,layout,aside,nav,demo,prism];
         if(window.$mangodoc.plugins){

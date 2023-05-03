@@ -1,4 +1,6 @@
-import util from "../util";
+import App from "../app";
+import Layout from "../enum/layout";
+import Util from "../util/util";
 export default {
     // init(){
     //     console.info("core init");
@@ -19,29 +21,33 @@ export default {
     ready(){
         // console.info("core ready");
         let template = `
-            <el-container id="main">
+            <el-container id="${Layout.main}">
         `;
         template += `
-            <el-main id='content'><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
+            <el-main id='${Layout.content}'><div id="${Layout.fullscreenLoading}" class="fullscreen-loading"></div><div id="${Layout.container}"></div></el-main>
         `; 
         if(window.$mangodoc.footer){
-            template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
+            template += `<el-footer id="${Layout.footer}">${window.$mangodoc.footer}</el-footer>`;
         }
         template += `
             </el-container>
         `;
         var pageEl = document.createElement("el-container");
-        pageEl.id = "page"
+        pageEl.id = Layout.page;
         pageEl.innerHTML = template;
-        let vue = document.getElementById("vue");
+        let vue: any = document.getElementById(Layout.app);
         vue.appendChild(pageEl);
-        util.setFlag("layout");
+        Util.setFlag(Layout.layout);
         console.info("layout finish!");
     },
     onpopstate(){
         // 如果是锚点，则不加载资源，因为是同一个页面
-        util.render(util.getUrl(),window.$mangodoc);
+        let app = new App();
+        app.start();
         // 变化页面标题
-        $("title").text(window.navMap[window.location.hash]);
+        $("title").text(Util.getNavMap(window.location.hash));
+        if(Util.getHash() == "#/"){
+            window.location.reload();
+        }
     }
 }

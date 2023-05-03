@@ -1,6 +1,8 @@
-import util from "../util";
+import Layout from "../enum/layout";
+import Global from "../util/global";
+import Util from "../util/util";
 
-function renderSidebarItem(list,init){
+function renderSidebarItem(list: Array<any>,init: boolean){
     let html = "";
     if(init){
         html = `
@@ -14,7 +16,7 @@ function renderSidebarItem(list,init){
         if(!item.children){
             html += `<el-menu-item index="${item.index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
             if(item.href.startsWith("#")){
-                window.navMap[item.href] = item.title;
+                Util.setNavMap(item.href,item.title);
             }
         }else {
             let itemHtml = renderSidebarItem(item.children,false);
@@ -36,10 +38,10 @@ function renderSidebarItem(list,init){
 }
 export default {
     ready(){
-        // console.info("aside ready");
+        console.info("aside ready");
         var elSide = document.createElement("el-aside");
-        elSide.setAttribute("width",util.getConfigOrDefault("sideWidth") + "px");
-        elSide.id = "aside";
+        elSide.setAttribute("width",Util.getConfigOrDefault(Global.ASIDE_WIDTH) + "px");
+        elSide.id = Layout.aside;
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
@@ -47,16 +49,16 @@ export default {
             let html = renderSidebarItem(sidebarList,true);
             // console.info("sidebar html:"+html);
             elSide.innerHTML = html;
-            let pageEl = document.getElementById("page");
+            let pageEl: any = document.getElementById(Layout.page);
             pageEl.insertBefore(elSide,pageEl.firstChild);
             var el = document.createElement("a");
             // title
-            el.id = "title";
+            el.id = Layout.title;
             el.href = "#/";
             el.target = "_self";
             let version = window.$mangodoc.version;
-            let logo = util.getConfigOrDefault("logo");
-            let titleHtml = `<img id="logo" src="${logo}"/>`;
+            let logo = Util.getConfigOrDefault(Global.LOGO);
+            let titleHtml = `<img id="${Layout.logo}" src="${logo}"/>`;
             if(version){
                 titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
             }else{
@@ -64,7 +66,7 @@ export default {
             }
             el.innerHTML = titleHtml;
             elSide.insertBefore(el,elSide.firstChild);
-            util.setFlag("aside");
+            Util.setFlag(Layout.aside);
             console.info("aside finish!");
         });
     }

@@ -1,8 +1,9 @@
 import $ from "jquery";
-import util from "../util";
-import Config from "../config";
+import Util from "../util/util";
+import Layout from "../enum/layout";
+import Global from "../util/global";
 
-function renderNavItem(list){
+function renderNavItem(list: Array<any>){
     let html = "";
     for(let item of list){
         if(!item.children){
@@ -20,7 +21,7 @@ function renderNavItem(list){
                 html += `${item.title}</a>`;
             }
             if(item.href.startsWith("#")){
-                window.navMap[item.href] = item.title;
+                Util.setNavMap(item.href,item.title);
             }
         }else {
             let itemHtml = renderNavItem(item.children);
@@ -42,7 +43,7 @@ export default {
     ready(){
         // console.info("nav ready");
         var el = document.createElement("el-header");
-        el.id = "header";
+        el.id = Layout.header;
         fetch("docs/_navbar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
@@ -50,9 +51,9 @@ export default {
             // console.info(navList);
             let html = renderNavItem(navList);
             // console.info("nav:"+html);
-            let oper = `<i id='oper' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
+            let oper = `<i id='${Layout.oper}' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
             el.innerHTML = oper + html;
-            let mainEl = document.getElementById("main");
+            let mainEl: any = document.getElementById("main");
             mainEl.insertBefore(el,mainEl.firstChild);
             // 处理repo
             if(window.$mangodoc.repo){
@@ -61,13 +62,13 @@ export default {
                 `;
                 let span = document.createElement('span');
                 span.innerHTML = html;
-                let header = document.getElementById("header");
+                let header: any = document.getElementById(Layout.header);
                 header.appendChild(span);
             }
-            if(screen.width < Config.smallWidth){
-                $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
+            if(screen.width < Util.getConfigOrDefault(Global.SMALL_WIDTH)){
+                $("#"+Layout.oper).removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
             }
-            util.setFlag("nav");
+            Util.setFlag(Layout.nav);
             console.info("nav finish");
         });
     },
@@ -79,10 +80,10 @@ export default {
 window.operFn = function(){
     let v = $("#aside");
     if (v.is(':visible')) {
-        $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
+        $("#"+Layout.oper).removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
         v.hide(); 
     } else {
-        $("#oper").removeClass("el-icon-d-arrow-right").addClass("el-icon-d-arrow-left");
+        $("#"+Layout.oper).removeClass("el-icon-d-arrow-right").addClass("el-icon-d-arrow-left");
         v.show();
     }
 }

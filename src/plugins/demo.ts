@@ -2,11 +2,11 @@ export default {
     init(){
         console.info("demo init");
     },
-    beforeEach(content){
+    beforeEach(content: string){
         console.info("demo beforeEach");
         return content;
     },
-    afterEach(html,next){
+    afterEach(html: string,next: any){
         // console.info("demo afterEach:"+html);
         next(html);
     },
@@ -19,7 +19,7 @@ export default {
     ready(){
         console.info("demo ready");
     },
-    onpopstate(event){
+    onpopstate(event: Event){
 
     },
     resize(){
