@@ -13,6 +13,7 @@
 
 ## 特性
 * 简单文档：基于`javascript`(1.x)或者`typescript`(2.x)实现的简单文档生成器。
+* 脚手架工具：支持[mangodoc](https://github.com/mg0324/mangodoc-cli)工具快速创建文档模板并启动。
 * `marked`转换:基于`marked`实现`markdown`到`html`的转换。
 * `elementui`风格：基于[elementui](https://element.eleme.cn/#/zh-CN/component/installation)的vue组件版本构建。
 * 简单路由：基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
@@ -42,5 +43,5 @@
 - [ ] （新特性）支持iconfont字体图标。
 - [ ] （新插件）显示文档内容字数及大约阅读时间。
 - [ ] （新插件）在文档末尾显示附近范围内的分页内容。
-- [ ] （新特性）设计并支持文档封面页。
+- [x] （新特性）设计并支持文档封面页。
 - [ ] （新插件）基于markmap支持思维导图，支持超链接跳转。
