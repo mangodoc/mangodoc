@@ -1,13 +1,43 @@
 <style type="text/css">
 .coverpage{
+  width:80%;
+  margin:0 auto;
+}
+.coverpage .logo{
+  width:25%;
+}
+.coverpage .future-remark{
+  color:gray;
+  font-size:14px;
+  min-height:60px;
+}
+.coverpage .future-card{
+  margin:8px;
+}
+.coverpage .footer{
+  text-align:center;
+  color:gray;
+  padding-top:10px;
+}
+.coverpage .footer a{
+  font-size:14px;
+}
 
+@media only screen and (max-width: 500px) {
+  .coverpage{
+    width:98%;
+    margin:0 auto;
+  }
+  .coverpage .logo{
+    width:60%;
+  }
 }
 </style>
 
-<div class="coverpage" style=" width:80%;margin:0 auto;">
+<div class="coverpage">
   <el-result style="margin:0 auto;" sub-title="一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。>2.0.0使用typescript对内核进行重构，使得代码更加可读可维护，更优雅！">
     <template slot="icon">
-      <el-image src="static/mangodoc.png" style="width:25%;"></el-image>
+      <el-image src="static/mangodoc.png" class="logo"></el-image>
     </template>
     <template slot="extra">
       <el-button type="default" size="medium" @click="handleClick('README')">查看主页</el-button>
@@ -16,14 +46,14 @@
   </el-result>
   <el-row>
     <el-col :xs="24" :md="8" v-for="(item,index) in futures">
-      <el-card shadow="hover" style="margin:8px;">
+      <el-card shadow="hover" class="future-card">
         <h3>{{item.title}}</h3>
-        <div v-html="item.remark" style="color:gray;font-size:16px;min-height:60px;">
+        <div v-html="item.remark" class="future-remark">
         </div>
       </el-card>
     </el-col>
   </el-row>
-  <div v-html="footer" style="text-align:center;color:gray;padding-top:10px;">
+  <div v-html="footer" class="footer">
   </div>
 </div>
 
@@ -37,6 +67,10 @@
             {
               title: "简单文档",
               remark: "基于typescript(2.x)实现的简单文档生成器。"
+            },
+            {
+              title: "脚手架工具",
+              remark: "支持<a href='https://github.com/mg0324/mangodoc-cli'>mangodoc<a/>工具快速创建文档模板并启动。"
             },
             {
               title: "marked转换",
