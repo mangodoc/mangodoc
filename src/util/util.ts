@@ -34,7 +34,7 @@ class Util {
      */
     static check(): boolean {
         let hash = this.getHash();
-        return (hash == "" || hash == "#/")&& this.getConfigOrDefault(Global.COVER_PAGE) ? true :false;
+        return (hash == "" || hash == "#/") && this.getConfigOrDefault(Global.COVER_PAGE) ? true :false;
     }
     /**
      * 通过key获取配置，先取window.$mangodoc上的，如果没有则获取默认配置项
@@ -73,8 +73,12 @@ class Util {
             }
         });
     }
-
-    static getVueData(localVue: any){
+    /**
+     * 组装vue的data数据
+     * @param localVue 本地md里的script对象
+     * @returns 组合后的data数据
+     */
+    private static getVueData(localVue: any){
         let data = {};
         if(localVue){
             data = Object.assign({}, localVue.data(), {
@@ -87,11 +91,22 @@ class Util {
         }
         return data;
     }
-
+    /**
+     * 将html内容设置到选择器的元素中
+     * @param el 选择器
+     * @param html html内容
+     */
     static appendHtml(el: string,html: string){
         $(el).html(html);
     }
-
+    /**
+     * 调用插件的生命周期
+     * @param config 合并后的window.$mangodoc配置
+     * @param hookName 调用的生命周期 @see Lifecycle
+     * @param data 调用生命周期时传递的参数
+     * @param callback 生命周期调用完后回调
+     * @returns 经过一系列插件生命周期处理后的数据
+     */
     static callHook(config: any,hookName: Lifecycle,data?: any,callback?: Function): any{
         if(config.plugins){
             let final = data;
@@ -115,39 +130,74 @@ class Util {
             }
         }
     }
-
+    /**
+     * 设置到store中
+     * @param key 属性key
+     * @param value 属性值
+     */
     static setStore(key: string,value: any){
         store.set(key,value);
     }
-
+    /**
+     * 从store中获取属性值
+     * @param key 属性key
+     * @returns 属性值
+     */
     static getStore(key: string): any{
         return store.get(key);
     }
-
+    /**
+     * 设置flag中的属性，值为true
+     * @param key 属性key
+     */
     static setFlag(key: string){
         flag.set(key,true);
     }
-
+    /**
+     * 获取flag中的属性值
+     * @param key 属性key
+     * @returns 属性值，为true，或者false
+     */
     static getFlag(key: string): boolean{
         return flag.get(key);
     }
-
+    /**
+     * 设置navMap中的属性
+     * @param key 属性key
+     * @param value 属性值
+     */
     static setNavMap(key: string,value: any){
         navMap.set(key,value);
     }
-
+    /**
+     * 获取navMap中的属性值
+     * @param key 属性key
+     * @returns 属性值
+     */
     static getNavMap(key: string){
         return navMap.get(key);
     }
-
+    /**
+     * 设置local中的属性
+     * @param key 属性key
+     * @param value 属性值
+     */
     static setLocal(key: string,value: any){
         local.set(key,value);
     }
-
+    /**
+     * 获取local中的属性值
+     * @param key 属性key
+     * @returns 属性值
+     */
     static getLocal(key: string){
         return local.get(key);
     }
-
+    /**
+     * 获取配置项
+     * @param key 属性值
+     * @returns 配置项，先取$mangodoc中的，在取Config中的
+     */
     static getConfig(key: string){
         return Util.getConfigOrDefault(key);
     }

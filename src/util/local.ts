@@ -38,6 +38,7 @@ class LocalUtil{
         });
         $html.find("style").remove();
         html = $html.html();
+        console.info(style);
         if(style){
             let id = url;
             (<any>style[0]).id = id;
