@@ -8,6 +8,7 @@ import Layout from "../enum/layout";
 
 /**
  * 主框架页
+ * 
  * @author mangomei
  * @since 2023-05-02 22:28
  */
@@ -61,9 +62,7 @@ class MainPage implements Page{
             Util.callHook(config,Lifecycle.afterEach,result[0],function(resultHtml: string){
                 // 将 HTML 显示在页面上
                 let retry = new Retry();
-                retry.handle(function(){
-                    return document.getElementById(Layout.container) ? true : false;
-                },()=>{
+                retry.handle((): boolean => document.getElementById(Layout.container) ? true : false,()=>{
                     let appEl: any = document.getElementById(Layout.container);
                     appEl.innerHTML = resultHtml;
                     // 调用后置处理
@@ -76,10 +75,7 @@ class MainPage implements Page{
                     // 记录old hash
                     Util.setLocal("oldHash",Util.getHash());
                     // 渲染为vue
-                    let retry = new Retry();
-                    retry.handle(()=>Util.getFlag(Layout.aside) && Util.getFlag(Layout.nav) && Util.getFlag(Layout.layout),()=>{
-                        Util.renderVue(()=>true,"#"+Layout.app,result[1]);
-                    })
+                    Util.renderVue(()=>Util.getFlag(Layout.aside) && Util.getFlag(Layout.nav) && Util.getFlag(Layout.layout),result[1]);
                 })
             });
         });

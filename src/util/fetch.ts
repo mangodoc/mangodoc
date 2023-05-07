@@ -22,14 +22,18 @@ class Fetch {
         }
         return false;
     }
-
-    static execute(url: string,callback: Function): void{
+    /**
+     * 获取资源
+     * 
+     * @param url 资源地址
+     * @param callback 回调函数
+     */
+    static execute(url: string,callback: Function){
         if(this.filteUrl()){
             return ;
         }
         // 显示loading
         Util.showLoading();
-        console.info(url);
         // 是否开启总是刷新，默认为false
         if(Util.getConfigOrDefault(Global.ALWAYS_REFRESH)){
             url += "?t="+Math.random();
@@ -45,7 +49,11 @@ class Fetch {
             callback(markdown);
         });
     }
-
+    /**
+     * 处理响应，记录修改时间
+     * 
+     * @param response 响应
+     */
     private static handleResponse(response: any){
         // 处理头信息
         let lastModified = response.headers.get('last-modified');

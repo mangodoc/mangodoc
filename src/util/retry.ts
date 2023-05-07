@@ -17,7 +17,6 @@ class Retry{
      * @param callback 回调函数
      */
     handle(condition: Function,callback: Function){
-        // console.info(`开始尝试：${condition()},${this.retryCount}`)
         if(condition()){
             callback();
         }else if (this.retryCount < Global.MAX_RETRY_TIMES) {

@@ -6,6 +6,7 @@ import Util from "../util/util";
 
 /**
  * 封面页
+ * 
  * @author mangomei
  * @since 2023-05-02 17:42
  */
@@ -19,11 +20,12 @@ class CoverPage implements Page{
             let html = Util.md2html(md);
             html = LocalUtil.handleLocalStyle(html,url);
             let result = LocalUtil.handleLocalScript(html);
+            let condition = false;
             Util.appendHtml("#"+Layout.app,result[0]);
             // 设置封面就绪
-            Util.setFlag(Global.FLAG_COVER_PAGE);
+            condition = true;
             // 渲染vue
-            Util.renderVue(()=>true,"#"+Layout.app,result[1]);
+            Util.renderVue(()=>condition,result[1]);
         });
     }
 

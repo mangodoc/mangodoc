@@ -7,6 +7,7 @@ import navMap from "../store/nav";
 import Lifecycle from "../enum/plugin";
 import local from "../store/local";
 import store from "../store/store";
+import Layout from "../enum/layout";
 
 /**
  * 工具类
@@ -58,10 +59,9 @@ class Util {
      * @param condition 条件
      * @param el vue的div元素选择器
      */
-    static renderVue(condition: Function,el: string,localVue: any,callback?: Function){
+    static renderVue(condition: Function,localVue: any,callback?: Function){
         let that = this;
-        VueUtil.create(condition, {
-            el: el,
+        VueUtil.create(condition, localVue, {
             data(){
                 return that.getVueData(localVue);
             },
@@ -204,11 +204,11 @@ class Util {
 
     // 关闭加载提示
     static hideLoading(){
-        $("#fullscreen-loading").hide();
+        $("#" + Layout.fullscreenLoading).hide();
     }
     // 显示加载提示
     static showLoading(){
-        $("#fullscreen-loading").show();
+        $("#" + Layout.fullscreenLoading).show();
     }
 }
 

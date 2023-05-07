@@ -9,7 +9,9 @@ import Util from "./util/util";
  * @since 2023-05-02 17:36
  */
 class App {
-    
+    /**
+     * 启动应用
+     */
     start(){
         // 判断是否进入封面
         if(Util.check()){
