@@ -1,7 +1,7 @@
 [
     {
         "title": "首页",
-        "href": "#/",
+        "href": "#/README",
         "target": "_self",
         "level": 1,
         "icon": "el-icon-s-home",
