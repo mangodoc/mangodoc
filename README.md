@@ -38,10 +38,3 @@
 * 外部插件[mangodoc-busuanzi](https://github.com/mg0324/mangodoc-busuanzi) - 集成卜算子，显示网站访问信息
 * 外部插件[mangodoc-update-time](https://github.com/mg0324/mangodoc-update-time) - 显示文档最后修改时间
 
-
-## 待办列表
-- [ ] （新特性）支持iconfont字体图标。
-- [ ] （新插件）显示文档内容字数及大约阅读时间。
-- [ ] （新插件）在文档末尾显示附近范围内的分页内容。
-- [x] （新特性）设计并支持文档封面页。
-- [ ] （新插件）基于markmap支持思维导图，支持超链接跳转。
