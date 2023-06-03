@@ -1,6 +1,45 @@
 # 更新日志
+
+## 2023-06-xx
+1. 调整文档结构，参考docsify目录，并新增封面页指引。
+
+## 2023-05-03
+1. 发布`2.0.2`版本，修复渲染vue实例冲突的问题，防止页面navbar和sidebar卡住。
+2. 优化ts代码，加上代码注释。
+3. 将待办列表移动到todo.md中维护，并新增内容。
+
+## 2023-05-03
+1. 使用`typescript`对内核进行重构，并发布2.0.0版本。
+2. 支持封面特性。
+3. 完善封面内容，增加特性列表和图标，以及页脚版权。
+4. 主页内容增加布局图。
+5. 发布`2.0.1`版本，修改快速入门内容，使用mangodoc-cli命令行来构建。
+6. 完善封面页支持style定义css,并完善对应封面内容。
+
+## 2023-05-01
+1. nav添加mangodoc-template的在线链接。
+
+
+## 2023-04-29
+1. （优化）优化`nav`上的更新日志链接，加上图标。
+2. （优化）优化`nav`上的仓库链接，加上图标。
+3. （优化）优化aside的激活颜色为主题色。
+4. （优化）优化aside的标题logo在小屏下显示的尺寸。
+5. （修复）修复`mangodoc-update-time`最后修改时间显示为`Invalid Date`的bug。
+6. （修复）修复刷新文档内链接后，title显示为默认标题的bug。
+7. （修复）修复aside的宽度初次显示不一致的问题，有时候宽有时候窄。
+8. （优化）在footer内增加备案信息显示。
+9.  发布`1.5.1`版本。
+
+## 2023-04-xx
+1. index.html里修改cdn为`https://mg.meiflower.top/oss/cdn/`。
+2. 升级mangodoc到`1.5.0`，支持`menuOpens`参数，默认打开左侧菜单。
+3. 集成iconfont字体支持，加入log和code2个图标。
+
 ## 2023-04-08
 1. index.html里的mangodoc版本更换为gcore上的1.4.3版本。
+2. 新增百度统计。
+3. 将文档拆分到doc分支，并部署到railway的cname到[mangodoc.meiflower.top](mangodoc.meiflower.top)。
 
 ## 2023-04-03
 1. 修复cdn被墙超时的问题，替换为gcore。

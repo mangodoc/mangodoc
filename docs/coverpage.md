@@ -41,7 +41,7 @@
     </template>
     <template slot="extra">
       <el-button type="default" size="medium" @click="handleClick('README')">查看主页</el-button>
-      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('quickstart')">快速开始</el-button>
+      <el-button type="primary" class="theme-color" size="medium" @click="handleClick('guide/quickstart')">快速开始</el-button>
     </template>
   </el-result>
   <el-row>

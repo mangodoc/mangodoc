@@ -5,14 +5,19 @@
 
 ## 架构图
 
-![](static/images/demo.drawio.png)
+![](static/images/arch.drawio.png)
+
+## 布局说明
+
+![](static/images/layout.drawio.png)
 
 ## 特性
-* 简单文档：基于`javascript`实现的简单文档生成器。
+* 简单文档：基于`javascript`(1.x)或者`typescript`(2.x)实现的简单文档生成器。
+* 脚手架工具：支持[mangodoc](https://github.com/mg0324/mangodoc-cli)工具快速创建文档模板并启动。
 * `marked`转换:基于`marked`实现`markdown`到`html`的转换。
 * `elementui`风格：基于[elementui](https://element.eleme.cn/#/zh-CN/component/installation)的vue组件版本构建。
 * 简单路由：基于`es6`中的`fetch()`加上`window.location.hash`实现路由。
-* 静态部署：支持静态资源部署，如`gitee pages`、`github pages`等。
+* 静态部署：支持静态资源部署，如`gitee pages`、`github pages`、`docker`和`paas http server`等。
 * 插件扩展：提供插件API接口，包括生命周期和部分事件监听函数。
 * 支持vue：md内支持局部使用，详情参考[例子](#/demo/elementui)。
 * 接口api: 将内部配置暴露为`window.$mangodocApi`提供给外部插件调用。
@@ -32,19 +37,3 @@
 * 外部插件[mangodoc-valine](https://github.com/mg0324/mangodoc-valine) - 支持valine评论，匿名评论
 * 外部插件[mangodoc-busuanzi](https://github.com/mg0324/mangodoc-busuanzi) - 集成卜算子，显示网站访问信息
 * 外部插件[mangodoc-update-time](https://github.com/mg0324/mangodoc-update-time) - 显示文档最后修改时间
-
-
-## 待办列表
-- [x] （优化）优化`nav`上的更新日志链接，加上图标。
-- [x] （优化）优化`nav`上的仓库链接，加上图标。
-- [x] （优化）优化aside的激活颜色为主题色。
-- [x] （优化）优化aside的标题logo在小屏下显示的尺寸。
-- [x] （修复）修复`mangodoc-update-time`最后修改时间显示为`Invalid Date`的bug。
-- [x] （修复）修复刷新文档内链接后，title显示为默认标题的bug。
-- [x] （修复）修复aside的宽度初次显示不一致的问题，有时候宽有时候窄。
-- [x] （优化）在footer内增加备案信息显示。
-- [ ] （新特性）支持iconfont字体图标。
-- [ ] （新插件）显示文档内容字数及大约阅读时间。
-- [ ] （新插件）在文档末尾显示附近范围内的分页内容。
-- [ ] （新特性）设计并支持文档封面页。
-- [ ] （新插件）基于markmap支持思维导图，支持超链接跳转。

@@ -8,34 +8,58 @@
         "index": "1"
     },
     {
-        "title": "快速开始",
-        "href": "#/quickstart",
-        "target": "_self",
+        "title": "入门",
         "level": 1,
-        "icon": "el-icon-tickets",
-        "index": "2"
+        "icon": "el-icon-s-home",
+        "index": "2",
+        "children": [
+            {
+                "title": "快速开始",
+                "href": "#/guide/quickstart",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-tickets",
+                "index": "2-1"
+            },
+            {
+                "title": "封面",
+                "href": "#/guide/cover",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-tickets",
+                "index": "2-2"
+            }
+        ]
     },
     {
-        "title": "配置参数",
-        "href": "#/configitem",
-        "target": "_self",
+        "title": "定制化",
         "level": 1,
-        "icon": "el-icon-tickets",
-        "index": "3"
-    },
-    {
-        "title": "API接口",
-        "href": "#/api",
-        "target": "_self",
-        "level": 1,
-        "icon": "el-icon-tickets",
-        "index": "4"
+        "icon": "el-icon-s-home",
+        "index": "3",
+        "children": [
+            {
+                "title": "配置参数",
+                "href": "#/config/configitem",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-tickets",
+                "index": "3-1"
+            },
+            {
+                "title": "API接口",
+                "href": "#/config/api",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-tickets",
+                "index": "3-2"
+            }
+        ]
     },
     {
         "title": "示例",
         "level": 1,
         "icon": "el-icon-star-on",
-        "index": "5",
+        "index": "4",
         "children": [
             {
                 "title": "示例",
@@ -43,7 +67,7 @@
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools",
-                "index": "5-1"
+                "index": "4-1"
             },
             {
                 "title": "elementui示例",
@@ -51,7 +75,7 @@
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools",
-                "index": "5-2"
+                "index": "4-2"
             }
         ]
     },
@@ -59,7 +83,7 @@
         "title": "内容",
         "level": 1,
         "icon": "el-icon-star-on",
-        "index": "6",
+        "index": "5",
         "children": [
             {
                 "title": "主流前端",
@@ -67,7 +91,7 @@
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-promotion",
-                "index": "6-1"
+                "index": "5-1"
             },
             {
                 "title": "网络模型",
@@ -75,7 +99,7 @@
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools",
-                "index": "6-2"
+                "index": "5-2"
             },
             {
                 "title": "知识总结",
@@ -83,8 +107,16 @@
                 "target": "_self",
                 "level": 2,
                 "icon": "el-icon-s-tools",
-                "index": "6-3"
+                "index": "5-3"
             }
         ]
+    },
+    {
+        "title": "待办列表",
+        "href": "#/doc/todo",
+        "target": "_self",
+        "level": 1,
+        "icon": "el-icon-tickets",
+        "index": "6"
     }
 ]
