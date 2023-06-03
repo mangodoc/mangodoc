@@ -105,14 +105,6 @@ function injectStyle() {
         padding: 8px;
         overflow: auto;
       }
-      code{
-        border-radius: 2px;
-        color: #e96900;
-        margin: 0 2px;
-        padding: 3px 5px;
-        white-space: pre-wrap;
-        background-color: #f8f8f8;
-      }
       pre code{
         background: none;
         color: black;
