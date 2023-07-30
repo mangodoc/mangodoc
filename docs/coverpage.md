@@ -4,7 +4,7 @@
   margin:0 auto;
 }
 .coverpage .logo{
-  width:25%;
+  width:30%;
 }
 .coverpage .future-remark{
   color:gray;
@@ -48,7 +48,7 @@
     margin:0 auto;
   }
   .coverpage .logo{
-    width:60%;
+    width:100%;
   }
 }
 </style>
@@ -56,9 +56,7 @@
 <div class="coverpage">
   <el-result style="margin:0 auto;" sub-title="提供给mangodoc的使用者一套持续更新的模板仓库！">
     <template slot="icon">
-      <div class="icon-title">
-        Mangodoc-Template <span class="mg-badge">{{version}}</span>
-      </div>
+      <img class="logo" src="/static/mangodoc-template.png">
     </template>
     <template slot="extra">
       <el-button type="default" size="medium" @click="handleClick('changelog')">更新日志</el-button>
