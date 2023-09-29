@@ -1,5 +1,5 @@
 import util from "./util";
-import plugin from "./plugins/index";
+import theme from "./theme";
 import api from "./api";
 
 // 暴露接口
@@ -8,7 +8,7 @@ window.$mangodocApi = api;
 window.navMap = {};
 let url = util.getUrl();
 // 合并插件列表
-window.$mangodoc.plugins = plugin.list();
+window.$mangodoc.plugins = theme.current().list();
 // 合并config 和 $mangodoc
 // config = Object.assign({}, window.$mangodoc, config );
 let config = window.$mangodoc;

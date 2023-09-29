@@ -13394,6 +13394,7 @@ module.exports = styleTagTransform;
 /* harmony export */   "Z": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+    theme: "default",// 默认主题
     themeColor: "#409EFF", // 默认主题颜色
     sideWidth: 200, // 左侧栏宽度默认200px
     smallWidth: 500, // 宽度超过500px为大屏
@@ -16596,37 +16597,7 @@ var __webpack_exports__ = {};
 
 // EXTERNAL MODULE: ./src/util.js
 var util = __webpack_require__(891);
-;// CONCATENATED MODULE: ./src/plugins/demo.js
-/* harmony default export */ const demo = ({
-    init(){
-        console.info("demo init");
-    },
-    beforeEach(content){
-        console.info("demo beforeEach");
-        return content;
-    },
-    afterEach(html,next){
-        // console.info("demo afterEach:"+html);
-        next(html);
-    },
-    doneEach(){
-        console.info("demo doneEach");
-    },
-    mounted(){
-        console.info("demo mounted");
-    },
-    ready(){
-        console.info("demo ready");
-    },
-    onpopstate(event){
-
-    },
-    resize(){
-
-    }
-});
-
-;// CONCATENATED MODULE: ./src/plugins/layout.js
+;// CONCATENATED MODULE: ./src/plugins/simple/layout.js
 
 /* harmony default export */ const layout = ({
     // init(){
@@ -16649,6 +16620,7 @@ var util = __webpack_require__(891);
         // console.info("core ready");
         let template = `
             <el-container id="main">
+            <el-container id="container">
         `;
         template += `
             <el-main id='content'><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
@@ -16657,6 +16629,7 @@ var util = __webpack_require__(891);
             template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
         }
         template += `
+            </el-container>
             </el-container>
         `;
         var pageEl = document.createElement("el-container");
@@ -16675,84 +16648,266 @@ var util = __webpack_require__(891);
     }
 });
 
-;// CONCATENATED MODULE: ./src/plugins/aside.js
+;// CONCATENATED MODULE: ./src/plugins/simple/css.js
 
 
-function renderSidebarItem(list,init){
-    let html = "";
-    if(init){
-        html = `
-            <el-menu
-                default-active="1"
-                class="el-menu-vertical-demo"
-                :default-openeds="menuOpens">
-        `;
-    }
-    for(let item of list){
-        if(!item.children){
-            html += `<el-menu-item index="${item.index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
-            if(item.href.startsWith("#")){
-                window.navMap[item.href] = item.title;
-            }
-        }else {
-            let itemHtml = renderSidebarItem(item.children,false);
-            html += `
-                <el-submenu index="${item.index}">
-                    <template slot="title">
-                        <i class="${item.icon}"></i>
-                        <span>${item.title}</span>
-                    </template>
-                    ${itemHtml}
-                </el-submenu>
-            `;
-        }
-    }
-    if(init){
-        html += `</el-menu>`;
-    }
-    return html;
-}
-/* harmony default export */ const aside = ({
+/* harmony default export */ const css = ({
     ready(){
-        // console.info("aside ready");
-        var elSide = document.createElement("el-aside");
-        elSide.setAttribute("width",util/* default.getConfigOrDefault */.Z.getConfigOrDefault("sideWidth") + "px");
-        elSide.id = "aside";
-        fetch("docs/_sidebar.json?t="+Math.random())
-        .then(response => response.text())
-        .then(json => {
-            let sidebarList = JSON.parse(json);
-            let html = renderSidebarItem(sidebarList,true);
-            // console.info("sidebar html:"+html);
-            elSide.innerHTML = html;
-            let pageEl = document.getElementById("page");
-            pageEl.insertBefore(elSide,pageEl.firstChild);
-            var el = document.createElement("a");
-            // title
-            el.id = "title";
-            el.href = "#/";
-            el.target = "_self";
-            let version = window.$mangodoc.version;
-            let logo = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("logo");
-            let titleHtml = `<img id="logo" src="${logo}"/>`;
-            if(version){
-                titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
-            }else{
-                titleHtml += `${window.$mangodoc.title}`;
-            }
-            el.innerHTML = titleHtml;
-            elSide.insertBefore(el,elSide.firstChild);
-            util/* default.setFlag */.Z.setFlag("aside");
-            console.info("aside finish!");
-        });
+      injectStyle();
     }
 });
+
+function injectStyle() {
+    let themeColor = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("themeColor");
+    let sideWidth = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("sideWidth");
+    let themePadding = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("themePadding");
+    let contentWidth = (100 - parseInt(themePadding)*3 - 2) + '%';
+    const styleEl = document.createElement("style");
+    styleEl.textContent = `
+      body {
+        margin: 0px;
+        padding: 0px;
+        -webkit-font-smoothing: antialiased;
+        color: #34495e;
+        font-family: Source Sans Pro,Helvetica Neue,Arial,sans-serif;
+        font-size: 15px;
+        letter-spacing: 0;
+        margin: 0;
+        overflow-x: hidden;
+      }
+      html, body {
+        height: 100%;
+        overflow: hidden;
+      }
+      #page, #vue {
+        height: 100%;
+      }
+      #app, #footer {
+        width: ${contentWidth};
+      }
+      #header,#footer {
+        padding: 0 ${themePadding};
+      }
+      #main {
+        padding-left: ${themePadding};
+        min-height: 100px;
+      }
+      #footer{
+        height:40px !important;
+        line-height:40px;
+        text-align:center;
+      }
+      #footer a{
+        font-size: 12px;
+      }
+      #aside {
+        overflow-x: hidden;
+      }
+      #aside ul {
+        margin: 0px;
+        padding: 0px;
+      }
+      #aside ul li {
+        list-style: none;
+      }
+      .theme-color {
+        color: ${themeColor};
+      }
+      #aside ul li a {
+        text-decoration: none;
+        color: black !important;
+      }
+      #title {
+        text-align: center;
+        height: 50px;
+        line-height: 50px;
+        margin: 0px;
+        padding: 0px;
+        display: block;
+        font-size: 20px;
+        text-decoration: none;
+        float: left;
+        padding-left: 20px;
+      }
+      #header {
+        height:51px !important;
+        line-height: 51px;
+        text-align: right;
+        border-bottom: 1px solid #eee;
+      }
+      #header .oper{
+        font-size: 25px;
+        color: ${themeColor};
+        float: left;
+        line-height: 51px;
+        padding: 0px;
+        margin: 0px;
+        cursor: pointer;
+        margin-left: 8px;
+      }
+      #header ul{
+        display: inline-block;
+        padding: 0px;
+        margin: 0px;
+        height: 51px;
+        line-height: 51px;
+      }
+      #header ul li{
+        list-style: none;
+        display: inline-block;
+        float: left;
+        margin-right: 8px;
+      }
+      #header ul li a {
+        text-decoration: none;
+        color: black !important;
+      }
+      pre {
+        background: #eee;
+        border-radius: 3px;
+        padding: 8px;
+        overflow: auto;
+      }
+      code{
+        border-radius: 2px;
+        color: #e96900;
+        margin: 0 2px;
+        padding: 3px 5px;
+        white-space: pre-wrap;
+        background-color: #f8f8f8;
+      }
+      pre code{
+        background: none;
+        color: black;
+      }
+      h1{
+        font-size: 32px;
+        margin: 0px;
+      }
+      blockquote{
+        border-left: 3px solid ${themeColor};
+        margin: 0px;
+        padding-left: 8px;
+        background: #eee;
+        color: gray;
+        border-radius: 3px;
+      }
+      blockquote p{
+        padding: 3px;
+      }
+      .el-menu{
+        border-right: 0px !important;
+      }
+      .nav-a {
+        font-size: 14px;
+        text-decoration: none;
+        color: ${themeColor};
+        margin-left: 5px;
+      }
+      .el-menu-item.is-active  {
+        border-left: 4px solid ${themeColor};
+      }
+      .fullscreen-loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(255, 255, 255, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .fullscreen-loading::before {
+        content: "";
+        width: 60px;
+        height: 60px;
+        border: 5px solid #ddd;
+        border-top-color: #777;
+        border-radius: 50%;
+        animation: rotate 1s linear infinite;
+      }
+      @keyframes rotate {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      #logo {
+        vertical-align: middle;
+        margin-right:8px;
+        width:30px;
+      }      
+      @media only screen and (max-width: 500px) {
+        #aside{
+          display: none;
+        }
+        img {
+          width:100%;
+        }
+        #logo {
+          width: 10%;
+        }
+        #title {
+          width: auto !important;
+        }
+        #header,#footer {
+          padding: 0 20px;
+        }
+        #app {
+          width: 100%;
+        }
+        #main {
+          padding: 0;
+        }
+      }
+      /* 滚动条的样式 */
+      ::-webkit-scrollbar {
+        width: 2px;
+        height: 2px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #888;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+      }
+      .version-item sup{
+        right: 0px !important;
+        top: 15px !important;
+        background: ${themeColor};
+      }
+      p,li{
+        font-family: Arial, sans-serif;
+        color: #333;
+      }
+      #app ul, #app ol{
+        line-height: 1.6rem;
+        word-spacing: 0.05rem;
+        padding-left: 20px;
+      }
+      #app strong{
+        color: black;
+      }
+      ul {
+        padding-left: 25px;
+      }
+      #toc {
+        right: ${themePadding} !important;
+      }
+    `;
+    document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
+}
+
 // EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
 var jquery = __webpack_require__(755);
 var jquery_default = /*#__PURE__*/__webpack_require__.n(jquery);
 // EXTERNAL MODULE: ./src/config.js
 var config = __webpack_require__(182);
-;// CONCATENATED MODULE: ./src/plugins/nav.js
+;// CONCATENATED MODULE: ./src/plugins/simple/nav.js
 
 
 
@@ -16805,6 +16960,315 @@ function renderNavItem(list){
             // console.info(navList);
             let html = renderNavItem(navList);
             // console.info("nav:"+html);
+            el.innerHTML = html;
+            let mainEl = document.getElementById("page");
+            mainEl.insertBefore(el,mainEl.firstChild);
+            // 处理repo
+            if(window.$mangodoc.repo){
+                let html = `
+                    <a class="nav-a" href="${window.$mangodoc.repo}" target="_blank"><i class="el-icon-cloudy theme-color"></i>仓库</a>         
+                `;
+                let span = document.createElement('span');
+                span.innerHTML = html;
+                let header = document.getElementById("header");
+                header.appendChild(span);
+            }
+            var logoEl = document.createElement("a");
+            // title
+            logoEl.id = "title";
+            logoEl.href = "#/";
+            logoEl.target = "_self";
+            let logo = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("logo");
+            let titleHtml = `<img id="logo" src="${logo}"/>${window.$mangodoc.title}`;
+            logoEl.innerHTML = titleHtml;
+            el.insertBefore(logoEl,el.firstChild);
+            util/* default.setFlag */.Z.setFlag("nav");
+            console.info("nav finish");
+        });
+    },
+    mounted(){
+        
+    }
+});
+;// CONCATENATED MODULE: ./src/plugins/simple/aside.js
+
+
+function renderSidebarItem(list,init){
+    let html = "";
+    if(init){
+        html = `
+            <el-menu
+                default-active="1"
+                class="el-menu-vertical-demo"
+                :default-openeds="menuOpens">
+        `;
+    }
+    for(let item of list){
+        if(!item.children){
+            html += `<el-menu-item index="${item.index}"><a href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
+            }
+        }else {
+            let itemHtml = renderSidebarItem(item.children,false);
+            html += `
+                <el-submenu index="${item.index}">
+                    <template slot="title">
+                        <span>${item.title}</span>
+                    </template>
+                    ${itemHtml}
+                </el-submenu>
+            `;
+        }
+    }
+    if(init){
+        html += `</el-menu>`;
+    }
+    return html;
+}
+/* harmony default export */ const aside = ({
+    ready(){
+        // console.info("aside ready");
+        var elSide = document.createElement("el-aside");
+        elSide.setAttribute("width",util/* default.getConfigOrDefault */.Z.getConfigOrDefault("sideWidth") + "px");
+        elSide.id = "aside";
+        fetch("docs/_sidebar.json?t="+Math.random())
+        .then(response => response.text())
+        .then(json => {
+            let sidebarList = JSON.parse(json);
+            let html = renderSidebarItem(sidebarList,true);
+            // console.info("sidebar html:"+html);
+            elSide.innerHTML = html;
+            let pageEl = document.getElementById("main");
+            pageEl.insertBefore(elSide,pageEl.firstChild);
+            util/* default.setFlag */.Z.setFlag("aside");
+            console.info("aside finish!");
+        });
+    }
+});
+;// CONCATENATED MODULE: ./src/plugins/simple/index.js
+
+
+
+
+
+
+
+/* harmony default export */ const simple = ({
+    list(){
+        let list = [css,layout,nav,aside];
+        if(window.$mangodoc.plugins){
+            list = list.concat(window.$mangodoc.plugins);
+        }
+        console.info("xxxx");
+        console.info(list)
+        return list;
+    }
+});
+;// CONCATENATED MODULE: ./src/plugins/default/demo.js
+/* harmony default export */ const demo = ({
+    init(){
+        console.info("demo init");
+    },
+    beforeEach(content){
+        console.info("demo beforeEach");
+        return content;
+    },
+    afterEach(html,next){
+        // console.info("demo afterEach:"+html);
+        next(html);
+    },
+    doneEach(){
+        console.info("demo doneEach");
+    },
+    mounted(){
+        console.info("demo mounted");
+    },
+    ready(){
+        console.info("demo ready");
+    },
+    onpopstate(event){
+
+    },
+    resize(){
+
+    }
+});
+
+;// CONCATENATED MODULE: ./src/plugins/default/layout.js
+
+/* harmony default export */ const default_layout = ({
+    // init(){
+    //     console.info("core init");
+    // },
+    // beforeEach(content){
+    //     console.info("core beforeEach");
+    //     return content;
+    // },
+    // afterEach(html,next){
+    //     next(html);
+    // },
+    // doneEach(){
+    //     console.info("core doneEach");
+    // },
+    // mounted(){
+    //     console.info("core mounted");
+    // },
+    ready(){
+        // console.info("core ready");
+        let template = `
+            <el-container id="main">
+        `;
+        template += `
+            <el-main id='content'><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
+        `; 
+        if(window.$mangodoc.footer){
+            template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
+        }
+        template += `
+            </el-container>
+        `;
+        var pageEl = document.createElement("el-container");
+        pageEl.id = "page"
+        pageEl.innerHTML = template;
+        let vue = document.getElementById("vue");
+        vue.appendChild(pageEl);
+        util/* default.setFlag */.Z.setFlag("layout");
+        console.info("layout finish!");
+    },
+    onpopstate(){
+        // 如果是锚点，则不加载资源，因为是同一个页面
+        util/* default.render */.Z.render(util/* default.getUrl */.Z.getUrl(),window.$mangodoc);
+        // 变化页面标题
+        $("title").text(window.navMap[window.location.hash]);
+    }
+});
+
+;// CONCATENATED MODULE: ./src/plugins/default/aside.js
+
+
+function aside_renderSidebarItem(list,init){
+    let html = "";
+    if(init){
+        html = `
+            <el-menu
+                default-active="1"
+                class="el-menu-vertical-demo"
+                :default-openeds="menuOpens">
+        `;
+    }
+    for(let item of list){
+        if(!item.children){
+            html += `<el-menu-item index="${item.index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
+            }
+        }else {
+            let itemHtml = aside_renderSidebarItem(item.children,false);
+            html += `
+                <el-submenu index="${item.index}">
+                    <template slot="title">
+                        <i class="${item.icon}"></i>
+                        <span>${item.title}</span>
+                    </template>
+                    ${itemHtml}
+                </el-submenu>
+            `;
+        }
+    }
+    if(init){
+        html += `</el-menu>`;
+    }
+    return html;
+}
+/* harmony default export */ const default_aside = ({
+    ready(){
+        // console.info("aside ready");
+        var elSide = document.createElement("el-aside");
+        elSide.setAttribute("width",util/* default.getConfigOrDefault */.Z.getConfigOrDefault("sideWidth") + "px");
+        elSide.id = "aside";
+        fetch("docs/_sidebar.json?t="+Math.random())
+        .then(response => response.text())
+        .then(json => {
+            let sidebarList = JSON.parse(json);
+            let html = aside_renderSidebarItem(sidebarList,true);
+            // console.info("sidebar html:"+html);
+            elSide.innerHTML = html;
+            let pageEl = document.getElementById("page");
+            pageEl.insertBefore(elSide,pageEl.firstChild);
+            var el = document.createElement("a");
+            // title
+            el.id = "title";
+            el.href = "#/";
+            el.target = "_self";
+            let version = window.$mangodoc.version;
+            let logo = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("logo");
+            let titleHtml = `<img id="logo" src="${logo}"/>`;
+            if(version){
+                titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
+            }else{
+                titleHtml += `${window.$mangodoc.title}`;
+            }
+            el.innerHTML = titleHtml;
+            elSide.insertBefore(el,elSide.firstChild);
+            util/* default.setFlag */.Z.setFlag("aside");
+            console.info("aside finish!");
+        });
+    }
+});
+;// CONCATENATED MODULE: ./src/plugins/default/nav.js
+
+
+
+
+function nav_renderNavItem(list){
+    let html = "";
+    for(let item of list){
+        if(!item.children){
+            if(item.level == 2){
+                html += `<el-dropdown-item><a class="nav-a" href="${item.href}" target="${item.target}">`;
+                if(item.icon){
+                    html += `<i class="${item.icon} theme-color"></i>`;
+                }
+                html += `${item.title}</a></el-dropdown-item>`;
+            }else if(item.level == 1){
+                html += `<a class="nav-a" href="${item.href}" target="${item.target}">`;
+                if(item.icon){
+                    html += `<i class="${item.icon} theme-color"></i>`;
+                }
+                html += `${item.title}</a>`;
+            }
+            if(item.href.startsWith("#")){
+                window.navMap[item.href] = item.title;
+            }
+        }else {
+            let itemHtml = nav_renderNavItem(item.children);
+            html += `
+                <el-dropdown>
+                    <span class="el-dropdown-link">
+                    ${item.title}<i class="el-icon-arrow-down el-icon--right"></i>
+                    </span>
+                    <el-dropdown-menu slot="dropdown">
+                    ${itemHtml}
+                    </el-dropdown-menu>
+                </el-dropdown>
+            `;
+        }
+    }
+    return html;
+}
+/* harmony default export */ const default_nav = ({
+    ready(){
+        // console.info("nav ready");
+        var el = document.createElement("el-header");
+        el.id = "header";
+        fetch("docs/_navbar.json?t="+Math.random())
+        .then(response => response.text())
+        .then(json => {
+            let navList = JSON.parse(json);
+            // console.info(navList);
+            let html = nav_renderNavItem(navList);
+            // console.info("nav:"+html);
             let oper = `<i id='oper' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
             el.innerHTML = oper + html;
             let mainEl = document.getElementById("main");
@@ -16841,16 +17305,16 @@ window.operFn = function(){
         v.show();
     }
 }
-;// CONCATENATED MODULE: ./src/plugins/css.js
+;// CONCATENATED MODULE: ./src/plugins/default/css.js
 
 
-/* harmony default export */ const css = ({
+/* harmony default export */ const default_css = ({
     ready(){
-      injectStyle();
+      css_injectStyle();
     }
 });
 
-function injectStyle() {
+function css_injectStyle() {
     let themeColor = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("themeColor");
     const styleEl = document.createElement("style");
     styleEl.textContent = `
@@ -17120,11 +17584,11 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, opt
 
        /* harmony default export */ const prismjs_themes_prism = (themes_prism/* default */.Z && themes_prism/* default.locals */.Z.locals ? themes_prism/* default.locals */.Z.locals : undefined);
 
-;// CONCATENATED MODULE: ./src/plugins/prism.js
+;// CONCATENATED MODULE: ./src/plugins/default/prism.js
 
 
 
-/* harmony default export */ const plugins_prism = ({
+/* harmony default export */ const default_prism = ({
     mounted(){
         console.info("prism mounted");
         setTimeout(() => {
@@ -17133,7 +17597,7 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, opt
     }
 });
 
-;// CONCATENATED MODULE: ./src/plugins/index.js
+;// CONCATENATED MODULE: ./src/plugins/default/index.js
 
 
 
@@ -17141,13 +17605,28 @@ var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, opt
 
 
 
-/* harmony default export */ const plugins = ({
+/* harmony default export */ const plugins_default = ({
     list(){
-        let list = [css,layout,aside,nav,demo,plugins_prism];
+        let list = [default_css,default_layout,default_aside,default_nav,demo,default_prism];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }
         return list;
+    }
+});
+;// CONCATENATED MODULE: ./src/theme.js
+
+
+
+
+let themeMap = {
+    "simple": simple,
+    "default": plugins_default
+}
+
+/* harmony default export */ const theme = ({
+    current() {
+        return themeMap[util/* default.getConfigOrDefault */.Z.getConfigOrDefault("theme")];
     }
 });
 ;// CONCATENATED MODULE: ./src/api.js
@@ -17174,7 +17653,7 @@ window.$mangodocApi = api;
 window.navMap = {};
 let url = util/* default.getUrl */.Z.getUrl();
 // 合并插件列表
-window.$mangodoc.plugins = plugins.list();
+window.$mangodoc.plugins = theme.current().list();
 // 合并config 和 $mangodoc
 // config = Object.assign({}, window.$mangodoc, config );
 let src_config = window.$mangodoc;

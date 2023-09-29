@@ -1,6 +1,6 @@
 import $ from "jquery";
-import util from "../util";
-import Config from "../config";
+import util from "../../util";
+import Config from "../../config";
 
 function renderNavItem(list){
     let html = "";
@@ -50,9 +50,8 @@ export default {
             // console.info(navList);
             let html = renderNavItem(navList);
             // console.info("nav:"+html);
-            let oper = `<i id='oper' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
-            el.innerHTML = oper + html;
-            let mainEl = document.getElementById("main");
+            el.innerHTML = html;
+            let mainEl = document.getElementById("page");
             mainEl.insertBefore(el,mainEl.firstChild);
             // 处理repo
             if(window.$mangodoc.repo){
@@ -64,25 +63,20 @@ export default {
                 let header = document.getElementById("header");
                 header.appendChild(span);
             }
-            if(screen.width < Config.smallWidth){
-                $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
-            }
+            var logoEl = document.createElement("a");
+            // title
+            logoEl.id = "title";
+            logoEl.href = "#/";
+            logoEl.target = "_self";
+            let logo = util.getConfigOrDefault("logo");
+            let titleHtml = `<img id="logo" src="${logo}"/>${window.$mangodoc.title}`;
+            logoEl.innerHTML = titleHtml;
+            el.insertBefore(logoEl,el.firstChild);
             util.setFlag("nav");
             console.info("nav finish");
         });
     },
     mounted(){
         
-    }
-}
-
-window.operFn = function(){
-    let v = $("#aside");
-    if (v.is(':visible')) {
-        $("#oper").removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
-        v.hide(); 
-    } else {
-        $("#oper").removeClass("el-icon-d-arrow-right").addClass("el-icon-d-arrow-left");
-        v.show();
     }
 }

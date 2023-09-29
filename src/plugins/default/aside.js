@@ -1,4 +1,4 @@
-import util from "../util";
+import util from "../../util";
 
 function renderSidebarItem(list,init){
     let html = "";

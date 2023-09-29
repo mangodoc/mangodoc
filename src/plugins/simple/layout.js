@@ -1,4 +1,4 @@
-import util from "../util";
+import util from "../../util";
 export default {
     // init(){
     //     console.info("core init");
@@ -20,6 +20,7 @@ export default {
         // console.info("core ready");
         let template = `
             <el-container id="main">
+            <el-container id="container">
         `;
         template += `
             <el-main id='content'><div id="fullscreen-loading" class="fullscreen-loading"></div><div id="app"></div></el-main>
@@ -28,6 +29,7 @@ export default {
             template += `<el-footer id="footer">${window.$mangodoc.footer}</el-footer>`;
         }
         template += `
+            </el-container>
             </el-container>
         `;
         var pageEl = document.createElement("el-container");
