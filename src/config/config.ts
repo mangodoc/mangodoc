@@ -7,6 +7,10 @@
 class Config {
     // 主题颜色，默认#409EFF
     themeColor: string = "#409EFF";
+    // 默认主题
+    theme: String = "default";
+    // 默认主题填充比例
+    themePadding: String = "10%";
     // 左侧栏宽度，默认200px
     sideWidth: number = 200;
     // 最新宽度，宽度超过500px为大屏

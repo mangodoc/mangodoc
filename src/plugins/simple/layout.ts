@@ -1,6 +1,6 @@
-import App from "../app";
-import Layout from "../enum/layout";
-import Util from "../util/util";
+import App from "../../app";
+import Layout from "../../enum/layout";
+import Util from "../../util/util";
 export default {
     // init(){
     //     console.info("core init");
@@ -22,6 +22,7 @@ export default {
         // console.info("core ready");
         let template = `
             <el-container id="${Layout.main}">
+            <el-container id="${Layout.app}">
         `;
         template += `
             <el-main id='${Layout.content}'><div id="${Layout.fullscreenLoading}" class="fullscreen-loading"></div><div id="${Layout.container}"></div></el-main>
@@ -30,6 +31,7 @@ export default {
             template += `<el-footer id="${Layout.footer}">${window.$mangodoc.footer}</el-footer>`;
         }
         template += `
+            </el-container>
             </el-container>
         `;
         var pageEl = document.createElement("el-container");

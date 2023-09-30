@@ -1,7 +1,7 @@
 import Fetch from "../util/fetch"
 import LocalUtil from "../util/local";
 import Util from "../util/util";
-import plugin from "../plugins/index";
+import Theme from "../theme";
 import Retry from "../util/retry";
 import Lifecycle from "../enum/plugin";
 import Layout from "../enum/layout";
@@ -39,7 +39,7 @@ class MainPage implements Page{
     getConfig(){
         // 合并插件列表
         if(MainPage.config == null){
-            window.$mangodoc.plugins = plugin.list();
+            window.$mangodoc.plugins = new Theme().current().list();
             MainPage.config = window.$mangodoc;
         }
         return MainPage.config;

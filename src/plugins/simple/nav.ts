@@ -1,7 +1,7 @@
 import $ from "jquery";
-import Util from "../util/util";
-import Layout from "../enum/layout";
-import Global from "../util/global";
+import Util from "../../util/util";
+import Layout from "../../enum/layout";
+import Global from "../../util/global";
 
 function renderNavItem(list: Array<any>){
     let html = "";
@@ -51,9 +51,9 @@ export default {
             // console.info(navList);
             let html = renderNavItem(navList);
             // console.info("nav:"+html);
-            let oper = `<i id='${Layout.oper}' class='el-icon-d-arrow-left oper' onclick='window.operFn()'></i>`
+            let oper = `<i id='${Layout.oper}' class='el-icon-menu oper' onclick='window.operFn()'></i>`
             el.innerHTML = oper + html;
-            let mainEl: any = document.getElementById("main");
+            let mainEl: any = document.getElementById("page");
             mainEl.insertBefore(el,mainEl.firstChild);
             // 处理repo
             if(window.$mangodoc.repo){
@@ -65,9 +65,15 @@ export default {
                 let header: any = document.getElementById(Layout.header);
                 header.appendChild(span);
             }
-            if(screen.width < Util.getConfigOrDefault(Global.SMALL_WIDTH)){
-                $("#"+Layout.oper).removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
-            }
+            var logoEl = document.createElement("a");
+            // title
+            logoEl.id = "title";
+            logoEl.href = "#/";
+            logoEl.target = "_self";
+            let logo = Util.getConfigOrDefault("logo");
+            let titleHtml = `<img id="logo" src="${logo}"/>${window.$mangodoc.title}`;
+            logoEl.innerHTML = titleHtml;
+            el.insertBefore(logoEl,el.firstChild);
             Util.setFlag(Layout.nav);
             console.info("nav finish");
         });
@@ -80,10 +86,8 @@ export default {
 window.operFn = function(){
     let v = $("#aside");
     if (v.is(':visible')) {
-        $("#"+Layout.oper).removeClass("el-icon-d-arrow-left").addClass("el-icon-d-arrow-right");
         v.hide(); 
     } else {
-        $("#"+Layout.oper).removeClass("el-icon-d-arrow-right").addClass("el-icon-d-arrow-left");
         v.show();
     }
 }

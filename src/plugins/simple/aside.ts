@@ -1,6 +1,6 @@
-import Layout from "../enum/layout";
-import Global from "../util/global";
-import Util from "../util/util";
+import Layout from "../../enum/layout";
+import Global from "../../util/global";
+import Util from "../../util/util";
 
 function renderSidebarItem(list: Array<any>,init: boolean){
     let html = "";
@@ -14,7 +14,7 @@ function renderSidebarItem(list: Array<any>,init: boolean){
     }
     for(let item of list){
         if(!item.children){
-            html += `<el-menu-item index="${item.index}"><i class="${item.icon}"></i><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
+            html += `<el-menu-item index="${item.index}"><a class="nav-a" href="${item.href}" target="${item.target}">${item.title}</a></el-menu-item>`
             if(item.href.startsWith("#")){
                 Util.setNavMap(item.href,item.title);
             }
@@ -23,7 +23,6 @@ function renderSidebarItem(list: Array<any>,init: boolean){
             html += `
                 <el-submenu index="${item.index}">
                     <template slot="title">
-                        <i class="${item.icon}"></i>
                         <span>${item.title}</span>
                     </template>
                     ${itemHtml}
@@ -49,23 +48,8 @@ export default {
             let html = renderSidebarItem(sidebarList,true);
             // console.info("sidebar html:"+html);
             elSide.innerHTML = html;
-            let pageEl: any = document.getElementById(Layout.page);
+            let pageEl: any = document.getElementById(Layout.main);
             pageEl.insertBefore(elSide,pageEl.firstChild);
-            var el = document.createElement("a");
-            // title
-            el.id = Layout.title;
-            el.href = "#/";
-            el.target = "_self";
-            let version = window.$mangodoc.version;
-            let logo = Util.getConfigOrDefault(Global.LOGO);
-            let titleHtml = `<img id="${Layout.logo}" src="${logo}"/>`;
-            if(version){
-                titleHtml += `<el-badge value="v${version}" class="version-item">${window.$mangodoc.title}</el-badge>`;
-            }else{
-                titleHtml += `${window.$mangodoc.title}`;
-            }
-            el.innerHTML = titleHtml;
-            elSide.insertBefore(el,elSide.firstChild);
             Util.setFlag(Layout.aside);
             console.info("aside finish!");
         });
