@@ -1,13 +1,13 @@
 [
   {
-    "title": "更新日志",
+    "title": "日志",
     "href": "#/changelog",
     "target": "",
     "icon": "el-icon-notebook-1",
     "level": 1
   },
   {
-    "title": "其他链接",
+    "title": "链接",
     "children": [{
         "title": "mangodoc",
         "href": "https://github.com/mg0324/mangodoc",
