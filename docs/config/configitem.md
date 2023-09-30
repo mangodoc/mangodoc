@@ -15,3 +15,7 @@
 配置站点左侧菜单默认展开列表，默认为空。值为数组，如`["5","6"]`,指向`_sidebar.json`内的`index`属性。
 ### coverPage
 配置封面，默认为`false`。开启后可在`coverpage.md`中做局部vue页面来构建自己的封面。
+### theme
+配置主题，默认为`default`。可配置`default`和`simple`，根据自己需要选择。
+### themePadding
+配置主题填充，默认为`10%`。
