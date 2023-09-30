@@ -8,8 +8,15 @@
 ![](static/images/arch.drawio.png)
 
 ## 布局说明
-
+### default的主题布局
 ![](static/images/layout.drawio.png)
+
+类似后台管理布局，严谨规整。
+
+### simple的主题布局
+![](static/images/layout-simple.drawio.png)
+
+去掉大部分border，更加简约，不受条条框框限制。
 
 ## 特性
 * 简单文档：基于`javascript`(1.x)或者`typescript`(2.x)实现的简单文档生成器。
