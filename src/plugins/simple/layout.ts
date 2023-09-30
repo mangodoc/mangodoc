@@ -22,7 +22,7 @@ export default {
         // console.info("core ready");
         let template = `
             <el-container id="${Layout.main}">
-            <el-container id="${Layout.app}">
+            <el-container>
         `;
         template += `
             <el-main id='${Layout.content}'><div id="${Layout.fullscreenLoading}" class="fullscreen-loading"></div><div id="${Layout.container}"></div></el-main>
