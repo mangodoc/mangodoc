@@ -19,6 +19,12 @@
         "href": "https://mangodoc-template.meiflower.top",
         "target": "_blank",
         "level": 2
+      },
+      {
+        "title": "mangodoc版本",
+        "href": "https://github.com/mg0324/mangodoc/releases",
+        "target": "_blank",
+        "level": 2
       }
     ]
   }
