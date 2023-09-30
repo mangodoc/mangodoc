@@ -217,7 +217,7 @@ function injectStyle() {
         padding-left: 0px;
       }
       #oper {
-        display: inline;
+        display: inline !important;
       }
     }
     /* 滚动条的样式 */
