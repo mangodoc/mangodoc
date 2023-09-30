@@ -13395,6 +13395,7 @@ module.exports = styleTagTransform;
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
     theme: "default",// 默认主题
+    themePadding: "10%",// 默认主题填充比例
     themeColor: "#409EFF", // 默认主题颜色
     sideWidth: 200, // 左侧栏宽度默认200px
     smallWidth: 500, // 宽度超过500px为大屏
@@ -16661,7 +16662,7 @@ function injectStyle() {
     let themeColor = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("themeColor");
     let sideWidth = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("sideWidth");
     let themePadding = util/* default.getConfigOrDefault */.Z.getConfigOrDefault("themePadding");
-    let contentWidth = (100 - parseInt(themePadding)*3 - 2) + '%';
+    let contentWidth = (100 - parseInt(themePadding)*2 - (sideWidth/window.screen.width)*100) + '%';
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       body {
@@ -16699,6 +16700,9 @@ function injectStyle() {
       }
       #footer a{
         font-size: 12px;
+      }
+      #app>p>img {
+        width:100%;
       }
       #aside {
         overflow-x: hidden;
@@ -16905,10 +16909,7 @@ function injectStyle() {
 // EXTERNAL MODULE: ./node_modules/jquery/dist/jquery.js
 var jquery = __webpack_require__(755);
 var jquery_default = /*#__PURE__*/__webpack_require__.n(jquery);
-// EXTERNAL MODULE: ./src/config.js
-var config = __webpack_require__(182);
 ;// CONCATENATED MODULE: ./src/plugins/simple/nav.js
-
 
 
 
@@ -17046,6 +17047,71 @@ function renderSidebarItem(list,init){
         });
     }
 });
+// EXTERNAL MODULE: ./node_modules/prismjs/prism.js
+var prism = __webpack_require__(660);
+var prism_default = /*#__PURE__*/__webpack_require__.n(prism);
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
+var injectStylesIntoStyleTag = __webpack_require__(379);
+var injectStylesIntoStyleTag_default = /*#__PURE__*/__webpack_require__.n(injectStylesIntoStyleTag);
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/styleDomAPI.js
+var styleDomAPI = __webpack_require__(795);
+var styleDomAPI_default = /*#__PURE__*/__webpack_require__.n(styleDomAPI);
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/insertBySelector.js
+var insertBySelector = __webpack_require__(569);
+var insertBySelector_default = /*#__PURE__*/__webpack_require__.n(insertBySelector);
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js
+var setAttributesWithoutAttributes = __webpack_require__(565);
+var setAttributesWithoutAttributes_default = /*#__PURE__*/__webpack_require__.n(setAttributesWithoutAttributes);
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/insertStyleElement.js
+var insertStyleElement = __webpack_require__(216);
+var insertStyleElement_default = /*#__PURE__*/__webpack_require__.n(insertStyleElement);
+// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/styleTagTransform.js
+var styleTagTransform = __webpack_require__(589);
+var styleTagTransform_default = /*#__PURE__*/__webpack_require__.n(styleTagTransform);
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/prismjs/themes/prism.css
+var themes_prism = __webpack_require__(183);
+;// CONCATENATED MODULE: ./node_modules/prismjs/themes/prism.css
+
+      
+      
+      
+      
+      
+      
+      
+      
+      
+
+var options = {};
+
+options.styleTagTransform = (styleTagTransform_default());
+options.setAttributes = (setAttributesWithoutAttributes_default());
+
+      options.insert = insertBySelector_default().bind(null, "head");
+    
+options.domAPI = (styleDomAPI_default());
+options.insertStyleElement = (insertStyleElement_default());
+
+var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, options);
+
+
+
+
+       /* harmony default export */ const prismjs_themes_prism = (themes_prism/* default */.Z && themes_prism/* default.locals */.Z.locals ? themes_prism/* default.locals */.Z.locals : undefined);
+
+;// CONCATENATED MODULE: ./src/plugins/simple/prism.js
+
+
+
+/* harmony default export */ const simple_prism = ({
+    mounted(){
+        console.info("prism mounted");
+        setTimeout(() => {
+            prism_default().highlightAll();
+        }, 200);
+    }
+});
+
 ;// CONCATENATED MODULE: ./src/plugins/simple/index.js
 
 
@@ -17056,12 +17122,10 @@ function renderSidebarItem(list,init){
 
 /* harmony default export */ const simple = ({
     list(){
-        let list = [css,layout,nav,aside];
+        let list = [css,layout,aside,nav,simple_prism];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }
-        console.info("xxxx");
-        console.info(list)
         return list;
     }
 });
@@ -17216,6 +17280,8 @@ function aside_renderSidebarItem(list,init){
         });
     }
 });
+// EXTERNAL MODULE: ./src/config.js
+var config = __webpack_require__(182);
 ;// CONCATENATED MODULE: ./src/plugins/default/nav.js
 
 
@@ -17531,58 +17597,6 @@ function css_injectStyle() {
     `;
     document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }
-
-// EXTERNAL MODULE: ./node_modules/prismjs/prism.js
-var prism = __webpack_require__(660);
-var prism_default = /*#__PURE__*/__webpack_require__.n(prism);
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js
-var injectStylesIntoStyleTag = __webpack_require__(379);
-var injectStylesIntoStyleTag_default = /*#__PURE__*/__webpack_require__.n(injectStylesIntoStyleTag);
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/styleDomAPI.js
-var styleDomAPI = __webpack_require__(795);
-var styleDomAPI_default = /*#__PURE__*/__webpack_require__.n(styleDomAPI);
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/insertBySelector.js
-var insertBySelector = __webpack_require__(569);
-var insertBySelector_default = /*#__PURE__*/__webpack_require__.n(insertBySelector);
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/setAttributesWithoutAttributes.js
-var setAttributesWithoutAttributes = __webpack_require__(565);
-var setAttributesWithoutAttributes_default = /*#__PURE__*/__webpack_require__.n(setAttributesWithoutAttributes);
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/insertStyleElement.js
-var insertStyleElement = __webpack_require__(216);
-var insertStyleElement_default = /*#__PURE__*/__webpack_require__.n(insertStyleElement);
-// EXTERNAL MODULE: ./node_modules/style-loader/dist/runtime/styleTagTransform.js
-var styleTagTransform = __webpack_require__(589);
-var styleTagTransform_default = /*#__PURE__*/__webpack_require__.n(styleTagTransform);
-// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/prismjs/themes/prism.css
-var themes_prism = __webpack_require__(183);
-;// CONCATENATED MODULE: ./node_modules/prismjs/themes/prism.css
-
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-var options = {};
-
-options.styleTagTransform = (styleTagTransform_default());
-options.setAttributes = (setAttributesWithoutAttributes_default());
-
-      options.insert = insertBySelector_default().bind(null, "head");
-    
-options.domAPI = (styleDomAPI_default());
-options.insertStyleElement = (insertStyleElement_default());
-
-var update = injectStylesIntoStyleTag_default()(themes_prism/* default */.Z, options);
-
-
-
-
-       /* harmony default export */ const prismjs_themes_prism = (themes_prism/* default */.Z && themes_prism/* default.locals */.Z.locals ? themes_prism/* default.locals */.Z.locals : undefined);
 
 ;// CONCATENATED MODULE: ./src/plugins/default/prism.js
 

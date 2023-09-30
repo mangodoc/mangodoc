@@ -1,6 +1,5 @@
 import $ from "jquery";
 import util from "../../util";
-import Config from "../../config";
 
 function renderNavItem(list){
     let html = "";

@@ -10,7 +10,7 @@ function injectStyle() {
     let themeColor = util.getConfigOrDefault("themeColor");
     let sideWidth = util.getConfigOrDefault("sideWidth");
     let themePadding = util.getConfigOrDefault("themePadding");
-    let contentWidth = (100 - parseInt(themePadding)*3 - 2) + '%';
+    let contentWidth = (100 - parseInt(themePadding)*2 - (sideWidth/window.screen.width)*100) + '%';
     const styleEl = document.createElement("style");
     styleEl.textContent = `
       body {
@@ -48,6 +48,9 @@ function injectStyle() {
       }
       #footer a{
         font-size: 12px;
+      }
+      #app>p>img {
+        width:100%;
       }
       #aside {
         overflow-x: hidden;

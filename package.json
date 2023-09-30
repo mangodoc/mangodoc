@@ -1,6 +1,6 @@
 {
     "name": "mangodoc",
-    "version": "1.5.2",
+    "version": "2.1.0",
     "description": "mangodoc tool",
     "main": "src",
     "unpkg": "dist/mangodoc.min.js",
