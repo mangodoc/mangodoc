@@ -8,8 +8,15 @@
 ![](static/images/arch.drawio.png)
 
 ## 布局说明
-
+### default的主题布局
 ![](static/images/layout.drawio.png)
+
+类似后台管理布局，严谨规整。
+
+### simple的主题布局
+![](static/images/layout-simple.drawio.png)
+
+去掉大部分border，更加简约，不受条条框框限制。
 
 ## 特性
 * 简单文档：基于`javascript`(1.x)或者`typescript`(2.x)实现的简单文档生成器。
@@ -21,6 +28,7 @@
 * 插件扩展：提供插件API接口，包括生命周期和部分事件监听函数。
 * 支持vue：md内支持局部使用，详情参考[例子](#/demo/elementui)。
 * 接口api: 将内部配置暴露为`window.$mangodocApi`提供给外部插件调用。
+* 内置主题: 支持2款内置主题，分别是`default`和`simple`。
 
 ## 插件列表
 * 内置插件core - 支持文档布局、文档核心、hash路由、加载提示、接口api及插件机制
