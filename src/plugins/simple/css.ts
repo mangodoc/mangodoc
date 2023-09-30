@@ -32,9 +32,9 @@ function injectStyle() {
       height: 100%;
     }
     #container, #footer {
-      width: ${contentWidth} !important;
+      width: ${contentWidth};
     }
-    #header,#footer {
+    #header {
       padding: 0 ${themePadding};
     }
     #main {

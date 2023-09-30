@@ -70,7 +70,7 @@ export default {
             logoEl.id = "title";
             logoEl.href = "#/";
             logoEl.target = "_self";
-            let logo = Util.getConfigOrDefault("logo");
+            let logo = Util.getConfig("logo");
             let titleHtml = `<img id="logo" src="${logo}"/>${window.$mangodoc.title}`;
             logoEl.innerHTML = titleHtml;
             el.insertBefore(logoEl,el.firstChild);
