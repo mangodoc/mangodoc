@@ -15,7 +15,7 @@ class CoverPage implements Page{
     render(): void {
         // 获取资源
         let url = Util.getConfigOrDefault(Global.COVER_PATH);
-        url = window.$mangodoc.context + url;
+        url = Util.getConfigOrDefault(Global.CONTEXT) + url;
         console.info("coverpage url " + url)
         Fetch.execute(url,(md: any)=>{
             // 转换

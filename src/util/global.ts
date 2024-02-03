@@ -27,6 +27,8 @@ abstract class Global{
     static ASIDE_WIDTH: string = "sideWidth";
     // 小屏幕宽度
     static SMALL_WIDTH: string = "smallWidth";
+    // 上下文
+    static CONTEXT: string = "context";
 }
 
 export default Global;
