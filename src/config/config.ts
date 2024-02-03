@@ -6,7 +6,7 @@
  */
 class Config {
     // 主题颜色，默认#409EFF
-    themeColor: string = "#409EFF";
+    themeColor: String = "#409EFF";
     // 默认主题
     theme: String = "default";
     // 默认主题填充比例
@@ -16,15 +16,17 @@ class Config {
     // 最新宽度，宽度超过500px为大屏
     smallWidth: number = 500;
     // logo， 默认logo
-    logo: string = "static/icon/favicon-32x32.png";
+    logo: String = "static/icon/favicon-32x32.png";
     // 左侧开启菜单，默认为空
     menuOpens: Array<string> = [""];
     // 是否开启封面页，默认false
     coverPage: boolean = false;
     // 默认的封面路径
-    coverPath: string = "/docs/coverpage.md";
+    coverPath: String = "/docs/coverpage.md";
     // 默认总是刷新
     alwaysRefresh: boolean = true;
+    // 上下文配置，默认为空
+    context: String = "";
 }
 
 let config = new Config();

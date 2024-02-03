@@ -22,6 +22,7 @@ class Util {
      */
     static getHash(){
         let hash = window.location.hash;
+        console.info("hash:"+hash);
         if(!hash){
             window.location.hash = "#/";
             hash = "#/";
