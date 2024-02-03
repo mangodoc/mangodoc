@@ -1,4 +1,6 @@
 # 更新日志
+## 2024-02-03
+1. 更新mangodoc到2.2.0版本，master发布到mangodoc.meiflower.top，github分支发布到mg0324.github.io/mangodoc。
 
 ## 2023-09-30
 1. 发布2.1.1，支持2款内置主题，分别是`default`和`simple`。
