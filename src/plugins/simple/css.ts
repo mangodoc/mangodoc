@@ -121,31 +121,29 @@ function injectStyle() {
       padding: 8px;
       overflow: auto;
     }
-    code{
-      border-radius: 2px;
-      color: #e96900;
-      margin: 0 2px;
-      padding: 3px 5px;
-      white-space: pre-wrap;
-      background-color: #f8f8f8;
+    pre[class*="language-"] {
+      background: #f8f8f8 !important;
     }
-    pre code{
+    code {
+      border-radius: 2px;
+    }
+    pre code {
       background: none;
       color: black;
     }
-    h1{
+    h1 {
       font-size: 32px;
       margin: 0px;
     }
-    blockquote{
+    blockquote {
       border-left: 3px solid ${themeColor};
       margin: 0px;
       padding-left: 8px;
-      background: #eee;
+      background: #f8f8f8;
       color: gray;
       border-radius: 3px;
     }
-    blockquote p{
+    blockquote p {
       padding: 3px;
     }
     .el-menu{
