@@ -1,4 +1,8 @@
 # 更新日志
+
+## 2024-02-16
+1. 更新到2.2.1版本，优化完善code和引用块样式。
+
 ## 2024-02-03
 1. 更新mangodoc到2.2.0版本，master发布到mangodoc.meiflower.top，github分支发布到mg0324.github.io/mangodoc。
 
