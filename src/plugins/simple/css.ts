@@ -54,6 +54,8 @@ function injectStyle() {
     }
     #aside {
       overflow-x: hidden;
+      padding-top: 10px;
+      padding-right: 10px;
     }
     #aside ul {
       margin: 0px;
@@ -115,6 +117,9 @@ function injectStyle() {
       text-decoration: none;
       color: black !important;
     }
+    #header .version{
+      color: gray;
+    }
     pre {
       background: #eee;
       border-radius: 3px;
@@ -156,7 +161,8 @@ function injectStyle() {
       margin-left: 5px;
     }
     .el-menu-item.is-active  {
-      border-left: 4px solid ${themeColor};
+      border-right: 4px solid ${themeColor};
+      background: #edf5ff;
     }
     .fullscreen-loading {
       position: fixed;

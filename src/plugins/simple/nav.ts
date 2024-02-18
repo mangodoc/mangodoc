@@ -59,7 +59,8 @@ export default {
             // 处理repo
             if(window.$mangodoc.repo){
                 let html = `
-                    <a class="nav-a" href="${window.$mangodoc.repo}" target="_blank"><i class="el-icon-cloudy theme-color"></i>仓库</a> v${window.$mangodoc.version}         
+                    <a class="nav-a" href="${window.$mangodoc.repo}" target="_blank"><i class="el-icon-cloudy theme-color"></i>仓库</a> 
+                    <span class="version">v${window.$mangodoc.version}</span>    
                 `;
                 let span = document.createElement('span');
                 span.innerHTML = html;
