@@ -19,3 +19,5 @@
 配置主题，默认为`default`。可配置`default`和`simple`，根据自己需要选择。
 ### themePadding
 配置主题填充，默认为`10%`。
+### context
+配置站点上下文，默认为空。
