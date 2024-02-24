@@ -211,6 +211,13 @@ class Util {
     static showLoading(){
         $("#" + Layout.fullscreenLoading).show();
     }
+
+    // 生成默认的页面配置
+    static getDefaultPageConfig() {
+        return {
+            "comment": true
+        }
+    }
 }
 
 export default Util;
