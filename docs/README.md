@@ -36,6 +36,7 @@
 * 内置插件aside - 支持左侧目录栏配置和生成
 * 内置插件nav - 支持顶部导航条配置和生成
 * 内置插件prism - 基于`prismjs`支持代码高亮
+* 内置插件pageconfig - 支持页面配置
 * 外部插件[mangodoc-giscus](https://github.com/mg0324/mangodoc-giscus) - 支持giscus评论
 * 外部插件[mangodoc-toc](https://github.com/mg0324/mangodoc-toc) - 支持文章目录书签生成
 * 外部插件[mangodoc-imgview](https://github.com/mg0324/mangodoc-imgview) - 集成`hammerjs`支持图片点击查看和放大移动
