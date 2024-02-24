@@ -9,6 +9,7 @@ declare global {
     interface Window {
         $mangodoc: any;
         $mangodocApi: any;
+        $pageconfig: any;
         Vue: any;
         navMap: any;
         operFn: Function;
