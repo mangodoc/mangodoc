@@ -10,7 +10,6 @@ export default {
           if (line.indexOf("<code>") > -1 || line.indexOf("</code>") > -1){
             inCode = !inCode;
           }
-          console.info("line:",line, ",inCode:", inCode)
           // 不在``` code内的才解析
           if (!inCode) {
             let match;
