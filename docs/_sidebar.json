@@ -84,6 +84,14 @@
                 "level": 2,
                 "icon": "el-icon-s-tools",
                 "index": "4-2"
+            },
+            {
+                "title": "test示例",
+                "href": "#/demo/test",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-tools",
+                "index": "4-3"
             }
         ]
     },
