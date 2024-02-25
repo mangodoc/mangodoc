@@ -73,21 +73,8 @@
             plugins: [
               {
                 afterEach1(html, next){
-                  // 使用正则表达式解析
-                  const myText = html;
-                  const lines = html.split('\n');
-                  const regexPattern = /<Tab>@@\s([^]+?)\s@@\s([^]+?)(?=<\/Tab>)/g;
-                  let match;
-                  const resultArray = [];
-                  lines.forEach((line, index) => {
-                    console.info(line);
-                    while ((match = regexPattern.exec(myText)) !== null) {
-                      const title = match[1].trim();
-                      const content = match[2].trim();
-                      resultArray.push({ title, content });
-                    }
-                  });
-                  next(html);
+                  // console.info("demo afterEach:"+html);
+                  
                 }
               }
             ]

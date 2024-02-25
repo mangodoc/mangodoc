@@ -35,14 +35,24 @@
 ```
 
 ## tab示例
-@tabstart
+<tab style="height:200px;">
 @@ 标题1
 内容1
 @@ 标题2
 内容2
 内容21
-@alert(error)(这是一个标题)(这是内容)
-@tabend
+<i class="el-icon-edit"></i>
+</tab>
 
+```
+<tab style="height:200px;">
+@@ 标题1
+内容1
+@@ 标题2
+内容2
+内容21
+<i class="el-icon-edit"></i>
+</tab>
+```
 
 
