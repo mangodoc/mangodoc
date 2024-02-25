@@ -5,10 +5,12 @@ import nav from './nav';
 import css from './css';
 import prism from './prism';
 import pageconfig from './pageconfig';
+import alert from './alert';
+import link from './link';
 
 export default {
     list(){
-        let list = [css,layout,aside,nav,demo,pageconfig,prism];
+        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }

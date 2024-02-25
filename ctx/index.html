@@ -69,7 +69,28 @@
               align: "right",// 默认
               prefix: "最后修改时间为",//默认
               format: "YYYY-MM-DD HH:mm:ss"// 默认
-            }
+            },
+            plugins: [
+              {
+                afterEach1(html, next){
+                  // 使用正则表达式解析
+                  const myText = html;
+                  const lines = html.split('\n');
+                  const regexPattern = /<Tab>@@\s([^]+?)\s@@\s([^]+?)(?=<\/Tab>)/g;
+                  let match;
+                  const resultArray = [];
+                  lines.forEach((line, index) => {
+                    console.info(line);
+                    while ((match = regexPattern.exec(myText)) !== null) {
+                      const title = match[1].trim();
+                      const content = match[2].trim();
+                      resultArray.push({ title, content });
+                    }
+                  });
+                  next(html);
+                }
+              }
+            ]
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
@@ -78,15 +99,15 @@
     <!-- <script src="https://cdn.jsdelivr.net/npm/mangodoc@1.5.0/dist/mangodoc.min.js"></script> -->
     <script src="../dist/mangodoc.min.js"></script>
     <!-- mangodoc-update-time -->
-    <script src="https://cdn.jsdelivr.net/npm/mangodoc-update-time@1.0.3/dist/mangodoc-update-time.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mangodoc-update-time@1.0.4/dist/mangodoc-update-time.min.js"></script>
     <!-- mangodoc-busuanzi -->
-    <script src="https://cdn.jsdelivr.net/npm/mangodoc-busuanzi@1.1.1/dist/mangodoc-busuanzi.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mangodoc-busuanzi@1.1.2/dist/mangodoc-busuanzi.min.js"></script>
     <!-- giscus评论  -->
     <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-giscus@1.0.1/dist/giscus.css">
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-giscus@1.0.1/dist/mangodoc-giscus.min.js"></script> -->
     <!-- valine -->
     <script src="https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mangodoc-valine@1.0.1/dist/mangodoc-valine.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mangodoc-valine@1.1.1/dist/mangodoc-valine.min.js"></script>
     <!-- toc文章目录  -->
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-toc@2.1.4/dist/mangodoc-toc.min.js"></script>  
     <!-- to top  -->
@@ -94,7 +115,7 @@
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-top@1.0.2/dist/mangodoc-top.min.js"></script> 
     <!-- imgview插件  -->
     <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-imgview@1.0.4/dist/imgview.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mangodoc-imgview@1.0.5/dist/imgview.css">
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-imgview@1.0.5/dist/mangodoc-imgview.min.js"></script>
     <!-- 百度统计 -->
     <script src="https://cdn.jsdelivr.net/npm/mangodoc-baidu-tj@1.0.0/dist/mangodoc-baidu-tj.min.js"></script>
