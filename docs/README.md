@@ -1,5 +1,7 @@
 # mangodoc
-一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
+一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。
+
+参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
 
 [在线demo](https://mangodoc.meiflower.top)
 
