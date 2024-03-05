@@ -1,5 +1,7 @@
 # mangodoc
-一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
+一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。
+
+参考[docsify](https://docsify.js.org/#/zh-cn/)和[chatGPT](https://chat.openai.com/chat)。
 
 [在线demo](https://mangodoc.meiflower.top)
 
@@ -36,6 +38,10 @@
 * 内置插件aside - 支持左侧目录栏配置和生成
 * 内置插件nav - 支持顶部导航条配置和生成
 * 内置插件prism - 基于`prismjs`支持代码高亮
+* 内置插件pageconfig - 支持页面配置
+* 内置插件alert - 支持alert告警格式文本
+* 内置插件link - 支持link链接格式文本
+* 内置插件tab - 支持tab标签格式文本
 * 外部插件[mangodoc-giscus](https://github.com/mg0324/mangodoc-giscus) - 支持giscus评论
 * 外部插件[mangodoc-toc](https://github.com/mg0324/mangodoc-toc) - 支持文章目录书签生成
 * 外部插件[mangodoc-imgview](https://github.com/mg0324/mangodoc-imgview) - 集成`hammerjs`支持图片点击查看和放大移动
