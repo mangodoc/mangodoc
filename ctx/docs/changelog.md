@@ -1,4 +1,8 @@
 # 更新日志
+## 2024-03-05
+1. 修复aside菜单刷新后激活项丢失的问题。
+2. 调整plugins目录，将公共的alert、link、tab、pageconfig等插件移动到plugins目录中，作为公共插件引入。
+
 ## 2024-02-25
 1. 发布2.3.0，新增内置插件alert和link，基于element支持连接和alert提醒信息。
 2. 发布2.4.0，新增内置插件tab，支持tab切换。

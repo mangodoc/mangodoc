@@ -3,11 +3,11 @@ import layout from './layout';
 import aside from './aside';
 import nav from './nav';
 import css from './css';
-import prism from './prism';
-import pageconfig from './pageconfig';
-import alert from './alert';
-import link from './link';
-import tab from './tab';
+import prism from '../prism';
+import pageconfig from '../pageconfig';
+import alert from '../alert';
+import link from '../link';
+import tab from '../tab';
 
 export default {
     list(){

@@ -3,11 +3,12 @@ import Global from "../../util/global";
 import Util from "../../util/util";
 
 function renderSidebarItem(list: Array<any>,init: boolean){
+    let active = Util.getActiveMenu(list);
     let html = "";
     if(init){
         html = `
             <el-menu
-                default-active="1"
+                default-active="${active}"
                 class="el-menu-vertical-demo"
                 :default-openeds="menuOpens">
         `;

@@ -17,12 +17,33 @@ import Layout from "../enum/layout";
  */
 class Util {
     /**
+     * 获取当前激活的菜单
+     * @returns 当前激活的菜单
+     */
+    static getActiveMenu(list: Array<any>): string {
+        let activeMenu = "1";
+        let hash = Util.getHash();
+        for(let item of list){
+            if(!item.children) {
+                if (hash === item.href) {
+                    return item.index;
+                }
+            } else {
+                activeMenu = Util.getActiveMenu(item.children);
+                // 说明找到了，则退出
+                if (activeMenu !== "1") {
+                    break;
+                }
+            }
+        }
+        return activeMenu;
+    }
+    /**
      * 获取hash值
      * @returns 页面hash值
      */
     static getHash(){
         let hash = window.location.hash;
-        console.info("hash:"+hash);
         if(!hash){
             window.location.hash = "#/";
             hash = "#/";
@@ -36,7 +57,7 @@ class Util {
      */
     static check(): boolean {
         let hash = this.getHash();
-        return (hash == "" || hash == "#/") && this.getConfigOrDefault(Global.COVER_PAGE) ? true :false;
+        return (hash === "" || hash === "#/") && this.getConfigOrDefault(Global.COVER_PAGE) ? true :false;
     }
     /**
      * 通过key获取配置，先取window.$mangodoc上的，如果没有则获取默认配置项
