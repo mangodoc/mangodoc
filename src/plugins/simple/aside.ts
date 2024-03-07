@@ -1,14 +1,18 @@
 import Layout from "../../enum/layout";
 import Global from "../../util/global";
 import Util from "../../util/util";
+// 默认值
+let active = {
+    index: "1",
+    title: "主页"
+};
 
 function renderSidebarItem(list: Array<any>,init: boolean) {
-    let active = Util.getActiveMenu(list);
     let html = "";
     if(init){
         html = `
             <el-menu
-                default-active="${active}"
+                default-active="${active.index}"
                 class="el-menu-vertical-demo"
                 :default-openeds="menuOpens">
         `;
@@ -46,6 +50,8 @@ export default {
         .then(response => response.text())
         .then(json => {
             let sidebarList = JSON.parse(json);
+            active = Util.getActiveMenu(sidebarList);
+            window.document.title = active.title;
             let html = renderSidebarItem(sidebarList, true);
             // console.info("sidebar html:"+html);
             elSide.innerHTML = html;

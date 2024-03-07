@@ -43,6 +43,7 @@ export default {
         console.info("layout finish!");
     },
     onpopstate(){
+        console.info("layout onpopstate");
         // 如果是锚点，则不加载资源，因为是同一个页面
         let app = new App();
         app.start();

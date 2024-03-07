@@ -15,4 +15,4 @@ window.$mangodoc = {
 
 ### 3. 预览
 
-<img src="../../static/res/coverpage.jpeg" width="100%">
+<img src="static/res/coverpage.jpeg" width="100%">

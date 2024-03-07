@@ -20,18 +20,18 @@ class Util {
      * 获取当前激活的菜单
      * @returns 当前激活的菜单
      */
-    static getActiveMenu(list: Array<any>): string {
-        let activeMenu = "1";
+    static getActiveMenu(list: Array<any>): any {
+        let activeMenu = null;
         let hash = Util.getHash();
         for(let item of list){
             if(!item.children) {
                 if (hash === item.href) {
-                    return item.index;
+                    return item;
                 }
             } else {
                 activeMenu = Util.getActiveMenu(item.children);
                 // 说明找到了，则退出
-                if (activeMenu !== "1") {
+                if (activeMenu != null) {
                     break;
                 }
             }

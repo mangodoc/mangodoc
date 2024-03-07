@@ -6,3 +6,4 @@ window.$mangodocApi = api;
 // 启动应用
 let app = new App();
 app.start();
+console.info("mangodoc start");
