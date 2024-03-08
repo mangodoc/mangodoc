@@ -32,7 +32,7 @@
         ]
     },
     {
-        "title": "定制化",
+        "title": "配置",
         "level": 1,
         "icon": "el-icon-s-home",
         "index": "3",
@@ -92,6 +92,30 @@
                 "level": 2,
                 "icon": "el-icon-s-tools",
                 "index": "4-3"
+            }
+        ]
+    },
+    {
+        "title": "工具",
+        "level": 1,
+        "icon": "el-icon-star-on",
+        "index": "41",
+        "children": [
+            {
+                "title": "脚手架",
+                "href": "#/tool/mangodoc-cli",
+                "target": "_self",
+                "level": 2,
+                "icon": "el-icon-s-promotion",
+                "index": "41-1"
+            },
+            {
+                "title": "模板仓库",
+                "href": "https://mangodoc-template.meiflower.top/",
+                "target": "_blank",
+                "level": 2,
+                "icon": "el-icon-s-tools",
+                "index": "41-2"
             }
         ]
     },
