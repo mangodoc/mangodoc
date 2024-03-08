@@ -31,7 +31,14 @@
         "href": "https://github.com/mg0324/mangodoc/releases",
         "target": "_blank",
         "level": 2
+      },
+      {
+        "title": "elementui",
+        "href": "https://element.eleme.cn/#/zh-CN/component/installation",
+        "target": "_blank",
+        "level": 2
       }
+      
     ]
   }
 ]
