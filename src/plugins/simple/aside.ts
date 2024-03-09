@@ -51,7 +51,9 @@ export default {
         .then(json => {
             let sidebarList = JSON.parse(json);
             active = Util.getActiveMenu(sidebarList);
-            window.document.title = active.title;
+            if (active) {
+                window.document.title = active.title;
+            }
             let html = renderSidebarItem(sidebarList, true);
             // console.info("sidebar html:"+html);
             elSide.innerHTML = html;

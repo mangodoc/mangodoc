@@ -36,6 +36,13 @@ class Util {
                 }
             }
         }
+        // 未找到则设置默认值
+        if (activeMenu == null) {
+            activeMenu = {
+                index: "1",
+                title: "主页"
+            }
+        }
         return activeMenu;
     }
     /**
