@@ -261,6 +261,41 @@ function injectStyle() {
     #toc {
       right: ${themePadding} !important;
     }
+    green {
+      color: green;
+    }
+    red {
+      color: red;
+    }
+    darkred {
+      color: darkred;
+    }
+    darkgreen {
+      color: darkgreen;
+    }
+    pink {
+      color: pink;
+    }
+    gray {
+      color: gray;
+    }
+    orange {
+      color: orange;
+    }
+    blue {
+      color: blue;
+    }
+    yellow {
+      color: yellow;
+    }
+    code {
+      border-radius: 2px;
+      color: #e96900;
+      margin: 0 2px;
+      padding: 3px 5px;
+      white-space: pre-wrap;
+      background-color: #f8f8f8;
+    }
   `;
   document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

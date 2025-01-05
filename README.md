@@ -48,3 +48,12 @@
 - [ ] （新插件）在文档末尾显示附近范围内的分页内容。
 - [ ] （新特性）设计并支持文档封面页。
 - [ ] （新插件）基于markmap支持思维导图，支持超链接跳转。
+- [x] （完善）支持内置更多的颜色标签，比如green/red/blue/yellow/orange/purple/pink/brown/gray/black/white等。
+- [x] （完善）md中code代码块的样式优化，目前显示不明显。
+
+## 发布版本
+1. 先安装依赖：`npm install`
+2. 修改版本号
+3. 打包：`npm run build`
+4. 登陆npm：`npm login`
+5. 发布：`npm publish`
