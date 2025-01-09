@@ -288,13 +288,73 @@ function injectStyle() {
     yellow {
       color: yellow;
     }
-    code {
+    p code {
       border-radius: 2px;
       color: #e96900;
       margin: 0 2px;
       padding: 3px 5px;
       white-space: pre-wrap;
-      background-color: #f8f8f8;
+      background-color: #e9ecef;
+      font-weight: bold;
+    }
+    pre {
+      position: relative;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem;
+    }
+    pre[class*="language-"] {
+      padding-top: 25px !important;
+    }
+    code[class*="language-"]::before {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #e9ecef;
+      padding: 2px 8px;
+      font-size: 12px;
+      border-radius: 0 4px 0 4px;
+      font-family: sans-serif;
+      color: #eb345b;
+      font-weight: bold;
+    }
+
+    /* 为不同语言定义内容 */
+    code.language-sql::before {
+      content: "SQL";
+    }
+    
+    code.language-js::before {
+      content: "JavaScript";
+    }
+    
+    code.language-shell::before {
+      content: "Shell";
+    }
+    
+    code.language-powershell::before {
+      content: "Shell";
+    }
+    
+    code.language-python::before {
+      content: "Python";
+    }
+    
+    code.language-java::before {
+      content: "Java";
+    }
+    
+    code.language-javascript::before {
+      content: "JavaScript";
+    }
+    
+    code.language-html::before {
+      content: "HTML";
+    }
+    
+    code.language-css::before {
+      content: "CSS";
     }
   `;
   document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
