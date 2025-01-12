@@ -32,15 +32,8 @@ class Util {
                 activeMenu = Util.getActiveMenu(item.children);
                 // 说明找到了，则退出
                 if (activeMenu != null) {
-                    break;
+                    return activeMenu
                 }
-            }
-        }
-        // 未找到则设置默认值
-        if (activeMenu == null) {
-            activeMenu = {
-                index: "1",
-                title: "主页"
             }
         }
         return activeMenu;
