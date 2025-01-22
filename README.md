@@ -54,8 +54,8 @@
 - [x] （完善）md中code代码块的样式优化，目前显示不明显。
 
 ## 发布版本
-1. 先安装依赖：`npm install`
+1. 先安装依赖：`yarn`
 2. 修改版本号
-3. 打包：`npm run build`
+3. 打包：`yarn build`
 4. 登陆npm：`npm login`
 5. 发布：`npm publish`
