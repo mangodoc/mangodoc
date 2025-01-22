@@ -83,9 +83,9 @@ export default {
         .fullscreen-mode #container {
           width: 100% !important;
         }
-        .fullscreen-btn {
-          right: 10px !important;
-        }
+          .fullscreen-btn {
+            right: 10px !important;
+          }
       }
     `;
     document.head.appendChild(style);
