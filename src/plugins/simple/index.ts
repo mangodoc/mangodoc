@@ -8,10 +8,11 @@ import pageconfig from '../pageconfig';
 import alert from '../alert';
 import link from '../link';
 import tab from '../tab';
+import fullscreen from './fullscreen';
 
 export default {
     list(){
-        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab];
+        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,fullscreen];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }
