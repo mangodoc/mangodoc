@@ -27,6 +27,14 @@ class Config {
     alwaysRefresh: boolean = true;
     // 上下文配置，默认为空
     context: String = "";
+    // iconfont配置，默认使用内置图标
+    iconfont: {
+        url: "",
+        prefix: "iconfont"
+    } = {
+        url: "",
+        prefix: "iconfont"
+    };
 }
 
 let config = new Config();

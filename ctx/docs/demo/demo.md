@@ -10,8 +10,43 @@
 
 ## iconfont示例
 
-<span class="iconfont icon-code" style="color:red;"></span>
-<span class="iconfont icon-log" style="color:green;font-size:20px;"></span>
+### 基础用法
+<i class="iconfont icon-code" style="color:red;"></i>
+<i class="iconfont icon-log" style="color:green;font-size:20px;"></i>
+
+### 图标列表
+| 图标 | 类名 | 说明 |
+|------|------|------|
+| <i class="iconfont icon-code"></i> | icon-code | 代码 |
+| <i class="iconfont icon-log"></i> | icon-log | 日志 |
+| <i class="iconfont icon-home"></i> | icon-home | 首页 |
+| <i class="iconfont icon-search"></i> | icon-search | 搜索 |
+| <i class="iconfont icon-setting"></i> | icon-setting | 设置 |
+| <i class="iconfont icon-user"></i> | icon-user | 用户 |
+| <i class="iconfont icon-star"></i> | icon-star | 星标 |
+| <i class="iconfont icon-heart"></i> | icon-heart | 收藏 |
+| <i class="iconfont icon-link"></i> | icon-link | 链接 |
+| <i class="iconfont icon-image"></i> | icon-image | 图片 |
+| <i class="iconfont icon-file"></i> | icon-file | 文件 |
+| <i class="iconfont icon-folder"></i> | icon-folder | 文件夹 |
+
+### 自定义样式
+<i class="iconfont icon-star" style="color:gold;font-size:24px;"></i>
+<i class="iconfont icon-heart" style="color:pink;font-size:24px;"></i>
+<i class="iconfont icon-home" style="color:#409EFF;font-size:24px;"></i>
+<i class="iconfont icon-setting" style="color:#67C23A;font-size:24px;"></i>
+
+### 箭头图标
+<i class="iconfont icon-arrow-left"></i>
+<i class="iconfont icon-arrow-right"></i>
+<i class="iconfont icon-arrow-up"></i>
+<i class="iconfont icon-arrow-down"></i>
+
+### 状态图标
+<i class="iconfont icon-success" style="color:#67C23A;"></i> 成功
+<i class="iconfont icon-warning" style="color:#E6A23C;"></i> 警告
+<i class="iconfont icon-error" style="color:#F56C6C;"></i> 错误
+<i class="iconfont icon-info" style="color:#409EFF;"></i> 信息
 
 ## java代码高亮
 ``` java

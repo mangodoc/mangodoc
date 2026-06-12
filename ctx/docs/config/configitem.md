@@ -19,3 +19,11 @@
 配置主题，默认为`default`。可配置`default`和`simple`，根据自己需要选择。
 ### themePadding
 配置主题填充，默认为`10%`。
+### iconfont
+配置iconfont字体图标。默认使用内置图标库，也可自定义iconfont资源。
+```javascript
+iconfont: {
+    url: "", // 自定义iconfont CSS URL，为空则使用内置图标
+    prefix: "iconfont" // 图标类名前缀
+}
+```

@@ -1,0 +1,17 @@
+/* mangodoc iconfont 图标样式 - SVG方案 */
+.iconfont {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    vertical-align: -0.15em;
+    fill: currentColor;
+    overflow: hidden;
+}
+
+.iconfont svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}

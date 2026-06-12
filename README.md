@@ -24,6 +24,7 @@
 * 内置插件nav - 支持顶部导航条配置和生成
 * 内置插件prism - 基于`prismjs`支持代码高亮
 * 内置插件fullscreen - 支持文档全屏显示，包含全屏按钮、布局优化和toc位置调整
+* 内置插件iconfont - 支持iconfont字体图标，内置常用图标并支持自定义iconfont资源
 * 外部插件[mangodoc-giscus](https://github.com/mg0324/mangodoc-giscus) - 支持giscus评论
 * 外部插件[mangodoc-toc](https://github.com/mg0324/mangodoc-toc) - 支持文章目录书签生成
 * 外部插件[mangodoc-imgview](https://github.com/mg0324/mangodoc-imgview) - 集成`hammerjs`支持图片点击查看和放大移动
@@ -45,7 +46,7 @@
 - [x] （修复）修复aside的宽度初次显示不一致的问题，有时候宽有时候窄。
 - [x] （优化）在footer内增加备案信息显示。
 - [x] (future) 支持文章全屏阅读，能收展头部和左侧等内容。
-- [ ] （新特性）支持iconfont字体图标。
+- [x] （新特性）支持iconfont字体图标。
 - [ ] （新插件）显示文档内容字数及大约阅读时间。
 - [ ] （新插件）在文档末尾显示附近范围内的分页内容。
 - [ ] （新特性）设计并支持文档封面页。

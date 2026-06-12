@@ -29,6 +29,8 @@ abstract class Global{
     static SMALL_WIDTH: string = "smallWidth";
     // 上下文
     static CONTEXT: string = "context";
+    // iconfont配置
+    static ICONFONT: string = "iconfont";
 }
 
 export default Global;
