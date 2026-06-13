@@ -165,14 +165,15 @@ function doSearch(query: string) {
     return
   }
 
-  const html = results.slice(0, 10).map((r: any) => {
+  const total = results.length
+  const items = results.slice(0, 10).map((r: any) => {
     const data = pageMap.get(r.id)
     if (!data) return ''
     const snippet = extractSnippet(data.content, query)
     return renderResult(r.id, data.title, data.path, snippet)
   }).join('')
 
-  resultsEl.innerHTML = html
+  resultsEl.innerHTML = `<div class="cool-search-count">共 ${total} 条结果</div>${items}`
   resultsEl.style.display = 'block'
 }
 

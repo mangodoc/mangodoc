@@ -1183,6 +1183,7 @@ function injectStyle() {
       box-shadow: var(--cool-shadow-glass);
       z-index: 999;
       padding: 6px 0;
+      text-align: left;
     }
     .cool-search-result {
       display: block;
@@ -1197,6 +1198,13 @@ function injectStyle() {
     .cool-search-result:hover {
       background: ${themeColor}11;
       border-color: ${themeColor}33;
+    }
+    .cool-search-count {
+      padding: 6px 14px 4px;
+      font-size: 11px;
+      color: var(--cool-text-muted);
+      border-bottom: 1px solid var(--cool-border-glass);
+      margin-bottom: 4px;
     }
     .cool-search-result-title {
       display: block;
