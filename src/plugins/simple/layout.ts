@@ -1,25 +1,8 @@
-import App from "../../app";
 import Layout from "../../enum/layout";
 import Util from "../../util/util";
+import MainPage from "../../page/mainpage";
 export default {
-    // init(){
-    //     console.info("core init");
-    // },
-    // beforeEach(content){
-    //     console.info("core beforeEach");
-    //     return content;
-    // },
-    // afterEach(html,next){
-    //     next(html);
-    // },
-    // doneEach(){
-    //     console.info("core doneEach");
-    // },
-    // mounted(){
-    //     console.info("core mounted");
-    // },
     ready(){
-        // console.info("core ready");
         let template = `
             <el-container id="${Layout.main}">
             <el-container>
@@ -44,10 +27,7 @@ export default {
     },
     onpopstate(){
         console.info("layout onpopstate");
-        // 如果是锚点，则不加载资源，因为是同一个页面
-        let app = new App();
-        app.start();
-        // 变化页面标题
+        MainPage.rerender();
         $("title").text(Util.getNavMap(window.location.hash));
         if(Util.getHash() == "#/"){
             window.location.reload();

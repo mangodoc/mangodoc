@@ -1,18 +1,20 @@
 export default {
-  container: null as HTMLElement | null,
+  container: null as any,
+  _contentEl: null as any,
 
   ready() {
     console.info('wordcount ready');
   },
 
   doneEach() {
+    this._contentEl = document.querySelector('#container');
     this.init();
     this.updateCount();
     console.info('wordcount doneEach');
   },
 
   init() {
-    // 创建容器
+    if (!this._contentEl) return;
     const container = document.createElement('div');
     container.className = 'word-count-container';
     container.style.textAlign = 'right';
@@ -21,27 +23,18 @@ export default {
     container.style.padding = '8px 16px';
     container.style.borderRadius = '4px';
 
-    // 插入到#container最前面
-    const content = document.querySelector('#container');
-    if (content) {
-      content.insertBefore(container, content.firstChild);
-      this.container = container;
-      console.log('阅读时长插件已加载到#container顶部');
-    }
+    this._contentEl.insertBefore(container, this._contentEl.firstChild);
+    this.container = container;
+    console.log('阅读时长插件已加载到#container顶部');
   },
 
   updateCount() {
-    if (!this.container) return;
+    if (!this.container || !this._contentEl) return;
 
-    const content = document.querySelector('#container');
-    if (!content) return;
-
-    // 统计字数
-    const text = content.textContent || '';
+    const text = this._contentEl.textContent || '';
     const wordCount = this.countWords(text);
     const readingTime = this.calculateReadingTime(wordCount);
 
-    // 更新显示
     this.container.innerHTML = `预计阅读时间：约${readingTime}分钟`;
   },
 

@@ -3,15 +3,12 @@ import Util from "../util/util";
 
 export default {
     beforeEach(content: string){
-        console.info("pageconfig beforeEach");
         let start = content.indexOf("@@start");
         let end = content.indexOf("@@end");
-        console.info(start,end);
-        if (start !== -1 || end !== -1){
-            let text = content.substring("@@start".length, end)
+        if (start !== -1 && end !== -1 && end > start){
+            let text = content.substring(start + "@@start".length, end).trim();
             if (text){
-                window.$pageconfig =JSON.parse(text)
-                console.info("pageconfig is {}", window.$pageconfig);
+                window.$pageconfig = JSON.parse(text);
             }
             content = content.substring(end + "@@end".length);
         } else {

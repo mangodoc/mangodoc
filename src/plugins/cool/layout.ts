@@ -1,6 +1,6 @@
-import App from "../../app";
 import Layout from "../../enum/layout";
 import Util from "../../util/util";
+import MainPage from "../../page/mainpage";
 
 export default {
     ready(){
@@ -28,8 +28,7 @@ export default {
     },
     onpopstate(){
         console.info("[cool] layout onpopstate");
-        let app = new App();
-        app.start();
+        MainPage.rerender();
         $("title").text(Util.getNavMap(window.location.hash));
         if(Util.getHash() == "#/"){
             window.location.reload();

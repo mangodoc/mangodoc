@@ -28,7 +28,6 @@ class VueUtil {
     static create(condition: Function,localVue: any,options: any){
         let retry = new Retry();
         retry.handle(condition,()=>{
-            // app的vue实例没有渲染，则做渲染
             if(!Util.getFlag(Layout.app)){
                 options.el = "#" + Layout.app;
                 this.vm = new window.Vue(options);
@@ -36,6 +35,10 @@ class VueUtil {
                 console.info("create app vue");
             }else{
                 if(localVue){
+                    if (this.localVm) {
+                        this.localVm.$destroy();
+                        this.localVm = null;
+                    }
                     options.el = "#" + Layout.container;
                     this.localVm = new window.Vue(options);
                     console.info("create local vue");

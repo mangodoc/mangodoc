@@ -1,11 +1,8 @@
-/**
- * Visual effects plugin for cool theme
- * Adds JavaScript-driven effects:
- * - Reading progress bar
- * - Content fade-in animation
- * - Back-to-top button
- */
 export default {
+    _contentEl: null as any,
+    _barEl: null as any,
+    _btnEl: null as any,
+
     ready() {
         this.createProgressBar();
         this.createBackToTop();
@@ -21,20 +18,13 @@ export default {
         this.setupScrollListener();
     },
 
-    /* ============================================
-       READING PROGRESS BAR
-       ============================================ */
-
     createProgressBar() {
         if (document.getElementById('cool-progress-bar')) return;
         const bar = document.createElement('div');
         bar.id = 'cool-progress-bar';
         document.body.prepend(bar);
+        this._barEl = bar;
     },
-
-    /* ============================================
-       CONTENT FADE-IN
-       ============================================ */
 
     fadeInContent() {
         const el = document.getElementById('container');
@@ -50,10 +40,6 @@ export default {
         setTimeout(() => { el.style.transition = ''; }, 400);
     },
 
-    /* ============================================
-       BACK TO TOP BUTTON
-       ============================================ */
-
     createBackToTop() {
         if (document.getElementById('cool-back-top')) return;
         const btn = document.createElement('div');
@@ -61,28 +47,24 @@ export default {
         btn.className = 'cool-float';
         btn.innerHTML = `<svg viewBox="0 0 24 24"><path d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"/></svg>`;
         btn.addEventListener('click', () => {
-            const el = document.getElementById('content');
+            const el = this._contentEl;
             if (el) el.scrollTo({ top: 0, behavior: 'smooth' });
         });
         document.body.appendChild(btn);
+        this._btnEl = btn;
     },
 
     checkBackToTop() {
-        // Wait for DOM settle, then check scroll position
         setTimeout(() => this.toggleBackToTop(), 100);
     },
 
     toggleBackToTop() {
-        const btn = document.getElementById('cool-back-top');
+        const btn = this._btnEl;
         if (!btn) return;
-        const el = document.getElementById('content');
+        const el = this._contentEl;
         if (!el) return;
         btn.classList.toggle('visible', el.scrollTop > 300);
     },
-
-    /* ============================================
-       SCROLL LISTENER (shared)
-       ============================================ */
 
     updateProgressBar() {
         setTimeout(() => { this.setProgressWidth(); }, 50);
@@ -91,6 +73,7 @@ export default {
     setupScrollListener() {
         const contentEl = document.getElementById('content');
         if (!contentEl) return;
+        this._contentEl = contentEl;
 
         let ticking = false;
         contentEl.addEventListener('scroll', () => {
@@ -106,9 +89,9 @@ export default {
     },
 
     setProgressWidth() {
-        const bar = document.getElementById('cool-progress-bar');
+        const bar = this._barEl || document.getElementById('cool-progress-bar');
         if (!bar) return;
-        const el = document.getElementById('content');
+        const el = this._contentEl;
         if (!el) return;
         const scrollTop = el.scrollTop;
         const scrollHeight = el.scrollHeight - el.clientHeight;

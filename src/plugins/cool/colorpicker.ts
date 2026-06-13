@@ -20,7 +20,10 @@ export default {
     injectColorSwatch() {
         if (document.getElementById('cool-color-swatch')) return;
 
+        let pollCount = 0;
         const poll = setInterval(() => {
+            pollCount++;
+            if (pollCount > 30) { clearInterval(poll); return; }
             const header = document.getElementById('header');
             const darkToggle = document.getElementById('cool-dark-toggle');
             if (!header || !darkToggle) return;
@@ -135,44 +138,28 @@ export default {
         const b = parseInt(newColor.slice(5, 7), 16);
         const rgb = `${r}, ${g}, ${b}`;
 
-        // 1. Update CSS custom properties — affects rules using var(--cool-theme)
         const root = document.documentElement;
         root.style.setProperty('--cool-theme', newColor);
         root.style.setProperty('--cool-theme-rgb', rgb);
 
-        // 2. Rebuild the core style tag: replace old hex color with new
         const style = document.querySelector('style[data-cool-theme="core"]');
         if (style) {
-            try {
-                let css = style.textContent || '';
-                const hexMatch = css.match(/--cool-theme:\s*(#[0-9a-fA-F]{6})/);
-                let oldColor: string;
-                if (hexMatch && hexMatch[1]) {
-                    oldColor = hexMatch[1];
-                } else {
-                    oldColor = (Util.getConfig('themeColor') || '#409EFF') as string;
-                }
-                // Replace old hex everywhere
-                css = css.split(oldColor).join(newColor);
-
-                // Also replace old RGB with new RGB
+            let css = style.textContent || '';
+            const hexMatch = css.match(/--cool-theme:\s*(#[0-9a-fA-F]{6})/);
+            if (hexMatch && hexMatch[1] && hexMatch[1] !== newColor) {
+                const oldColor = hexMatch[1];
                 const oR = parseInt(oldColor.slice(1, 3), 16);
                 const oG = parseInt(oldColor.slice(3, 5), 16);
                 const oB = parseInt(oldColor.slice(5, 7), 16);
-                css = css.split(`${oR}, ${oG}, ${oB}`).join(rgb);
-
+                css = css.replace(new RegExp(oldColor.replace('#', '\\#'), 'g'), newColor);
+                css = css.replace(new RegExp(`${oR},\\s*${oG},\\s*${oB}`, 'g'), rgb);
                 style.textContent = css;
-            } catch (e) {
-                // If rebuild fails, CSS vars still work for var() rules
-                console.warn('colorpicker rebuild failed, CSS vars still active', e);
             }
         }
 
-        // 3. Update the dot
         const dot = document.getElementById('cool-color-dot');
         if (dot) dot.style.background = newColor;
 
-        // 4. Persist
         localStorage.setItem('cool-theme-color', newColor);
         if (window.$mangodoc) window.$mangodoc.themeColor = newColor;
     },
@@ -183,15 +170,18 @@ export default {
         const current = this.getConfigColor();
         if (saved.toLowerCase() === current.toLowerCase()) return;
 
+        let pollCount = 0;
         const poll = setInterval(() => {
-            if (!document.querySelector('style[data-cool-theme="core"]')) return;
-            clearInterval(poll);
-            this.setColor(saved);
-            // Update dot if already injected
-            const dot = document.getElementById('cool-color-dot');
-            if (dot) dot.style.background = saved;
+            pollCount++;
+            if (pollCount > 60 || document.querySelector('style[data-cool-theme="core"]')) {
+                clearInterval(poll);
+                if (document.querySelector('style[data-cool-theme="core"]')) {
+                    this.setColor(saved);
+                    const dot = document.getElementById('cool-color-dot');
+                    if (dot) dot.style.background = saved;
+                }
+            }
         }, 50);
-        setTimeout(() => clearInterval(poll), 3000);
     },
 
     getCurrentColor(): string {

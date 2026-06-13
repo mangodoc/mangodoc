@@ -2,7 +2,6 @@ import Fetch from "../util/fetch"
 import LocalUtil from "../util/local";
 import Util from "../util/util";
 import Theme from "../theme";
-import Retry from "../util/retry";
 import Lifecycle from "../enum/plugin";
 import Layout from "../enum/layout";
 
@@ -13,14 +12,24 @@ import Layout from "../enum/layout";
  * @since 2023-05-02 22:28
  */
 class MainPage implements Page{
-    /**
-     * 主配置，window.$mangodoc
-     */
     static config: any = null;
-    /**
-     * 获取url路径
-     * @returns url路径
-     */
+    private static instance: MainPage | null = null;
+    private static popstateHandler: any = null;
+    private static readyHandler: any = null;
+    private static resizeHandler: any = null;
+
+    static getInstance(): MainPage {
+        if (!MainPage.instance) {
+            MainPage.instance = new MainPage();
+        }
+        return MainPage.instance;
+    }
+
+    static rerender(): void {
+        const instance = MainPage.getInstance();
+        instance.render();
+    }
+
     getUrl(): string {
         let hash = Util.getHash();
         let url = hash.replace("#","");
@@ -32,12 +41,8 @@ class MainPage implements Page{
         url = "docs" + url;
         return url;
     }
-    /**
-     * 合并配置并获取
-     * @returns 合并后的配置
-     */
+
     getConfig(){
-        // 合并插件列表
         if(MainPage.config == null){
             window.$mangodoc.plugins = new Theme().current().list();
             MainPage.config = window.$mangodoc;
@@ -47,57 +52,55 @@ class MainPage implements Page{
 
     render(): void {
         let config = this.getConfig();
-        // 调用生命周期 beforeEach
         Util.callHook(config,Lifecycle.init);
         let url = this.getUrl();
-        // 获取资源
         Fetch.execute(url,(md: any)=>{
-            // 调用生命周期 beforeEach
             md = Util.callHook(config,Lifecycle.beforeEach,md);
-            // 转换
             let html = Util.md2html(md);
             html = LocalUtil.handleLocalStyle(html,url);
             let result = LocalUtil.handleLocalScript(html);
-            // 调用生命周期 afterEach
             Util.callHook(config,Lifecycle.afterEach,result[0],function(resultHtml: string){
-                // 将 HTML 显示在页面上
-                let retry = new Retry();
-                retry.handle((): boolean => document.getElementById(Layout.container) ? true : false,()=>{
-                    let appEl: any = document.getElementById(Layout.container);
-                    appEl.innerHTML = resultHtml;
-                    // 调用后置处理
-                    // 调用生命周期 doneEach
-                    Util.callHook(config,Lifecycle.doneEach);
-                    // 调用生命周期 mounted
-                    Util.callHook(config,Lifecycle.mounted);
-                    // 关闭加载提示
+                let container = document.getElementById(Layout.container);
+                if (!container) {
                     Util.hideLoading();
-                    // 记录old hash
-                    Util.setLocal("oldHash",Util.getHash());
-                    // 渲染为vue
-                    Util.renderVue(()=>Util.getFlag(Layout.aside) && Util.getFlag(Layout.nav) && Util.getFlag(Layout.layout),result[1]);
-                })
+                    return;
+                }
+                container.innerHTML = resultHtml;
+                Util.callHook(config,Lifecycle.doneEach);
+                Util.callHook(config,Lifecycle.mounted);
+                Util.hideLoading();
+                Util.setLocal("oldHash",Util.getHash());
+                Util.renderVue(()=>Util.getFlag(Layout.aside) && Util.getFlag(Layout.nav) && Util.getFlag(Layout.layout),result[1]);
             });
         });
     }
 
     watch(){
         let config = this.getConfig();
-        // 监听地址栏变化
-        window.onpopstate = function(event) {
-            // 调用事件
+
+        if (MainPage.popstateHandler) {
+            window.removeEventListener('popstate', MainPage.popstateHandler);
+        }
+        if (MainPage.readyHandler) {
+            document.removeEventListener('DOMContentLoaded', MainPage.readyHandler);
+        }
+        if (MainPage.resizeHandler) {
+            window.removeEventListener('resize', MainPage.resizeHandler);
+        }
+
+        MainPage.popstateHandler = function(event: PopStateEvent) {
             Util.callHook(config,Lifecycle.onpopstate,event);
         };
-
-        // 监听文档ready
-        document.addEventListener("DOMContentLoaded", function(event) { 
+        MainPage.readyHandler = function() {
             Util.callHook(config,Lifecycle.ready);
-        });
-
-        // 监听resize
-        window.addEventListener(Lifecycle.resize, function() {
+        };
+        MainPage.resizeHandler = Util.throttle(function() {
             Util.callHook(config,Lifecycle.resize);
-        });
+        }, 150);
+
+        window.addEventListener('popstate', MainPage.popstateHandler);
+        document.addEventListener('DOMContentLoaded', MainPage.readyHandler);
+        window.addEventListener('resize', MainPage.resizeHandler);
     }
 }
 

@@ -122,6 +122,24 @@ class Util {
         $(el).html(html);
     }
     /**
+     * 节流函数
+     * @param fn 要节流的函数
+     * @param delay 间隔时间(ms)
+     */
+    static throttle(fn: Function, delay: number): any {
+        let ticking = false;
+        return function(this: any, ...args: any[]) {
+            if (!ticking) {
+                ticking = true;
+                setTimeout(() => {
+                    fn.apply(this, args);
+                    ticking = false;
+                }, delay);
+            }
+        };
+    }
+
+    /**
      * 调用插件的生命周期
      * @param config 合并后的window.$mangodoc配置
      * @param hookName 调用的生命周期 @see Lifecycle
@@ -132,17 +150,15 @@ class Util {
     static callHook(config: any,hookName: Lifecycle,data?: any,callback?: Function): any{
         if(config.plugins){
             let final = data;
-            // 调用hook
             for(let plugin of config.plugins){
-                if(plugin[hookName]){
-                    if(callback){
-                        plugin[hookName](data,function(res: any){
-                            data = res;
-                            final = data;
-                        });
-                    }else{
-                        final = plugin[hookName](data);
-                    }
+                if(!plugin[hookName]) continue;
+                if(callback){
+                    plugin[hookName](data,function(res: any){
+                        data = res;
+                        final = data;
+                    });
+                }else{
+                    final = plugin[hookName](data);
                 }
             }
             if(callback){
@@ -224,13 +240,13 @@ class Util {
         return Util.getConfigOrDefault(key);
     }
 
-    // 关闭加载提示
     static hideLoading(){
-        $("#" + Layout.fullscreenLoading).hide();
+        let el = document.getElementById(Layout.fullscreenLoading);
+        if (el) el.style.display = 'none';
     }
-    // 显示加载提示
     static showLoading(){
-        $("#" + Layout.fullscreenLoading).show();
+        let el = document.getElementById(Layout.fullscreenLoading);
+        if (el) el.style.display = '';
     }
 
     // 生成默认的页面配置

@@ -1,17 +1,20 @@
 export default {
-  container: null as HTMLElement | null,
+  container: null as any,
+  _contentEl: null as any,
 
   ready() {
     console.info('[cool] wordcount ready');
   },
 
   doneEach() {
+    this._contentEl = document.querySelector('#container');
     this.init();
     this.updateCount();
     console.info('[cool] wordcount doneEach');
   },
 
   init() {
+    if (!this._contentEl) return;
     const container = document.createElement('div');
     container.className = 'word-count-container';
     container.style.cssText = `
@@ -23,19 +26,14 @@ export default {
       opacity: 0.8;
     `;
 
-    const content = document.querySelector('#container');
-    if (content) {
-      content.insertBefore(container, content.firstChild);
-      this.container = container;
-    }
+    this._contentEl.insertBefore(container, this._contentEl.firstChild);
+    this.container = container;
   },
 
   updateCount() {
-    if (!this.container) return;
-    const content = document.querySelector('#container');
-    if (!content) return;
+    if (!this.container || !this._contentEl) return;
 
-    const text = content.textContent || '';
+    const text = this._contentEl.textContent || '';
     const wordCount = this.countWords(text);
     const readingTime = this.calculateReadingTime(wordCount);
 

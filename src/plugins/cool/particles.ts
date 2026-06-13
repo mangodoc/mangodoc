@@ -43,6 +43,7 @@ export default {
         // Derive a secondary color for gradient variety
         const color2 = '#a855f7';
         const linkDist = 150;
+        const linkDistSq = linkDist * linkDist;
 
         interface Particle {
             x: number; y: number;
@@ -87,8 +88,9 @@ export default {
                     const b = particles[j];
                     const dx = a.x - b.x;
                     const dy = a.y - b.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < linkDist) {
+                    const distSq = dx * dx + dy * dy;
+                    if (distSq < linkDistSq) {
+                        const dist = Math.sqrt(distSq);
                         const t = 1 - dist / linkDist;
                         safeCtx.beginPath();
                         safeCtx.moveTo(a.x, a.y);

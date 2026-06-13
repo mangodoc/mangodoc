@@ -11,8 +11,7 @@ abstract class Global{
     static ALWAYS_REFRESH: string = "alwaysRefresh";
     // 更新时间
     static UPDATE_TIME: string = "updateTime";
-    // 最大重试次数
-    static MAX_RETRY_TIMES: number = 30;
+    static MAX_RETRY_TIMES: number = 15;
     // 封面就绪
     static FLAG_COVER_PAGE: string = "coverpage";
     // 封面路径

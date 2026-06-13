@@ -9,16 +9,11 @@ import Util from "./util/util";
  * @since 2023-05-02 17:36
  */
 class App {
-    /**
-     * 启动应用
-     */
     start(){
-        // 判断是否进入封面
         if(Util.check()){
             new CoverPage().render();
         }else{
-            // 不是封面
-            let mainPage = new MainPage();
+            let mainPage = MainPage.getInstance();
             mainPage.watch();
             mainPage.render();
         }

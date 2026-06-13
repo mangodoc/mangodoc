@@ -75,13 +75,8 @@ const iconfontPlugin = {
      * 替换页面中的iconfont元素为SVG图标
      */
     replaceIconSpans() {
-        // 同时处理span和i标签
-        const allElements = document.querySelectorAll('span, i');
+        const allElements = document.querySelectorAll('.iconfont:not([data-iconfont-processed])');
         allElements.forEach((el) => {
-            // 检查是否有iconfont类
-            if (!el.classList.contains('iconfont')) return;
-            
-            // 获取icon类名
             let iconClass = '';
             for (const cls of el.classList) {
                 if (cls.startsWith('icon-') && cls !== 'iconfont') {
@@ -90,24 +85,22 @@ const iconfontPlugin = {
                 }
             }
             if (!iconClass) return;
-            
-            // 检查是否已经替换过
-            if (el.querySelector('svg')) return;
-            
+
             const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
             svg.setAttribute('viewBox', '0 0 24 24');
             svg.style.width = '1em';
             svg.style.height = '1em';
             svg.style.fill = 'currentColor';
             svg.style.verticalAlign = '-0.15em';
-            
+
             const use = document.createElementNS('http://www.w3.org/2000/svg', 'use');
             use.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', `#${iconClass}`);
             use.setAttribute('href', `#${iconClass}`);
             svg.appendChild(use);
-            
+
             el.innerHTML = '';
             el.appendChild(svg);
+            el.setAttribute('data-iconfont-processed', 'true');
         });
     },
 
