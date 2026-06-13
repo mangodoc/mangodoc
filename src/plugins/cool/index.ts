@@ -16,6 +16,7 @@ import darkmode from './darkmode';
 import colorpicker from './colorpicker';
 import particles from './particles';
 import pagenav from '../pagenav';
+import search from './search';
 
 export default {
     list(){
@@ -37,7 +38,8 @@ export default {
             darkmode,
             colorpicker,
             particles,
-            pagenav
+            pagenav,
+            search
         ];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);

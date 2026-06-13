@@ -1092,6 +1092,16 @@ function injectStyle() {
         height: 28px !important;
       }
 
+      /* ---- Search ---- */
+      #cool-search.open input { width: 100px; }
+      .cool-search-results {
+        right: 10px !important;
+        left: 10px !important;
+        min-width: auto;
+        max-width: none;
+        top: 44px;
+      }
+
       /* ---- Blockquote ---- */
       blockquote {
         margin: 10px 0;
@@ -1110,6 +1120,90 @@ function injectStyle() {
     #container > .page-nav + div + div {
       color: var(--cool-text-muted) !important;
       font-size: 13px !important;
+    }
+
+    /* ============================================
+       SEARCH — Inline search box + dropdown
+       ============================================ */
+    #cool-search {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 6px;
+    }
+    #cool-search .el-icon-search {
+      font-size: 16px;
+      color: var(--cool-text-secondary);
+      cursor: pointer;
+      padding: 0 6px;
+      transition: var(--cool-transition-fast);
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 44px;
+    }
+    #cool-search .el-icon-search:hover {
+      color: ${themeColor};
+      transform: scale(1.15);
+    }
+    #cool-search input {
+      width: 0;
+      padding: 0;
+      border: none;
+      outline: none;
+      background: transparent;
+      color: var(--cool-text-primary);
+      font-size: 13px;
+      transition: width 0.25s ease, padding 0.25s ease;
+      vertical-align: middle;
+      line-height: 28px;
+    }
+    #cool-search.open input {
+      width: 160px;
+      padding: 0 8px;
+      border-bottom: 1px solid var(--cool-border-glass);
+    }
+    #cool-search input::placeholder {
+      color: var(--cool-text-muted);
+    }
+
+    .cool-search-results {
+      display: none;
+      position: fixed;
+      top: 48px;
+      right: 80px;
+      min-width: 280px;
+      max-width: 360px;
+      max-height: 360px;
+      overflow-y: auto;
+      background: var(--cool-bg-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--cool-border-glass);
+      border-radius: var(--cool-radius-md);
+      box-shadow: var(--cool-shadow-glass);
+      z-index: 999;
+      padding: 4px 0;
+    }
+    .cool-search-result {
+      display: block;
+      padding: 8px 14px;
+      color: var(--cool-text-primary);
+      font-size: 13px;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      border-radius: var(--cool-radius-sm);
+      margin: 2px 6px;
+    }
+    .cool-search-result:hover {
+      background: ${themeColor}22;
+      color: ${themeColor};
+    }
+
+    .cool-search-status {
+      padding: 20px;
+      text-align: center;
+      color: var(--cool-text-muted);
+      font-size: 13px;
     }
   `;
   document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
