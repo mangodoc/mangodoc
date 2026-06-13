@@ -20,6 +20,20 @@ class VueUtil {
     private static localVm: any = null;
 
     /**
+     * 销毁所有vue实例，用于封面页到内容页的切换
+     */
+    static destroyVm(){
+        if (this.vm) {
+            this.vm.$destroy();
+            this.vm = null;
+        }
+        if (this.localVm) {
+            this.localVm.$destroy();
+            this.localVm = null;
+        }
+    }
+
+    /**
      * 创建vue实例
      * @param condition 条件
      * @param localVue 本地vue

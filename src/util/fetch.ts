@@ -30,6 +30,7 @@ class Fetch {
      */
     static execute(url: string,callback: Function){
         if(this.filteUrl()){
+            Util.hideLoading();
             return ;
         }
         // 显示loading

@@ -15,6 +15,7 @@ class MainPage implements Page{
     static config: any = null;
     private static instance: MainPage | null = null;
     private static popstateHandler: any = null;
+    private static hashchangeHandler: any = null;
     private static readyHandler: any = null;
     private static resizeHandler: any = null;
 
@@ -81,6 +82,9 @@ class MainPage implements Page{
         if (MainPage.popstateHandler) {
             window.removeEventListener('popstate', MainPage.popstateHandler);
         }
+        if (MainPage.hashchangeHandler) {
+            window.removeEventListener('hashchange', MainPage.hashchangeHandler);
+        }
         if (MainPage.readyHandler) {
             document.removeEventListener('DOMContentLoaded', MainPage.readyHandler);
         }
@@ -91,6 +95,9 @@ class MainPage implements Page{
         MainPage.popstateHandler = function(event: PopStateEvent) {
             Util.callHook(config,Lifecycle.onpopstate,event);
         };
+        MainPage.hashchangeHandler = function() {
+            Util.callHook(config,Lifecycle.onpopstate);
+        };
         MainPage.readyHandler = function() {
             Util.callHook(config,Lifecycle.ready);
         };
@@ -99,6 +106,7 @@ class MainPage implements Page{
         }, 150);
 
         window.addEventListener('popstate', MainPage.popstateHandler);
+        window.addEventListener('hashchange', MainPage.hashchangeHandler);
         document.addEventListener('DOMContentLoaded', MainPage.readyHandler);
         window.addEventListener('resize', MainPage.resizeHandler);
     }

@@ -7,9 +7,11 @@ export default {
 }
 
 function injectStyle() {
+  if (document.getElementById('cool-theme-core')) return;
   let themeColor = Util.getConfig("themeColor");
 
   const styleEl = document.createElement("style");
+  styleEl.id = 'cool-theme-core';
   styleEl.setAttribute('data-cool-theme', 'core');
   styleEl.textContent = `
     /* ============================================
@@ -879,6 +881,97 @@ function injectStyle() {
     }
     .el-tabs--border-card > .el-tabs__header .el-tabs__item:hover {
       color: ${themeColor} !important;
+    }
+
+    /* ============================================
+       COVER PAGE — Full-screen hero + feature cards
+       ============================================ */
+    .coverpage {
+      width: 80%;
+      margin: 0 auto;
+      padding: 60px 0 40px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .coverpage .el-result {
+      max-width: 640px;
+    }
+    .coverpage .logo {
+      width: 40%;
+      max-width: 280px;
+      border-radius: 16px;
+      box-shadow: 0 0 40px ${themeColor}44, 0 0 80px ${themeColor}22;
+      transition: box-shadow 0.4s ease;
+    }
+    .coverpage .logo .el-image__inner {
+      border-radius: 16px;
+      object-fit: contain;
+    }
+    .coverpage .logo:hover {
+      box-shadow: 0 0 60px ${themeColor}66, 0 0 120px ${themeColor}33;
+    }
+    .coverpage .future-card {
+      margin: 8px;
+      background: var(--cool-bg-glass) !important;
+      backdrop-filter: blur(16px) !important;
+      border: 1px solid var(--cool-border-glass) !important;
+      border-radius: var(--cool-radius-lg) !important;
+      transition: all 0.3s ease !important;
+    }
+    .coverpage .future-card:hover {
+      border-color: ${themeColor}44 !important;
+      box-shadow: 0 0 24px ${themeColor}22 !important;
+      transform: translateY(-2px);
+    }
+    .coverpage .future-card h3 {
+      color: var(--cool-text-primary);
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .coverpage .future-remark {
+      color: var(--cool-text-muted);
+      font-size: 13px;
+      min-height: 48px;
+      line-height: 1.6;
+    }
+    .coverpage .future-remark a {
+      color: ${themeColor};
+    }
+    .coverpage .footer {
+      text-align: center;
+      color: var(--cool-text-muted);
+      padding-top: 40px;
+      font-size: 12px;
+      width: 100%;
+    }
+    .coverpage .footer a {
+      color: ${themeColor};
+      font-size: 12px;
+    }
+    .coverpage .el-button--primary {
+      background: var(--cool-theme, ${themeColor});
+      border-color: var(--cool-theme, ${themeColor});
+    }
+    .coverpage .el-button--primary:hover {
+      filter: brightness(1.12);
+    }
+
+    @media only screen and (max-width: 500px) {
+      .coverpage {
+        width: 96%;
+        padding: 40px 0 20px;
+      }
+      .coverpage .logo {
+        width: 70%;
+        max-width: 240px;
+      }
+      .coverpage .el-result {
+        max-width: 100%;
+      }
     }
 
     /* ============================================

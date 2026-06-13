@@ -191,6 +191,9 @@ class Util {
     static setFlag(key: string){
         flag.set(key,true);
     }
+    static resetFlag(key: string){
+        flag.set(key,false);
+    }
     /**
      * 获取flag中的属性值
      * @param key 属性key

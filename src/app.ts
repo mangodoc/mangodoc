@@ -10,13 +10,15 @@ import Util from "./util/util";
  */
 class App {
     start(){
-        if(Util.check()){
-            new CoverPage().render();
-        }else{
-            let mainPage = MainPage.getInstance();
-            mainPage.watch();
-            mainPage.render();
-        }
+        let mainPage = MainPage.getInstance();
+        mainPage.watch();
+        document.addEventListener('DOMContentLoaded', () => {
+            if(Util.check()){
+                new CoverPage().render();
+            }else{
+                mainPage.render();
+            }
+        });
     }
 }
 

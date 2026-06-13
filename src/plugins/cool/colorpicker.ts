@@ -1,5 +1,8 @@
 import Util from "../../util/util";
 
+let _swatchPollActive = false;
+let _docHandlerAttached = false;
+
 const PRESET_COLORS = [
     { color: '#409EFF', label: '蓝' },
     { color: '#667eea', label: '靛' },
@@ -13,21 +16,55 @@ const PRESET_COLORS = [
 
 export default {
     ready() {
+        this._ensureDocHandler();
         this.applySavedColor();
         this.injectColorSwatch();
+    },
+    mounted() {
+        this.injectColorSwatch();
+    },
+
+    _ensureDocHandler() {
+        if (_docHandlerAttached) return;
+        _docHandlerAttached = true;
+        document.addEventListener('click', (e: Event) => {
+            const target = e.target as Node;
+            const dot = document.getElementById('cool-color-dot');
+            if (dot && (target === dot || dot.contains(target))) {
+                e.stopPropagation();
+                const wrapper = document.getElementById('cool-color-swatch');
+                if (wrapper) this.togglePopover(wrapper, dot);
+                return;
+            }
+            const popover = document.getElementById('cool-color-popover');
+            if (popover && !popover.contains(target)) {
+                const wrapper = document.getElementById('cool-color-swatch');
+                const d = document.getElementById('cool-color-dot');
+                if (wrapper && d && !wrapper.contains(target)) {
+                    this.closePopover(wrapper, d);
+                }
+            }
+        });
     },
 
     injectColorSwatch() {
         if (document.getElementById('cool-color-swatch')) return;
+        this._startSwatchPoll();
+    },
 
+    _startSwatchPoll() {
+        if (_swatchPollActive) return;
+        _swatchPollActive = true;
         let pollCount = 0;
         const poll = setInterval(() => {
             pollCount++;
-            if (pollCount > 30) { clearInterval(poll); return; }
+            if (pollCount > 60) { clearInterval(poll); _swatchPollActive = false; return; }
             const header = document.getElementById('header');
             const darkToggle = document.getElementById('cool-dark-toggle');
             if (!header || !darkToggle) return;
             clearInterval(poll);
+            _swatchPollActive = false;
+            if (document.getElementById('cool-color-swatch')) return;
 
             const wrapper = document.createElement('span');
             wrapper.id = 'cool-color-swatch';
@@ -36,11 +73,6 @@ export default {
             const dot = document.createElement('span');
             dot.id = 'cool-color-dot';
             this.updateDot(dot, this.getCurrentColor());
-
-            dot.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.togglePopover(wrapper, dot);
-            });
 
             let hoverTimer: any = null;
             dot.addEventListener('mouseenter', () => {
@@ -59,11 +91,6 @@ export default {
 
             wrapper.appendChild(dot);
             header.insertBefore(wrapper, darkToggle);
-
-            document.addEventListener('click', (e: any) => {
-                if (wrapper.contains(e.target)) return;
-                this.closePopover(wrapper, dot);
-            });
         }, 200);
     },
 

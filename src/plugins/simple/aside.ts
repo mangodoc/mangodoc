@@ -49,6 +49,7 @@ export default {
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
+            if (document.getElementById(Layout.aside)) return;
             let sidebarList = JSON.parse(json);
             let theActive = Util.getActiveMenu(sidebarList);
             if (theActive) {

@@ -1,4 +1,16 @@
 # 更新日志
+## 2026-06-13
+1. 发布 v2.7.1，修复多项导航与封面页问题。
+2. 修复封面页点击按钮后 loading 永驻问题（`_popstateBusy` 防重入 + `filterUrl` 补 `hideLoading` + 保存布局前先隐藏 loading）。
+3. 修复直接访问 `#/README` 页面错乱（`render()` 延迟到 `DOMContentLoaded` 后执行）。
+4. 修复主题色选择器在多切菜单后按钮无响应（`document` 级事件委托替代 `dot.onclick`）。
+5. 修复全屏按钮状态无法恢复（`savedState === 'true'` 布尔值比较错误）。
+6. 修复 simple 主题全屏恢复时图标为滑雪人（改用正确 SVG）。
+7. 修复 simple 主题全屏 `<style>` 缺少防重入守卫。
+8. 修复 default 主题 aside 空指针异常（`getActiveMenu` 返回 null 未防御）。
+9. 优化封面页 logo 尺寸（`40%`/`280px`），cool 主题去圆形裁剪为圆角。
+10. 封面页 primary 按钮颜色跟随主题色变化（`--cool-theme` CSS 变量）。
+
 ## 2024-03-10
 1. 发布2.5.0，新增内置插件iconfont，支持iconfont字体图标。
 2. 内置常用图标（code、log、home、search等），支持自定义iconfont资源。

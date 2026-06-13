@@ -14,6 +14,7 @@ import Util from "../../util/util";
 export default {
     ready() {
         if (Util.getConfig('particles') === false) return;
+        if (document.getElementById('cool-particles-canvas')) return;
         this.startParticles();
     },
 

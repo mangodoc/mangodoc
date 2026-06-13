@@ -7,8 +7,10 @@ export default {
 }
 
 function injectStyle() {
+    if (document.getElementById('default-theme-style')) return;
     let themeColor = Util.getConfigOrDefault("themeColor");
     const styleEl = document.createElement("style");
+    styleEl.id = 'default-theme-style';
     styleEl.textContent = `
       body {
         margin: 0px;
@@ -163,7 +165,49 @@ function injectStyle() {
         vertical-align: middle;
         margin-right:8px;
         width:30px;
-      }      
+      }
+      .coverpage {
+        width: 80%;
+        margin: 0 auto;
+        padding: 60px 0 40px;
+        text-align: center;
+      }
+      .coverpage .logo {
+        width: 40%;
+        max-width: 280px;
+      }
+      .coverpage .logo .el-image__inner {
+        object-fit: contain;
+      }
+      .coverpage .future-card {
+        margin: 8px;
+        text-align: left;
+      }
+      .coverpage .future-card h3 {
+        color: #303133;
+      }
+      .coverpage .future-remark {
+        color: #909399;
+        font-size: 13px;
+        min-height: 48px;
+        line-height: 1.6;
+      }
+      .coverpage .footer {
+        text-align: center;
+        color: #909399;
+        padding-top: 40px;
+        font-size: 12px;
+      }
+      @media only screen and (max-width: 500px) {
+        .coverpage {
+          width: 96%;
+          padding: 40px 0 20px;
+        }
+      .coverpage .logo {
+        width: 70%;
+        max-width: 240px;
+      }
+      }
       @media only screen and (max-width: 500px) {
         #aside{
           display: none;

@@ -7,11 +7,13 @@ export default {
 }
 
 function injectStyle() {
+  if (document.getElementById('simple-theme-style')) return;
   let themeColor = Util.getConfig("themeColor");
   let sideWidth = Util.getConfig("sideWidth");
   let themePadding = Util.getConfig("themePadding");
   let contentWidth = (100 - parseInt(themePadding)*2 - (sideWidth/window.screen.width)*100) + '%';
   const styleEl = document.createElement("style");
+  styleEl.id = 'simple-theme-style';
   styleEl.textContent = `
     body {
       margin: 0px;
@@ -190,12 +192,61 @@ function injectStyle() {
         transform: rotate(360deg);
       }
     }
-    #logo {
-      vertical-align: middle;
-      margin-right:8px;
-      width:30px;
-    }      
-    @media only screen and (max-width: 500px) {
+      #logo {
+        vertical-align: middle;
+        margin-right:8px;
+        width:30px;
+      }
+      .coverpage {
+        width: 80%;
+        margin: 0 auto;
+        padding: 60px 0 40px;
+        text-align: center;
+      }
+      .coverpage .logo {
+        width: 40%;
+        max-width: 280px;
+      }
+      .coverpage .logo .el-image__inner {
+        object-fit: contain;
+      }
+      .coverpage .future-card {
+        margin: 8px;
+        text-align: left;
+      }
+      .coverpage .future-card h3 {
+        color: #303133;
+      }
+      .coverpage .future-remark {
+        color: #909399;
+        font-size: 13px;
+        min-height: 48px;
+        line-height: 1.6;
+      }
+      .coverpage .future-remark a {
+        color: ${themeColor};
+      }
+      .coverpage .footer {
+        text-align: center;
+        color: #909399;
+        padding-top: 40px;
+        font-size: 12px;
+      }
+      .coverpage .footer a {
+        color: ${themeColor};
+        font-size: 12px;
+      }
+      @media only screen and (max-width: 500px) {
+        .coverpage {
+          width: 96%;
+          padding: 40px 0 20px;
+        }
+      .coverpage .logo {
+        width: 70%;
+        max-width: 240px;
+      }
+      }
+      @media only screen and (max-width: 500px) {
       #aside{
         display: none;
       }

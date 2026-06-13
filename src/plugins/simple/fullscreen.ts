@@ -6,8 +6,9 @@ export default {
   },
 
   initFullscreen() {
-    // 创建样式
+    if (document.getElementById('simple-fullscreen-style')) return;
     const style = document.createElement('style');
+    style.id = 'simple-fullscreen-style';
     style.textContent = `
       .fullscreen-btn {
         position: fixed;
@@ -123,9 +124,13 @@ export default {
 
     // 恢复上次的全屏状态
     const savedState = Util.getLocal('fullscreen');
-    if (savedState === 'true') {
+    if (savedState === true) {
       document.body.classList.add('fullscreen-mode');
-      fullscreenBtn.innerHTML = '&#x26F7;';
+      fullscreenBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+        </svg>
+      `;
       isFullscreen = true;
     }
   }

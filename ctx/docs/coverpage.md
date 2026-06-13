@@ -1,41 +1,5 @@
-<style type="text/css">
-.coverpage{
-  width:80%;
-  margin:0 auto;
-}
-.coverpage .logo{
-  width:25%;
-}
-.coverpage .future-remark{
-  color:gray;
-  font-size:14px;
-  min-height:60px;
-}
-.coverpage .future-card{
-  margin:8px;
-}
-.coverpage .footer{
-  text-align:center;
-  color:gray;
-  padding-top:10px;
-}
-.coverpage .footer a{
-  font-size:14px;
-}
-
-@media only screen and (max-width: 500px) {
-  .coverpage{
-    width:98%;
-    margin:0 auto;
-  }
-  .coverpage .logo{
-    width:60%;
-  }
-}
-</style>
-
 <div class="coverpage">
-  <el-result style="margin:0 auto;" sub-title="一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。>2.0.0使用typescript对内核进行重构，使得代码更加可读可维护，更优雅！">
+  <el-result style="margin:0 auto;" sub-title="一个简单的doc文档构建器，采用微内核架构风格实现，使用插件机制来支持扩展。2.0.0使用typescript对内核进行重构，使得代码更加可读可维护，更优雅！">
     <template slot="icon">
       <el-image src="static/mangodoc.png" class="logo"></el-image>
     </template>
@@ -70,7 +34,7 @@
             },
             {
               title: "脚手架工具",
-              remark: "支持<a href='https://github.com/mg0324/mangodoc-cli'>mangodoc<a/>工具快速创建文档模板并启动。"
+              remark: "支持<a href='https://github.com/mg0324/mangodoc-cli'>mangodoc</a>工具快速创建文档模板并启动。"
             },
             {
               title: "marked转换",
@@ -105,8 +69,7 @@
     },
     methods: {
         handleClick(url) {
-          window.location.href = window.$mangodoc.context+"/#/"+url;
-          window.location.reload();
+          window.location.hash = "#/" + url;
         }
     }
   }

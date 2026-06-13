@@ -47,6 +47,7 @@ export default {
         fetch("docs/_navbar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
+            if (document.getElementById(Layout.header)) return;
             let navList = JSON.parse(json);
             let html = renderNavItem(navList);
             let oper = `<i id='${Layout.oper}' class='el-icon-menu oper' onclick='window.operFn()'></i>`

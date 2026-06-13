@@ -49,9 +49,10 @@ export default {
         fetch("docs/_sidebar.json?t="+Math.random())
         .then(response => response.text())
         .then(json => {
+            if (document.getElementById(Layout.aside)) return;
             let sidebarList = JSON.parse(json);
-            active = Util.getActiveMenu(sidebarList);
-            window.document.title = active.title;
+            let theActive = Util.getActiveMenu(sidebarList);
+            if (theActive) { active = theActive; window.document.title = active.title; }
             let html = renderSidebarItem(sidebarList,true);
             // console.info("sidebar html:"+html);
             elSide.innerHTML = html;

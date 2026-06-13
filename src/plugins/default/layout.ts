@@ -1,8 +1,15 @@
 import Layout from "../../enum/layout";
 import Util from "../../util/util";
+import VueUtil from "../../util/vue";
 import MainPage from "../../page/mainpage";
+import CoverPage from "../../page/coverpage";
+import store from "../../store/store";
+import Lifecycle from "../../enum/plugin";
+let _popstateBusy = false;
+
 export default {
     ready(){
+        if (document.getElementById(Layout.page)) return;
         let template = `
             <el-container id="${Layout.main}">
         `;
@@ -24,10 +31,29 @@ export default {
         console.info("layout finish!");
     },
     onpopstate(){
+        if (_popstateBusy) return;
+        _popstateBusy = true;
+        setTimeout(() => { _popstateBusy = false; }, 300);
+
+        console.info("layout onpopstate");
+        if (Util.getHash() == "#/" && Util.getConfig('coverPage')) {
+            new CoverPage().render();
+            return;
+        }
+        if (!document.getElementById(Layout.container)) {
+            VueUtil.destroyVm();
+            Util.resetFlag(Layout.app);
+            Util.resetFlag("coverpage");
+            const app = document.getElementById(Layout.app);
+            const saved = store.get('_savedLayout');
+            if (app && saved) {
+                app.innerHTML = saved;
+                store.set('_savedLayout', null);
+                const config = MainPage.getInstance().getConfig();
+                Util.callHook(config, Lifecycle.ready);
+            }
+        }
         MainPage.rerender();
         $("title").text(Util.getNavMap(window.location.hash));
-        if(Util.getHash() == "#/"){
-            window.location.reload();
-        }
     }
 }
