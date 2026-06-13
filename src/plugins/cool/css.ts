@@ -1147,6 +1147,27 @@ function injectStyle() {
       font-size: 13px !important;
     }
 
+    /* ---- Edit this page ---- */
+    .cool-edit-page {
+      margin-top: 24px;
+    }
+    .cool-edit-page a {
+      display: inline-block;
+      color: var(--cool-text-muted);
+      font-size: 13px;
+      text-decoration: none;
+      padding: 4px 10px;
+      border-radius: var(--cool-radius-sm);
+      transition: color 0.2s, background 0.2s;
+    }
+    .cool-edit-page a:hover {
+      color: ${themeColor};
+      background: ${themeColor}11;
+    }
+    .cool-edit-page a i {
+      margin-right: 4px;
+    }
+
     /* ============================================
        SEARCH — Inline search box + dropdown
        ============================================ */

@@ -18,6 +18,7 @@ import particles from './particles';
 import pagenav from '../pagenav';
 import search from './search';
 import copycode from '../copycode';
+import editpage from '../editpage';
 
 export default {
     list(){
@@ -41,7 +42,8 @@ export default {
             particles,
             pagenav,
             search,
-            copycode
+            copycode,
+            editpage
         ];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
