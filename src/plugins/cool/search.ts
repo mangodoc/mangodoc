@@ -1,9 +1,10 @@
 import MiniSearch from 'minisearch'
 
-interface PageItem {
+interface PageData {
   id: string
   title: string
   content: string
+  path: string
 }
 
 let miniSearch: MiniSearch | null = null
@@ -11,6 +12,8 @@ let isIndexReady = false
 let searchBox: HTMLElement | null = null
 let searchInput: HTMLInputElement | null = null
 let resultsEl: HTMLElement | null = null
+let timer: any = null
+const pageMap = new Map<string, PageData>()
 
 function hashToUrl(hash: string): string {
   let url = hash.replace(/^#/, '')
@@ -22,17 +25,20 @@ function stripMarkdown(md: string): string {
   return md
     .replace(/^---[\s\S]*?---\n?/m, '')
     .replace(/```[\s\S]*?```/g, ' ')
+    .replace(/\]\([^)]*\)/g, '] ')
     .replace(/[#*`~\[\]()>|\\_\-]/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
 }
 
-function collectPages(items: any[], result: PageItem[]) {
+function collectPages(items: any[], result: PageData[], section: string = '') {
   for (const item of items) {
     if (item.href && item.title) {
-      result.push({ id: item.href, title: item.title, content: '' })
+      result.push({ id: item.href, title: item.title, content: '', path: section })
     }
-    if (item.children) collectPages(item.children, result)
+    if (item.children) {
+      collectPages(item.children, result, item.title)
+    }
   }
 }
 
@@ -40,7 +46,7 @@ async function buildIndex() {
   try {
     const resp = await fetch('docs/_sidebar.json?t=' + Math.random())
     const sidebar = await resp.json()
-    const pages: PageItem[] = []
+    const pages: PageData[] = []
     collectPages(sidebar, pages)
     if (pages.length === 0) return
 
@@ -49,13 +55,13 @@ async function buildIndex() {
         const url = hashToUrl(page.id)
         const resp = await fetch(url + '?t=' + Math.random())
         const md = await resp.text()
-        page.content = stripMarkdown(md).substring(0, 10000)
+        page.content = stripMarkdown(md)
+        pageMap.set(page.id, page)
       } catch (_) {}
     }))
 
     miniSearch = new MiniSearch({
       fields: ['title', 'content'],
-      storeFields: ['title', 'id'],
       searchOptions: {
         boost: { title: 3 },
         fuzzy: 0.2,
@@ -109,7 +115,7 @@ function createSearchUI() {
     }
   }
 
-  let timer: any = null
+  let timer = null as any
   input.oninput = () => {
     clearTimeout(timer)
     const q = input.value.trim()
@@ -159,12 +165,45 @@ function doSearch(query: string) {
     return
   }
 
-  const html = results.slice(0, 10).map((r: any) =>
-    `<a class="cool-search-result" href="${r.id}">${esc(r.title || '')}</a>`
-  ).join('')
+  const html = results.slice(0, 10).map((r: any) => {
+    const data = pageMap.get(r.id)
+    if (!data) return ''
+    const snippet = extractSnippet(data.content, query)
+    return renderResult(r.id, data.title, data.path, snippet)
+  }).join('')
 
   resultsEl.innerHTML = html
   resultsEl.style.display = 'block'
+}
+
+function extractSnippet(content: string, query: string): string {
+  const lower = content.toLowerCase()
+  const q = query.toLowerCase()
+  const idx = lower.indexOf(q)
+  if (idx < 0) {
+    const preview = content.substring(0, 80).trim()
+    return preview ? esc(preview) + '…' : ''
+  }
+
+  const start = Math.max(0, idx - 30)
+  const end = Math.min(content.length, idx + q.length + 60)
+  let snippet = content.substring(start, end)
+
+  if (start > 0) snippet = '…' + snippet
+  if (end < content.length) snippet = snippet + '…'
+
+  const pattern = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+  snippet = snippet.replace(new RegExp(pattern, 'gi'), '<em>$&</em>')
+
+  return snippet
+}
+
+function renderResult(href: string, title: string, path: string, snippet: string): string {
+  return `<a class="cool-search-result" href="${href}">
+    <span class="cool-search-result-title">${esc(title)}</span>
+    ${path ? '<span class="cool-search-result-path">' + esc(path) + '</span>' : ''}
+    ${snippet ? '<span class="cool-search-result-snippet">' + snippet + '</span>' : ''}
+  </a>`
 }
 
 function hideResults() {

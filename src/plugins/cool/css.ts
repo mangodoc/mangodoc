@@ -1171,9 +1171,9 @@ function injectStyle() {
       position: fixed;
       top: 48px;
       right: 80px;
-      min-width: 280px;
-      max-width: 360px;
-      max-height: 360px;
+      min-width: 300px;
+      max-width: 420px;
+      max-height: 400px;
       overflow-y: auto;
       background: var(--cool-bg-glass);
       backdrop-filter: blur(24px);
@@ -1182,25 +1182,59 @@ function injectStyle() {
       border-radius: var(--cool-radius-md);
       box-shadow: var(--cool-shadow-glass);
       z-index: 999;
-      padding: 4px 0;
+      padding: 6px 0;
     }
     .cool-search-result {
       display: block;
-      padding: 8px 14px;
+      padding: 10px 14px;
       color: var(--cool-text-primary);
-      font-size: 13px;
       text-decoration: none;
-      transition: background 0.15s ease;
+      transition: background 0.15s ease, border-color 0.15s ease;
       border-radius: var(--cool-radius-sm);
-      margin: 2px 6px;
+      margin: 2px 8px;
+      border: 1px solid transparent;
     }
     .cool-search-result:hover {
-      background: ${themeColor}22;
+      background: ${themeColor}11;
+      border-color: ${themeColor}33;
+    }
+    .cool-search-result-title {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--cool-text-primary);
+      line-height: 1.4;
+    }
+    .cool-search-result:hover .cool-search-result-title {
       color: ${themeColor};
+    }
+    .cool-search-result-path {
+      display: block;
+      font-size: 11px;
+      color: var(--cool-text-muted);
+      margin-top: 1px;
+      line-height: 1.3;
+    }
+    .cool-search-result-snippet {
+      display: block;
+      font-size: 12px;
+      color: var(--cool-text-secondary);
+      margin-top: 4px;
+      line-height: 1.5;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+    }
+    .cool-search-result-snippet em {
+      font-style: normal;
+      color: ${themeColor};
+      font-weight: 600;
     }
 
     .cool-search-status {
-      padding: 20px;
+      padding: 24px;
       text-align: center;
       color: var(--cool-text-muted);
       font-size: 13px;
