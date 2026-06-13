@@ -1,14 +1,12 @@
 import simplePlugin from "./plugins/simple/index";
 import defaultPlugin from "./plugins/default/index";
 import coolPlugin from "./plugins/cool/index";
-import warmPlugin from "./plugins/warm/index";
 import util from "./util/util";
 
 let themeMap:any = {
     "simple": simplePlugin,
     "default": defaultPlugin,
-    "cool": coolPlugin,
-    "shanshui": warmPlugin
+    "cool": coolPlugin
 }
 
 class Theme {
