@@ -16,6 +16,14 @@
 * 插件扩展：提供插件API接口，包括生命周期和部分事件监听函数。
 * 支持vue：md内支持局部使用，详情参考[例子](#/demo/elementui)。
 * 接口api: 将内部配置暴露为`window.$mangodocApi`提供给外部插件调用。
+* **内置三款主题**：`default`（默认）、`simple`（简洁）、`cool`（酷炫）。
+
+## 主题切换
+```javascript
+window.$mangodoc = {
+    theme: "cool", // "default" | "simple" | "cool"
+};
+```
 
 ## 插件列表
 * 内置插件core - 支持文档布局、文档核心、hash路由、加载提示、接口api及插件机制
@@ -25,6 +33,9 @@
 * 内置插件prism - 基于`prismjs`支持代码高亮
 * 内置插件fullscreen - 支持文档全屏显示，包含全屏按钮、布局优化和toc位置调整
 * 内置插件iconfont - 支持iconfont字体图标，内置常用图标并支持自定义iconfont资源
+* 内置插件wordcount - 显示文档内容字数及大约阅读时间（simple/cool 主题）
+* 内置插件darkmode - 深色/浅色模式切换（cool 主题）
+* 内置插件particles - 动态粒子连接背景（cool 主题，默认关闭）
 * 外部插件[mangodoc-giscus](https://github.com/mg0324/mangodoc-giscus) - 支持giscus评论
 * 外部插件[mangodoc-toc](https://github.com/mg0324/mangodoc-toc) - 支持文章目录书签生成
 * 外部插件[mangodoc-imgview](https://github.com/mg0324/mangodoc-imgview) - 集成`hammerjs`支持图片点击查看和放大移动
@@ -35,6 +46,48 @@
 * 外部插件[mangodoc-busuanzi](https://github.com/mg0324/mangodoc-busuanzi) - 集成卜算子，显示网站访问信息
 * 外部插件[mangodoc-update-time](https://github.com/mg0324/mangodoc-update-time) - 显示文档最后修改时间
 
+## 使用 cool 主题
+
+在页面初始化配置中设置 `theme: "cool"` 即可启用。
+
+### cool 主题特性
+* **深色模式**：内置深色/浅色模式切换按钮，支持跟随系统偏好，默认深色。
+* **玻璃态设计**：导航栏、侧边栏、内容卡片采用毛玻璃效果（`backdrop-filter: blur`）。
+* **渐变质感**：标题使用渐变色填充，按钮和焦点元素有渐变高亮。
+* **粒子背景**：可选动态粒子连接动画（默认关闭，`particles: true` 启用）。
+* **平滑动画**：hover 状态、页面切换、模式切换均有缓动动画。
+* **暗色代码块**：暗黑主题代码高亮配色，浅色模式下代码块保持深色。
+* **全屏阅读**：全屏模式适配玻璃态风格。
+* **字数统计**：显示文档字数及阅读时间估算。
+
+### cool 主题配置项
+```javascript
+window.$mangodoc = {
+    theme: "cool",              // 启用 cool 主题
+    themeColor: "#667eea",      // 主题色，默认 #409EFF
+    darkMode: true,             // true=深色, false=浅色, 不设置=跟随系统偏好
+    particles: false,           // 关闭粒子背景（默认 true，开启）
+    particlesCount: 50,         // 粒子数量（默认 50）
+    particlesSpeed: 0.4,        // 粒子移动速度（默认 0.4）
+};
+```
+
+### cool 主题插件列表
+* `css` - 酷炫样式：渐变色、毛玻璃、暗色主题整体配色
+* `layout` / `aside` / `nav` - 布局、侧边栏、导航栏
+* `darkmode` - 深色/浅色模式切换（含 localStorage 持久化 + 系统偏好检测）
+* `particles` - 动态粒子连接背景（canvas 绘制，标签页隐藏时自动暂停）
+* `fullscreen` - 增强版全屏阅读
+* `wordcount` - 字数统计 + 阅读时间估算
+* 共享插件：`prism` / `pageconfig` / `alert` / `link` / `tab` / `iconfont`
+
+## cool 主题界面预览
+- 深色太空背景，配合主题色渐变
+- 导航栏和侧边栏带有毛玻璃效果和`backdrop-filter`
+- 内容卡片半透明磨砂质感，hover 时发光边框
+- 页面间切换配合 `themeColor` 主色调
+- 代码块深色主题配色，语言标签高亮
+- 响应式适配移动端
 
 ## 待办列表
 - [x] （优化）优化`nav`上的更新日志链接，加上图标。
@@ -47,7 +100,8 @@
 - [x] （优化）在footer内增加备案信息显示。
 - [x] (future) 支持文章全屏阅读，能收展头部和左侧等内容。
 - [x] （新特性）支持iconfont字体图标。
-- [ ] （新插件）显示文档内容字数及大约阅读时间。
+- [x] （新插件）显示文档内容字数及大约阅读时间。
+- [x] （新特性）设计并支持第三款酷炫主题（cool theme）。
 - [ ] （新插件）在文档末尾显示附近范围内的分页内容。
 - [ ] （新特性）设计并支持文档封面页。
 - [ ] （新插件）基于markmap支持思维导图，支持超链接跳转。

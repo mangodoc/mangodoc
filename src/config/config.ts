@@ -35,6 +35,14 @@ class Config {
         url: "",
         prefix: "iconfont"
     };
+    // 是否启用深色模式（cool 主题）：true=深色, false=浅色, 不设置=跟随系统
+    darkMode: any = null;
+    // 是否启用粒子背景（cool 主题），默认开启
+    particles: boolean = true;
+    // 粒子数量
+    particlesCount: number = 50;
+    // 粒子移动速度
+    particlesSpeed: number = 0.3;
 }
 
 let config = new Config();
