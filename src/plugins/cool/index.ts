@@ -20,6 +20,7 @@ import search from './search';
 import copycode from '../copycode';
 import editpage from '../editpage';
 import imgview from '../imgview';
+import breadcrumb from '../breadcrumb';
 
 export default {
     list(){
@@ -45,7 +46,8 @@ export default {
             search,
             copycode,
             editpage,
-            imgview
+            imgview,
+            breadcrumb
         ];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
