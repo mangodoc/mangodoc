@@ -675,6 +675,31 @@ function injectStyle() {
       border-bottom: 1px solid var(--cool-border);
       border-left: 1px solid var(--cool-border);
     }
+    .cool-copy-btn {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      z-index: 2;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--cool-border-glass);
+      color: var(--cool-text-muted);
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: var(--cool-radius-sm);
+      cursor: pointer;
+      opacity: 0;
+      transition: opacity 0.2s ease, background 0.2s ease, color 0.2s ease;
+      font-family: sans-serif;
+      line-height: 1.6;
+    }
+    pre:hover .cool-copy-btn {
+      opacity: 1;
+    }
+    .cool-copy-btn:hover {
+      background: ${themeColor}22;
+      color: ${themeColor};
+      border-color: ${themeColor}44;
+    }
 
     .token.comment { color: #6b7280; font-style: italic; }
     .token.function { color: #60a5fa; }

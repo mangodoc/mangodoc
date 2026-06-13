@@ -17,6 +17,7 @@ import colorpicker from './colorpicker';
 import particles from './particles';
 import pagenav from '../pagenav';
 import search from './search';
+import copycode from '../copycode';
 
 export default {
     list(){
@@ -39,7 +40,8 @@ export default {
             colorpicker,
             particles,
             pagenav,
-            search
+            search,
+            copycode
         ];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
