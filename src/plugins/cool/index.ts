@@ -15,6 +15,7 @@ import wordcount from './wordcount';
 import darkmode from './darkmode';
 import colorpicker from './colorpicker';
 import particles from './particles';
+import pagenav from '../pagenav';
 
 export default {
     list(){
@@ -35,7 +36,8 @@ export default {
             wordcount,
             darkmode,
             colorpicker,
-            particles
+            particles,
+            pagenav
         ];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);

@@ -52,6 +52,31 @@ class Util {
         return hash;
     }
     /**
+     * 从当前 hash 获取菜单 activeIndex
+     * @returns 匹配的 index，默认 "1"
+     */
+    static getActiveIndexFromHash(): string {
+        const hash = this.getHash();
+        if (!hash || hash === "#/") return "1";
+        // after Vue compilation (class selector)
+        const compiledLinks = document.querySelectorAll<HTMLAnchorElement>(".el-menu-item a.nav-a");
+        for (const link of compiledLinks) {
+            if (link.getAttribute("href") === hash) {
+                const item = link.closest(".el-menu-item");
+                if (item) return item.getAttribute("index") || "1";
+            }
+        }
+        // before Vue compilation (tag selector)
+        const rawLinks = document.querySelectorAll<HTMLAnchorElement>("el-menu-item a.nav-a");
+        for (const link of rawLinks) {
+            if (link.getAttribute("href") === hash) {
+                const item = link.closest("el-menu-item");
+                if (item) return item.getAttribute("index") || "1";
+            }
+        }
+        return "1";
+    }
+    /**
      * 判断是否进入封面
      * @returns 是否进入封面
      */
@@ -102,14 +127,14 @@ class Util {
      */
     private static getVueData(localVue: any){
         let data = {};
+        let common = {
+            menuOpens: this.getConfigOrDefault(Global.MENU_OPENS),
+            activeIndex: this.getActiveIndexFromHash()
+        };
         if(localVue){
-            data = Object.assign({}, localVue.data(), {
-                menuOpens: this.getConfigOrDefault(Global.MENU_OPENS)
-            });
+            data = Object.assign({}, localVue.data(), common);
         }else{
-            data = {
-                menuOpens: this.getConfigOrDefault(Global.MENU_OPENS)
-            }
+            data = common;
         }
         return data;
     }

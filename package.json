@@ -1,6 +1,6 @@
 {
     "name": "mangodoc",
-    "version": "2.7.1",
+    "version": "2.7.2",
     "description": "mangodoc tool",
     "homepage": "https://github.com/mg0324/mangodoc",
     "repository": "git@github.com:mg0324/mangodoc.git",
@@ -28,6 +28,7 @@
         "marked": "^4.2.12",
         "plantuml-encoder": "^1.4.0",
         "prismjs": "^1.29.0",
+        "puppeteer": "^25.1.0",
         "style-loader": "^3.3.2",
         "ts-loader": "^9.4.2",
         "typescript": "^5.0.4",

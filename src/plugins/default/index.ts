@@ -9,10 +9,11 @@ import alert from '../alert';
 import link from '../link';
 import tab from '../tab';
 import iconfont from '../iconfont';
+import pagenav from '../pagenav';
 
 export default {
     list(){
-        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,iconfont];
+        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,iconfont,pagenav];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }

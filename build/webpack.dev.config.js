@@ -7,6 +7,10 @@ module.exports = {
             {
                 directory: path.join(__dirname, '../ctx'),
                 publicPath: '/'
+            },
+            {
+                directory: path.join(__dirname, '../dist'),
+                publicPath: '/dist'
             }
         ]
     }

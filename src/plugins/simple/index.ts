@@ -11,10 +11,11 @@ import tab from '../tab';
 import fullscreen from './fullscreen';
 import wordcount from './wordcount';
 import iconfont from '../iconfont';
+import pagenav from '../pagenav';
 
 export default {
     list(){
-        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,fullscreen,wordcount,iconfont];
+        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,fullscreen,wordcount,iconfont,pagenav];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }
