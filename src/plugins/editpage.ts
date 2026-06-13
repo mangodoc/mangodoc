@@ -27,12 +27,10 @@ export default {
       const container = document.getElementById(Layout.container);
       if (!container) return;
 
-      const pageNav = container.querySelector(".page-nav");
-      if (!pageNav) return;
-      const updateTime = pageNav.nextElementSibling;
-      if (!updateTime || updateTime.tagName !== "DIV") return;
+      const wcContainer = container.querySelector(".word-count-container");
+      if (!wcContainer) return;
 
-      let link = updateTime.querySelector<HTMLAnchorElement>(".cool-edit-page");
+      let link = wcContainer.querySelector<HTMLAnchorElement>(".cool-edit-page");
       if (link) {
         link.href = editUrl;
         return;
@@ -45,11 +43,11 @@ export default {
       link.rel = "noopener";
       link.innerHTML = '<i class="el-icon-edit-outline"></i> 编辑此页';
 
-      (updateTime as HTMLElement).style.display = "flex";
-      (updateTime as HTMLElement).style.alignItems = "center";
-      (updateTime as HTMLElement).style.justifyContent = "flex-end";
-      (updateTime as HTMLElement).style.gap = "8px";
-      updateTime.insertBefore(link, updateTime.firstChild);
+      (wcContainer as HTMLElement).style.display = "flex";
+      (wcContainer as HTMLElement).style.alignItems = "center";
+      (wcContainer as HTMLElement).style.justifyContent = "flex-end";
+      (wcContainer as HTMLElement).style.gap = "16px";
+      wcContainer.appendChild(link);
     }, 0);
   }
 };
