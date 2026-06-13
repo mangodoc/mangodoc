@@ -36,9 +36,9 @@ window.$mangodoc = {
 * 内置插件wordcount - 显示文档内容字数及大约阅读时间（simple/cool 主题）
 * 内置插件darkmode - 深色/浅色模式切换（cool 主题）
 * 内置插件particles - 动态粒子连接背景（cool 主题，默认关闭）
+* 内置插件imgview - 图片灯箱，点击图片放大查看，支持滚轮缩放、拖拽平移、双击还原
 * 外部插件[mangodoc-giscus](https://github.com/mg0324/mangodoc-giscus) - 支持giscus评论
 * 外部插件[mangodoc-toc](https://github.com/mg0324/mangodoc-toc) - 支持文章目录书签生成
-* 外部插件[mangodoc-imgview](https://github.com/mg0324/mangodoc-imgview) - 集成`hammerjs`支持图片点击查看和放大移动
 * 外部插件[mangodoc-top](https://github.com/mg0324/mangodoc-top) - 支持文章阅读时返回顶部
 * 外部插件[mangodoc-baidu-tj](https://github.com/mg0324/mangodoc-baidu-tj) - 支持集成百度统计
 * 外部插件[mangodoc-plantuml](https://github.com/mg0324/mangodoc-plantuml) - 支持集成`plantuml`
@@ -79,7 +79,7 @@ window.$mangodoc = {
 * `particles` - 动态粒子连接背景（canvas 绘制，标签页隐藏时自动暂停）
 * `fullscreen` - 增强版全屏阅读
 * `wordcount` - 字数统计 + 阅读时间估算
-* 共享插件：`prism` / `pageconfig` / `alert` / `link` / `tab` / `iconfont`
+* 共享插件：`prism` / `pageconfig` / `alert` / `link` / `tab` / `iconfont` / `imgview`
 
 ## cool 主题界面预览
 - 深色太空背景，配合主题色渐变
@@ -130,7 +130,7 @@ window.$mangodoc = {
 * 国际化 i18n — 多语言文档目录切换
 * SEO 元信息 — 动态设置 description/OG 标签
 * 打印/PDF导出 — @media print 样式 + 打印按钮
-* 图片灯箱 — 内置图片点击放大（替代外部插件）
+* [x] 图片灯箱 — 内置图片点击放大（替代外部插件）
 * 版本切换 — 多版本文档支持
 
 ## 发布版本

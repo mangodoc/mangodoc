@@ -10,10 +10,11 @@ import link from '../link';
 import tab from '../tab';
 import iconfont from '../iconfont';
 import pagenav from '../pagenav';
+import imgview from '../imgview';
 
 export default {
     list(){
-        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,iconfont,pagenav];
+        let list = [css,layout,aside,nav,demo,pageconfig,prism,alert,link,tab,iconfont,pagenav,imgview];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
         }

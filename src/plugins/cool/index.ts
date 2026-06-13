@@ -19,6 +19,7 @@ import pagenav from '../pagenav';
 import search from './search';
 import copycode from '../copycode';
 import editpage from '../editpage';
+import imgview from '../imgview';
 
 export default {
     list(){
@@ -43,7 +44,8 @@ export default {
             pagenav,
             search,
             copycode,
-            editpage
+            editpage,
+            imgview
         ];
         if(window.$mangodoc.plugins){
             list = list.concat(window.$mangodoc.plugins);
