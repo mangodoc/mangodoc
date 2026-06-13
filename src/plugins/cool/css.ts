@@ -1149,49 +1149,19 @@ function injectStyle() {
 
     /* ---- Edit this page ---- */
     .cool-edit-page {
-      margin-top: 24px;
-      padding-top: 12px;
-      border-top: 1px solid var(--cool-border);
-    }
-    .cool-edit-page a {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      color: var(--cool-text-muted);
-      font-size: 13px;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 6px 14px;
-      border-radius: var(--cool-radius-md);
-      border: 1px solid var(--cool-border-glass);
-      background: var(--cool-bg-secondary);
-      transition: color 0.2s, background 0.2s, border-color 0.2s;
-    }
-    .cool-edit-page a:hover {
-      color: ${themeColor};
-      background: ${themeColor}11;
-      border-color: ${themeColor}44;
-    }
-    .cool-edit-page a i {
-      font-size: 14px;
-    }
-
-    /* Header edit link */
-    .cool-edit-header {
-      color: var(--cool-text-muted) !important;
+      color: ${themeColor} !important;
+      text-decoration: none !important;
       font-size: 13px !important;
       font-weight: 600 !important;
-      text-decoration: none !important;
-      padding: 4px 10px !important;
-      border-radius: var(--cool-radius-sm) !important;
-      border: 1px solid var(--cool-border-glass) !important;
-      background: var(--cool-bg-card) !important;
-      transition: color 0.2s, background 0.2s, border-color 0.2s !important;
+      white-space: nowrap !important;
+      opacity: 0.7;
+      transition: opacity 0.2s;
     }
-    .cool-edit-header:hover {
-      color: ${themeColor} !important;
-      background: ${themeColor}11 !important;
-      border-color: ${themeColor}44 !important;
+    .cool-edit-page:hover {
+      opacity: 1;
+    }
+    .cool-edit-page i {
+      margin-right: 3px;
     }
 
     /* ============================================

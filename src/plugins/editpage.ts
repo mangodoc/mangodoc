@@ -18,56 +18,38 @@ function generateEditUrl(): string | null {
   return `${repo}/edit/${branch}/${path}`;
 }
 
-function addFooterLink(editUrl: string) {
-  const container = document.getElementById(Layout.container);
-  if (!container) return;
-
-  let el = container.querySelector<HTMLElement>(".cool-edit-page");
-  if (el) {
-    el.querySelector("a")!.href = editUrl;
-    return;
-  }
-
-  el = document.createElement("div");
-  el.className = "cool-edit-page";
-  el.innerHTML = `<a href="${editUrl}" target="_blank" rel="noopener"><i class="el-icon-edit-outline"></i> 编辑此页</a>`;
-
-  const pageNav = container.querySelector(".page-nav");
-  if (pageNav) {
-    container.insertBefore(el, pageNav);
-  } else {
-    container.appendChild(el);
-  }
-}
-
-function addHeaderLink(editUrl: string) {
-  const header = document.getElementById(Layout.header);
-  if (!header) return;
-
-  header.querySelectorAll(".cool-edit-header").forEach(el => el.remove());
-
-  const link = document.createElement("a");
-  link.className = "cool-edit-header";
-  link.href = editUrl;
-  link.target = "_blank";
-  link.rel = "noopener";
-  link.innerHTML = '<i class="el-icon-edit-outline"></i> 编辑';
-
-  const version = header.querySelector(".version");
-  if (version && version.parentElement) {
-    version.parentElement.insertBefore(link, version);
-    version.parentElement.insertBefore(document.createTextNode(" "), version);
-  } else {
-    header.appendChild(link);
-  }
-}
-
 export default {
   doneEach() {
     const editUrl = generateEditUrl();
     if (!editUrl) return;
 
-    addFooterLink(editUrl);
-    addHeaderLink(editUrl);
+    setTimeout(() => {
+      const container = document.getElementById(Layout.container);
+      if (!container) return;
+
+      const pageNav = container.querySelector(".page-nav");
+      if (!pageNav) return;
+      const updateTime = pageNav.nextElementSibling;
+      if (!updateTime || updateTime.tagName !== "DIV") return;
+
+      let link = updateTime.querySelector<HTMLAnchorElement>(".cool-edit-page");
+      if (link) {
+        link.href = editUrl;
+        return;
+      }
+
+      link = document.createElement("a");
+      link.className = "cool-edit-page";
+      link.href = editUrl;
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.innerHTML = '<i class="el-icon-edit-outline"></i> 编辑此页';
+
+      (updateTime as HTMLElement).style.display = "flex";
+      (updateTime as HTMLElement).style.alignItems = "center";
+      (updateTime as HTMLElement).style.justifyContent = "flex-end";
+      (updateTime as HTMLElement).style.gap = "8px";
+      updateTime.insertBefore(link, updateTime.firstChild);
+    }, 0);
   }
 };
