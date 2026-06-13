@@ -43,6 +43,12 @@ class Config {
     particlesCount: number = 50;
     // 粒子移动速度
     particlesSpeed: number = 0.3;
+    // BGM 背景音乐 URL（shanshui 主题）
+    bgm: String = "";
+    // BGM 是否循环
+    bgmLoop: boolean = true;
+    // BGM 音量 0-1
+    bgmVolume: number = 0.3;
 }
 
 let config = new Config();
