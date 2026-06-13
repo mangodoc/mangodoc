@@ -108,6 +108,31 @@ window.$mangodoc = {
 - [x] （完善）支持内置更多的颜色标签，比如green/red/blue/yellow/orange/purple/pink/brown/gray/black/white等。
 - [x] （完善）md中code代码块的样式优化，目前显示不明显。
 
+## 未来特性
+建议新增的特性/插件（按优先级）
+### 高优先级
+
+* 全文搜索 — 最核心缺失功能。使用 minisearch/flexsearch 构建客户端索引，在导航栏添加搜索框
+* 上/下页导航 — README 已有 TODO，基于侧栏顺序在文档底部显示上一页/下一页                                
+* 编辑此页链接 — 低工作量高回报，根据 repo 配置 + 当前路径生成 GitHub 编辑链接                            
+* 封面页完善 — README 已有 TODO，现有骨架需打磨 UI 和配置                                                
+                                                                                                        
+### 中优先级                                                                                                  
+                                                                                                        
+* Mermaid 图表插件 — 补充 PlantUML， ``mermaid ` 代码块渲染流程图/时序图等                               
+* 代码复制按钮 — 每个 <pre> 代码块右上角加复制按钮                                                        
+* 目录高亮追踪 — 滚动时高亮侧栏中当前章节                                                                
+* Markmap 思维导图 — README 已有 TODO                                                                     
+                                                                                                        
+### 低优先级                                                                                                  
+                                                                                                        
+* Markdown 容器 — ::: tip/warning/danger 语法支持                                                       
+* 国际化 i18n — 多语言文档目录切换
+* SEO 元信息 — 动态设置 description/OG 标签
+* 打印/PDF导出 — @media print 样式 + 打印按钮
+* 图片灯箱 — 内置图片点击放大（替代外部插件）
+* 版本切换 — 多版本文档支持
+
 ## 发布版本
 1. 先安装依赖：`yarn`
 2. 修改版本号
