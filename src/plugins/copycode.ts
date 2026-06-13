@@ -1,4 +1,13 @@
 export default {
+  doneEach() {
+    document.querySelectorAll<HTMLPreElement>('#container pre').forEach(pre => {
+      if (pre.getAttribute('data-lang')) return
+      const code = pre.querySelector('code')
+      if (!code) return
+      const m = code.className.match(/(?:^|\s)language-(\w+)/)
+      if (m) pre.setAttribute('data-lang', m[1])
+    })
+  },
   mounted() {
     requestAnimationFrame(() => {
       document.querySelectorAll<HTMLPreElement>('#container pre').forEach(pre => {

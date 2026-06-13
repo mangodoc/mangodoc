@@ -662,18 +662,18 @@ function injectStyle() {
     pre[class*="language-"]::before {
       content: attr(data-lang);
       position: absolute;
-      top: 0; right: 0;
+      top: 0; left: 0;
       background: #0d0d22;
       padding: 3px 12px;
       font-size: 10px;
       font-weight: 600;
-      border-radius: 0 var(--cool-radius-md) 0 var(--cool-radius-sm);
+      border-radius: var(--cool-radius-md) 0 var(--cool-radius-sm) 0;
       font-family: sans-serif;
       color: ${themeColor};
       text-transform: uppercase;
       letter-spacing: 0.5px;
       border-bottom: 1px solid var(--cool-border);
-      border-left: 1px solid var(--cool-border);
+      border-right: 1px solid var(--cool-border);
     }
     .cool-copy-btn {
       position: absolute;
