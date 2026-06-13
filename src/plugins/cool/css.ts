@@ -1101,6 +1101,16 @@ function injectStyle() {
       /* ---- Loading ---- */
       .fullscreen-loading::before { width: 30px; height: 30px; }
     }
+
+    /* ---- Metadata footer (update time & view count) ---- */
+    #container > .page-nav + div {
+      color: var(--cool-text-muted) !important;
+      font-size: 13px !important;
+    }
+    #container > .page-nav + div + div {
+      color: var(--cool-text-muted) !important;
+      font-size: 13px !important;
+    }
   `;
   document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }
