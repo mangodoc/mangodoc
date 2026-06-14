@@ -3,4 +3,4 @@ node_modules
 test.html
 dist/mangodoc.min.js
 dist/mangodoc.min.js.LICENSE.txt
-test-*.png
+test*.png
