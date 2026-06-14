@@ -4,8 +4,14 @@ export default {
       if (pre.getAttribute('data-lang')) return
       const code = pre.querySelector('code')
       if (!code) return
-      const m = code.className.match(/(?:^|\s)language-(\w+)/)
-      if (m) pre.setAttribute('data-lang', m[1])
+      const m = code.className.match(/(?:^|\s)(language-([^\s:]+))(?::([^\s]+))?/)
+      if (m) {
+        pre.setAttribute('data-lang', m[2])
+        if (m[3]) {
+          pre.setAttribute('data-filename', m[3])
+          code.className = code.className.replace(m[1] + ':' + m[3], m[1])
+        }
+      }
     })
   },
   mounted() {
@@ -36,5 +42,17 @@ export default {
         pre.appendChild(btn)
       })
     })
+    setTimeout(() => {
+      document.querySelectorAll<HTMLPreElement>('#container pre code').forEach(code => {
+        const pre = code.closest('pre')
+        if (!pre || pre.hasAttribute('data-line-numbers')) return
+        const html = code.innerHTML
+        const lines = html.split('\n')
+        if (lines.length <= 1) return
+        if (lines[lines.length - 1].trim() === '') lines.pop()
+        code.innerHTML = lines.map(line => `<span class="code-line">${line || ' '}</span>`).join('\n')
+        pre.setAttribute('data-line-numbers', '')
+      })
+    }, 400)
   }
 }

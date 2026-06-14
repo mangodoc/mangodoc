@@ -631,11 +631,14 @@ function injectStyle() {
       box-shadow: inset 0 0 20px rgba(0,0,0,0.3), 0 0 20px ${themeColor}11;
     }
     pre code {
+      display: block;
       background: none;
       color: #d4d4e8;
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
       font-size: 13px;
-      line-height: 1.55;
+      line-height: 0.3;
+      margin: 0;
+      padding: 0;
     }
     code {
       border-radius: var(--cool-radius-sm);
@@ -659,8 +662,9 @@ function injectStyle() {
       box-shadow: 0 0 12px rgba(var(--cool-theme-rgb), 0.2);
     }
     pre[class*="language-"] { padding-top: 28px !important; }
+    pre[data-filename] { padding-top: 28px !important; }
     pre[class*="language-"]::before {
-      content: attr(data-lang);
+      content: attr(data-filename) attr(data-lang);
       position: absolute;
       top: 0; left: 0;
       background: #0d0d22;
@@ -674,6 +678,46 @@ function injectStyle() {
       letter-spacing: 0.5px;
       border-bottom: 1px solid var(--cool-border);
       border-right: 1px solid var(--cool-border);
+      max-width: calc(100% - 60px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    pre[data-filename]::before {
+      content: attr(data-filename) " · " attr(data-lang);
+    }
+
+    /* ============================================
+       CODE LINE NUMBERS
+       ============================================ */
+    pre[data-line-numbers] {
+      padding-left: 3.5em !important;
+      counter-reset: line-number;
+    }
+    pre[data-line-numbers] code {
+      counter-reset: line-number;
+    }
+    pre[data-line-numbers] .code-line {
+      display: block;
+      counter-increment: line-number;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      line-height: 0.3;
+    }
+    pre[data-line-numbers] .code-line::before {
+      content: counter(line-number);
+      position: absolute;
+      left: -3.5em;
+      top: 0;
+      width: 2.8em;
+      text-align: right;
+      color: var(--cool-text-muted);
+      opacity: 0.35;
+      user-select: none;
+      font-size: 12px;
+      font-variant-numeric: tabular-nums;
+      line-height: inherit;
     }
     .cool-copy-btn {
       position: absolute;
