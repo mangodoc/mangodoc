@@ -1494,6 +1494,151 @@ function injectStyle() {
       color: var(--cool-text-muted);
       font-size: 13px;
     }
+
+    /* ============================================
+       COMMENTS — GitHub file-based comment system
+       ============================================ */
+    .cool-comments {
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--cool-border-glass);
+    }
+    .cool-comments-header {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--cool-text-primary);
+      margin-bottom: 20px;
+    }
+    .cool-comments-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+    .cool-comments-empty {
+      color: var(--cool-text-muted);
+      font-size: 13px;
+      text-align: center;
+      padding: 24px 0;
+    }
+    .cool-comment-item {
+      background: var(--cool-bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--cool-border-glass);
+      border-radius: var(--cool-radius-md);
+      padding: 16px 20px;
+      transition: var(--cool-transition-fast);
+    }
+    .cool-comment-item:hover {
+      border-color: ${themeColor}33;
+      background: var(--cool-bg-glass-hover);
+    }
+    .cool-comment-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .cool-comment-author {
+      font-size: 13px;
+      font-weight: 600;
+      color: ${themeColor};
+    }
+    .cool-comment-date {
+      font-size: 11px;
+      color: var(--cool-text-muted);
+    }
+    .cool-comment-body {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--cool-text-secondary);
+    }
+    .cool-comment-body p {
+      margin: 0 0 8px;
+    }
+    .cool-comment-body p:last-child {
+      margin-bottom: 0;
+    }
+    .cool-comment-body code {
+      background: var(--cool-bg-tertiary);
+      padding: 1px 6px;
+      border-radius: 3px;
+      font-size: 13px;
+      color: ${themeColor};
+    }
+    .cool-comment-body a {
+      color: ${themeColor};
+      text-decoration: none;
+    }
+    .cool-comment-body a:hover {
+      text-decoration: underline;
+    }
+    .cool-comments-form {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .cool-comments-input,
+    .cool-comments-textarea {
+      background: var(--cool-bg-glass);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid var(--cool-border-glass);
+      border-radius: var(--cool-radius-md);
+      padding: 10px 14px;
+      color: var(--cool-text-primary);
+      font-size: 13px;
+      font-family: inherit;
+      outline: none;
+      transition: var(--cool-transition-fast);
+    }
+    .cool-comments-input:focus,
+    .cool-comments-textarea:focus {
+      border-color: ${themeColor}66;
+      box-shadow: 0 0 12px ${themeColor}22;
+    }
+    .cool-comments-input::placeholder,
+    .cool-comments-textarea::placeholder {
+      color: var(--cool-text-muted);
+    }
+    .cool-comments-input {
+      width: 200px;
+    }
+    .cool-comments-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+    .cool-comments-submit {
+      align-self: flex-start;
+      background: var(--cool-gradient-primary);
+      color: #fff;
+      border: none;
+      border-radius: var(--cool-radius-md);
+      padding: 8px 24px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--cool-transition-fast);
+    }
+    .cool-comments-submit:hover:not(:disabled) {
+      box-shadow: var(--cool-shadow-glow);
+      transform: translateY(-1px);
+    }
+    .cool-comments-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .cool-comments-status {
+      font-size: 12px;
+      padding: 4px 0;
+    }
+    .cool-comments-status.success {
+      color: #34d399;
+    }
+    .cool-comments-status.error {
+      color: #f87171;
+    }
   `;
   document.head.insertBefore(styleEl, document.querySelector("head style, head link[rel*='stylesheet']"));
 }

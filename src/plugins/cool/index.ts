@@ -22,6 +22,7 @@ import editpage from '../editpage';
 import imgview from '../imgview';
 import breadcrumb from '../breadcrumb';
 import floatToc from './float-toc';
+import comment from '../comment';
 
 export default {
     list(){
@@ -49,6 +50,7 @@ export default {
             editpage,
             imgview,
             floatToc,
+            comment,
             breadcrumb
         ];
         if(window.$mangodoc.plugins){
