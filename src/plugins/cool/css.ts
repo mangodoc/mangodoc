@@ -758,6 +758,148 @@ function injectStyle() {
     .token.property { color: #60a5fa; }
 
     /* ============================================
+       FLOATING TOC
+       ============================================ */
+    #cool-toc {
+      position: fixed;
+      right: 20px;
+      top: 60px;
+      width: 170px;
+      max-height: calc(100vh - 92px);
+      overflow-y: auto;
+      background: var(--cool-bg-glass);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--cool-border-glass);
+      border-radius: var(--cool-radius-md);
+      box-shadow: var(--cool-shadow-glass);
+      padding: 6px 0;
+      z-index: 99;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+    #cool-toc::-webkit-scrollbar { width: 2px; }
+    .cool-toc-header {
+      padding: 2px 12px 5px;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--cool-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--cool-border-glass);
+      margin: 0 0 2px;
+      opacity: 0.6;
+    }
+    .cool-toc-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .cool-toc-item { margin: 0; padding: 0; }
+    .cool-toc-link {
+      display: block;
+      padding: 1px 12px;
+      color: var(--cool-text-secondary);
+      text-decoration: none;
+      transition: all 0.15s ease;
+      border-left: 2px solid transparent;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      opacity: 0.65;
+    }
+    .cool-toc-link:hover {
+      opacity: 1;
+      color: ${themeColor};
+      background: rgba(255,255,255,0.03);
+    }
+    .cool-toc-link.cool-toc-active {
+      opacity: 1;
+      color: ${themeColor};
+      border-left-color: ${themeColor};
+      font-weight: 600;
+      background: linear-gradient(90deg, ${themeColor}11 0%, transparent 100%);
+    }
+    .cool-toc-list .cool-toc-list .cool-toc-link { padding-left: 22px; font-size: 10px; }
+    .cool-toc-list .cool-toc-list .cool-toc-list .cool-toc-link { padding-left: 32px; font-size: 10px; }
+    .cool-toc-list .cool-toc-list .cool-toc-list .cool-toc-list .cool-toc-link { padding-left: 42px; font-size: 10px; }
+
+    @media only screen and (max-width: 1300px) {
+      #cool-toc { display: none; }
+    }
+
+    /* ============================================
+       FLOATING TOC — Mobile toggle
+       ============================================ */
+    #cool-toc-toggle {
+      display: none;
+      position: fixed;
+      right: 16px;
+      bottom: 84px;
+      z-index: 1000;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--cool-text-primary);
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+      transition: all 0.25s ease;
+    }
+    #cool-toc-toggle:hover {
+      background: ${themeColor}22;
+      border-color: ${themeColor}44;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px ${themeColor}33;
+    }
+    #cool-toc-toggle:active { transform: scale(0.9); }
+    #cool-toc-toggle svg { display: block; }
+
+    @media only screen and (max-width: 500px) {
+      #cool-toc {
+        display: none;
+        position: fixed;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: 55vh;
+        border-radius: var(--cool-radius-lg) var(--cool-radius-lg) 0 0;
+        border-bottom: none;
+        padding: 10px 0 20px;
+        z-index: 1001;
+        font-size: 13px;
+        box-shadow: 0 -4px 30px rgba(0,0,0,0.5);
+        transform: translateY(100%);
+        transition: transform 0.25s ease;
+      }
+      #cool-toc.cool-toc-open {
+        display: block;
+        transform: translateY(0);
+      }
+      #cool-toc.cool-toc-open::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 3px;
+        background: var(--cool-text-muted);
+        border-radius: 2px;
+        margin: 2px auto 6px;
+        opacity: 0.4;
+      }
+      #cool-toc-toggle { display: flex; right: 10px; bottom: 16px; }
+      .cool-toc-link { padding: 4px 16px; font-size: 13px; }
+      .cool-toc-header { padding: 4px 16px 6px; }
+      .cool-toc-list .cool-toc-list .cool-toc-link { padding-left: 28px; font-size: 12px; }
+      .cool-toc-list .cool-toc-list .cool-toc-list .cool-toc-link { padding-left: 40px; font-size: 12px; }
+      .cool-toc-list .cool-toc-list .cool-toc-list .cool-toc-list .cool-toc-link { padding-left: 52px; font-size: 12px; }
+    }
+
+    /* ============================================
        TABLES
        ============================================ */
     table {

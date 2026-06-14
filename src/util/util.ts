@@ -91,7 +91,7 @@ class Util {
      */
     static getConfigOrDefault(key: string): any{
         let obj: any = config;
-        return window.$mangodoc[key] ? window.$mangodoc[key] : obj[key];
+        return window.$mangodoc[key] !== undefined ? window.$mangodoc[key] : obj[key];
     }
     /**
      * 将md转换为html

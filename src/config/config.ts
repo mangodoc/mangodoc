@@ -43,6 +43,8 @@ class Config {
     particlesCount: number = 50;
     // 粒子移动速度
     particlesSpeed: number = 0.3;
+    // 浮动目录，默认开启（cool 主题）
+    floatToc: boolean = true;
 }
 
 let config = new Config();

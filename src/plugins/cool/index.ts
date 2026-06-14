@@ -21,6 +21,7 @@ import copycode from '../copycode';
 import editpage from '../editpage';
 import imgview from '../imgview';
 import breadcrumb from '../breadcrumb';
+import floatToc from './float-toc';
 
 export default {
     list(){
@@ -47,6 +48,7 @@ export default {
             copycode,
             editpage,
             imgview,
+            floatToc,
             breadcrumb
         ];
         if(window.$mangodoc.plugins){
