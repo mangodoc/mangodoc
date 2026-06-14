@@ -1,12 +1,14 @@
 # 更新日志
 ## 2026-06-14
-1. 发布 v2.14.0，新增内置评论系统——基于 GitHub 文件的评论插件。
-2. 支持读写模式（配置 GitHub PAT）和只读模式（仅显示）。
-3. 评论存储在 `docs/_comments/{页面路径}/{时间戳}-{随机}.md`。
-4. 支持每页通过前端配置 `comment: false` 关闭评论。
-5. 本地缓存 5 分钟，减少 API 调用；乐观更新提交后立即显示。
-6. 修复 `Util.getConfigOrDefault()` 布尔值 `false` 被忽略的 bug。
-7. 优化错误提示，提交失败时显示 GitHub API 具体原因。
+1. 发布 v2.14.1，修复悬浮 TOC 点击最后一个书签时顶部导航条消失的问题。
+   - 改用 `#content.scrollTo()` 替代 `target.scrollIntoView()`，避免自定义元素 `<el-main>` 的 `overflow` 穿透导致 `#header` 滚出视口。
+2. 发布 v2.14.0，新增内置评论系统——基于 GitHub 文件的评论插件。
+   - 支持读写模式（配置 GitHub PAT）和只读模式（仅显示）。
+   - 评论存储在 `docs/_comments/{页面路径}/{时间戳}-{随机}.md`。
+   - 支持每页通过前端配置 `comment: false` 关闭评论。
+   - 本地缓存 5 分钟，减少 API 调用；乐观更新提交后立即显示。
+   - 修复 `Util.getConfigOrDefault()` 布尔值 `false` 被忽略的 bug。
+   - 优化错误提示，提交失败时显示 GitHub API 具体原因。
 
 ## 2026-06-13
 1. 发布 v2.7.2，修复菜单高亮不跟随页面切换、上/下页位置错误。
