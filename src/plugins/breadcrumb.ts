@@ -117,10 +117,22 @@ export default {
 
         const nav = document.createElement("div");
         nav.innerHTML = renderBreadcrumb(trail);
-        const el = nav.firstElementChild;
-        if (!el) return;
+        const breadcrumbEl = nav.firstElementChild;
+        if (!breadcrumbEl) return;
 
-        container.insertBefore(el, container.firstChild);
+        let topBar = container.querySelector<HTMLElement>(".cool-top-bar");
+        if (!topBar) {
+          topBar = document.createElement("div");
+          topBar.className = "cool-top-bar";
+          container.insertBefore(topBar, container.firstChild);
+        }
+        topBar.appendChild(breadcrumbEl);
+
+        const wordCount = container.querySelector(".word-count-container");
+        if (wordCount && wordCount.parentElement !== topBar) {
+          topBar.appendChild(wordCount);
+        }
+
       });
     }, 0);
   }

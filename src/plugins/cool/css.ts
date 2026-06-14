@@ -1147,6 +1147,26 @@ function injectStyle() {
       font-size: 13px !important;
     }
 
+    /* ---- Top bar (breadcrumb + word count) ---- */
+    .cool-top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--cool-border);
+      margin-bottom: 8px;
+      min-height: 36px;
+    }
+    .cool-top-bar .mangodoc-breadcrumb {
+      border-bottom: none !important;
+      margin-bottom: 0 !important;
+      padding: 6px 16px 6px 0 !important;
+      flex: 1;
+    }
+    .cool-top-bar .word-count-container {
+      flex-shrink: 0;
+      padding: 6px 0 !important;
+    }
+
     /* ---- Edit this page ---- */
     .cool-edit-page {
       color: ${themeColor} !important;

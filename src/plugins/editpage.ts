@@ -19,18 +19,20 @@ function generateEditUrl(): string | null {
 }
 
 export default {
-  doneEach() {
-    const editUrl = generateEditUrl();
-    if (!editUrl) return;
-
+  mounted() {
     setTimeout(() => {
+      const editUrl = generateEditUrl();
+      if (!editUrl) return;
+
       const container = document.getElementById(Layout.container);
       if (!container) return;
 
-      const wcContainer = container.querySelector(".word-count-container");
-      if (!wcContainer) return;
+      const pageNav = container.querySelector(".page-nav");
+      if (!pageNav) return;
+      const updateTime = pageNav.nextElementSibling as HTMLElement;
+      if (!updateTime) return;
 
-      let link = wcContainer.querySelector<HTMLAnchorElement>(".cool-edit-page");
+      let link = updateTime.querySelector<HTMLAnchorElement>(".cool-edit-page");
       if (link) {
         link.href = editUrl;
         return;
@@ -43,11 +45,8 @@ export default {
       link.rel = "noopener";
       link.innerHTML = '<i class="el-icon-edit-outline"></i> 编辑此页';
 
-      (wcContainer as HTMLElement).style.display = "flex";
-      (wcContainer as HTMLElement).style.alignItems = "center";
-      (wcContainer as HTMLElement).style.justifyContent = "flex-end";
-      (wcContainer as HTMLElement).style.gap = "16px";
-      wcContainer.appendChild(link);
-    }, 0);
+      updateTime.style.cssText += ";display:flex;align-items:center;justify-content:flex-end;gap:8px";
+      updateTime.insertBefore(link, updateTime.firstChild);
+    }, 50);
   }
 };
