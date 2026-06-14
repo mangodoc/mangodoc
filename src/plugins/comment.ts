@@ -59,7 +59,7 @@ function writeCache(pagePath: string, data: CommentData[]) {
   localStorage.setItem(cacheKey(pagePath), JSON.stringify({ ts: Date.now(), data }))
 }
 
-async function fetchComments(owner: string, repo: string, pagePath: string, token?: string): Promise<CommentData[]> {
+async function fetchComments(owner: string, repo: string, pagePath: string): Promise<CommentData[]> {
   const cached = readCache(pagePath)
   if (cached) {
     cachedComments = cached
@@ -67,9 +67,8 @@ async function fetchComments(owner: string, repo: string, pagePath: string, toke
   }
 
   const url = `https://api.github.com/repos/${owner}/${repo}/contents/${getCommentDir(pagePath)}`
-  const headers: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {}
   try {
-    const resp = await fetch(url, { headers })
+    const resp = await fetch(url)
     if (resp.status === 404) {
       cachedComments = []
       writeCache(pagePath, [])
@@ -180,8 +179,8 @@ function addLocalComment(pagePath: string, author: string, content: string) {
   renderComments(cachedComments)
 }
 
-async function loadComments(owner: string, repo: string, pagePath: string, token?: string) {
-  const comments = await fetchComments(owner, repo, pagePath, token)
+async function loadComments(owner: string, repo: string, pagePath: string) {
+  const comments = await fetchComments(owner, repo, pagePath)
   renderComments(comments)
 }
 
@@ -209,7 +208,7 @@ function initCommentUI(owner: string, repo: string, pagePath: string, token?: st
   document.getElementById('container')?.appendChild(container)
   commentContainer = container
 
-  loadComments(owner, repo, pagePath, token)
+  loadComments(owner, repo, pagePath)
 
   if (!hasToken) return
 
