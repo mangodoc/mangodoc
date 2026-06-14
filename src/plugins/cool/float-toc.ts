@@ -136,7 +136,13 @@ function initTocScroll() {
       if (id) {
         const target = document.getElementById(id)
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' })
+          const scroller = document.getElementById('content')
+          if (scroller) {
+            const targetRect = target.getBoundingClientRect()
+            const containerRect = scroller.getBoundingClientRect()
+            const offset = targetRect.top - containerRect.top + scroller.scrollTop - 64
+            scroller.scrollTo({ top: offset, behavior: 'smooth' })
+          }
         }
       }
     }
